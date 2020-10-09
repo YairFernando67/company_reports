@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_09_011617) do
+ActiveRecord::Schema.define(version: 2020_10_09_051159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2020_10_09_011617) do
     t.string "city"
     t.string "state"
     t.string "zip_code"
+    t.integer "addressable_id"
+    t.string "addressable_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -66,6 +68,8 @@ ActiveRecord::Schema.define(version: 2020_10_09_011617) do
     t.datetime "start_of_operation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_fiscal_infos_on_company_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -117,6 +121,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_011617) do
   end
 
   add_foreign_key "companies", "users"
+  add_foreign_key "fiscal_infos", "companies"
   add_foreign_key "products", "companies"
   add_foreign_key "purchase_concepts", "products"
   add_foreign_key "purchase_concepts", "purchases"
