@@ -12,6 +12,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'pry-rails'
 gem 'devise'
+gem 'slim-rails', '~> 3.2'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 

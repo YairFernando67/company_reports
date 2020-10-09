@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ri: MyString
+  account_statement: MyString
+  proof_of_address: MyString
+  incorporation_act: MyString
+  start_of_operation: 2020-10-08 20:12:30
+
+two:
+  ri: MyString
+  account_statement: MyString
+  proof_of_address: MyString
+  incorporation_act: MyString
+  start_of_operation: 2020-10-08 20:12:30
