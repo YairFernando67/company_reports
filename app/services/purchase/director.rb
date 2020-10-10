@@ -15,5 +15,8 @@ class Purchase::Director
     @builder.add_company_fiscal_information
     @builder.add_purchases
     @builder.add_purchase_concepts
+    @builder.add_employee_info
+    @builder.add_client_info
+    @builder.add_charts
   end
 end
