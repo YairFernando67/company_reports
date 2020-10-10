@@ -2,7 +2,7 @@ class PurchaseReportService
   def initialize(params, user)
     @params = params
     @user = user
-    @director = Purchase::Director.new
+    # @director = Purchase::Director.new
   end
 
   def call
@@ -16,6 +16,7 @@ class PurchaseReportService
   private
 
   def get_simple_report
+    @director = Purchase::Director.new
     builder = Purchase::SimpleReportBuilder.new(@user)
     @director.builder = builder
     @director.build_simple_report
@@ -23,7 +24,11 @@ class PurchaseReportService
   end
 
   def get_detailed_report
-
+    @director = Purchase::Director.new
+    builder = Purchase::DetailedReportBuilder.new(@user)
+    @director.builder = builder
+    @director.build_detailed_report
+    builder.report.data
   end
 
   def get_full_report

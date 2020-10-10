@@ -3,7 +3,6 @@ class PurchasesController < ApplicationController
 
   def generate_report
     result = PurchaseReportService.new(params, current_user).call
-    binding.pry
     render json: result
   end
 end

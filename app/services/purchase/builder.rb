@@ -12,11 +12,11 @@ class Purchase::Builder
     raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
   end
     
-  def add_purchases
+  def add_sales
     raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
   end
   
-  def add_purchase_concepts
+  def add_sales_concepts
     raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
   end
 

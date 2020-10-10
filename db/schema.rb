@@ -82,30 +82,30 @@ ActiveRecord::Schema.define(version: 2020_10_10_190307) do
     t.index ["company_id"], name: "index_products_on_company_id"
   end
 
-  create_table "purchase_concepts", force: :cascade do |t|
-    t.bigint "purchase_id", null: false
+  create_table "sale_concepts", force: :cascade do |t|
+    t.bigint "sale_id", null: false
     t.string "unit_price"
     t.string "total"
     t.string "amount"
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_purchase_concepts_on_product_id"
-    t.index ["purchase_id"], name: "index_purchase_concepts_on_purchase_id"
+    t.index ["product_id"], name: "index_sale_concepts_on_product_id"
+    t.index ["sale_id"], name: "index_sale_concepts_on_sale_id"
   end
 
-  create_table "purchases", force: :cascade do |t|
+  create_table "sales", force: :cascade do |t|
     t.integer "seller_id"
     t.integer "buyer_id"
     t.decimal "total"
     t.integer "status"
-    t.string "purchase_type"
+    t.string "sale_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "company_id"
-    t.index ["buyer_id"], name: "index_purchases_on_buyer_id"
-    t.index ["company_id"], name: "index_purchases_on_company_id"
-    t.index ["seller_id"], name: "index_purchases_on_seller_id"
+    t.index ["buyer_id"], name: "index_sales_on_buyer_id"
+    t.index ["company_id"], name: "index_sales_on_company_id"
+    t.index ["seller_id"], name: "index_sales_on_seller_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2020_10_10_190307) do
   add_foreign_key "companies", "users"
   add_foreign_key "fiscal_infos", "companies"
   add_foreign_key "products", "companies"
-  add_foreign_key "purchase_concepts", "products"
-  add_foreign_key "purchase_concepts", "purchases"
-  add_foreign_key "purchases", "companies"
+  add_foreign_key "sale_concepts", "products"
+  add_foreign_key "sale_concepts", "sales"
+  add_foreign_key "sales", "companies"
 end
