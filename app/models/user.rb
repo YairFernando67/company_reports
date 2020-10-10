@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :companies, dependent: :destroy
   has_one :address, as: :addressable, dependent: :destroy
   has_many :sales, foreign_key: :seller_id, class_name: "Purchase"
+
+  def active_companies
+    companies.where(active: true)
+  end
 end
