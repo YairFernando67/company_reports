@@ -1,0 +1,53 @@
+class Purchase::Builder
+  
+  def add_user_info
+    raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
+  end
+  
+  def add_company_info
+    raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
+  end
+  
+  def add_company_fiscal_information
+    raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
+  end
+    
+  def add_purchases
+    raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
+  end
+  
+  def add_purchase_concepts
+    raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
+  end
+
+  def add_employee_address
+    raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
+  end
+
+  def add_client_address
+    raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
+  end
+
+  # def add_company_address
+  #   raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
+  # end
+
+  def add_charts
+    raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
+  end
+
+
+
+  # def add_company_type
+  #   raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
+  # end
+
+
+  # def add_products
+  #   raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
+  # end
+
+  def add_purchases
+    raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
+  end
+end
