@@ -49,9 +49,9 @@ client_amanda = Client.create(name: "Amanda", email: "amanda@gmail.com", phone: 
 client_emma = Client.create(name: "Emma", email: "emma@gmail.com", phone: "5214589744")
 client_olivia = Client.create(name: "Olivia", email: "olivia@gmail.com", phone: "1254784521")
 
-purchase_one = Purchase.create(seller_id: rebeca_employee.id, buyer_id: client_amanda.id, total: 1000, status: :completed, purchase_type: "IT")
-purchase_two = Purchase.create(seller_id: rebeca_employee.id, buyer_id: client_emma.id, total: 500, status: :completed, purchase_type: "IT")
-purchase_three = Purchase.create(seller_id: jack_employee.id, buyer_id: client_emma.id, total: 1350, status: :completed, purchase_type: "IT")
+purchase_one = Purchase.create(company_id: company_one.id, seller_id: rebeca_employee.id, buyer_id: client_amanda.id, total: 1000, status: :completed, purchase_type: "IT")
+purchase_two = Purchase.create(company_id: company_one.id, seller_id: rebeca_employee.id, buyer_id: client_emma.id, total: 500, status: :completed, purchase_type: "IT")
+purchase_three = Purchase.create(company_id: company_one.id, seller_id: jack_employee.id, buyer_id: client_emma.id, total: 1350, status: :completed, purchase_type: "IT")
 
 purchase_one.purchase_concepts.create(unit_price: "750", total: "750", amount: "1", product_id: product_one.id)
 purchase_one.purchase_concepts.create(unit_price: "250", total: "250", amount: "1", product_id: product_two.id)
@@ -62,9 +62,9 @@ purchase_three.purchase_concepts.create(unit_price: "250", total: "250", amount:
 purchase_three.purchase_concepts.create(unit_price: "1100", total: "1100", amount: "1", product_id: product_three.id)
 
 
-purchase_four = Purchase.create(seller_id: jack_employee.id, buyer_id: client_olivia.id, total: 14500, status: :completed, purchase_type: "IT")
-purchase_five = Purchase.create(seller_id: rebeca_employee.id, buyer_id: client_olivia.id, total: 12000, status: :completed, purchase_type: "IT")
-purchase_six = Purchase.create(seller_id: jack_employee.id, buyer_id: client_emma.id, total: 22000, status: :completed, purchase_type: "IT")
+purchase_four = Purchase.create(company_id: company_three.id, seller_id: jack_employee.id, buyer_id: client_olivia.id, total: 14500, status: :completed, purchase_type: "IT")
+purchase_five = Purchase.create(company_id: company_three.id, seller_id: rebeca_employee.id, buyer_id: client_olivia.id, total: 12000, status: :completed, purchase_type: "IT")
+purchase_six = Purchase.create(company_id: company_three.id, seller_id: jack_employee.id, buyer_id: client_emma.id, total: 22000, status: :completed, purchase_type: "IT")
 
 purchase_four.purchase_concepts.create(unit_price: "5000", total: "10000", amount: "2", product_id: product_five.id)
 purchase_four.purchase_concepts.create(unit_price: "4500", total: "4500", amount: "1", product_id: product_six.id)
