@@ -20,7 +20,8 @@ class PurchaseReportService
     builder = Purchase::SimpleReportBuilder.new(@user)
     @director.builder = builder
     @director.build
-    builder.report.data
+    # builder.report.data
+    Ui::Purchase::SimpleReportCreator.new(builder.report.data)
   end
 
   def get_detailed_report

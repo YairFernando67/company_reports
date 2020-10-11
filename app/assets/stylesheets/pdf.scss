@@ -39,7 +39,9 @@
 .bl-white { border-left: 1px solid #fff; }
 
 .bg-color-red, .company-name { background-color: #e91e63; }
-.product-name { background-color: #26a69a;}
+.product-name,
+.sale-concept-name,
+.sale-name { background-color: #26a69a; color: #fff;}
 
 .company-name,
 .product-name {
@@ -50,6 +52,10 @@
 .text-left { text-align: left !important;}
 .text-right { text-align: right !important;}
 .text-justify { text-align: justify !important;}
+
+table.alwaysbreak { page-break-before: always !important; }
+table.nobreak:before { clear:both !important; }
+table.nobreak { page-break-inside: avoid !important; }
 // .text-left{	text-align: left !important; } .text-right{ text-align: right;}
 // .text-justify{	text-align: justify !important; }
 // .text-normal{

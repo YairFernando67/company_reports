@@ -54,7 +54,7 @@ class Purchase::SimpleReportBuilder < Purchase::Builder
           id: sale[:id],
           status: sale[:status],
           total_before_taxes: sale[:total].to_f,
-          total: sale[:total].to_f * 0.16,
+          total: sale[:total].to_f + (sale[:total].to_f * 0.16),
           date: sale[:created_at].strftime('%b %Y %m'),
         }
       end
@@ -69,6 +69,7 @@ class Purchase::SimpleReportBuilder < Purchase::Builder
         companies[i][:sales][j][:sale_concepts] = concepts.map do |concept|
           {
             id: concept[:id],
+            sale_id: concept[:sale_id],
             total: concept[:total].to_f,
             unit_price: concept[:unit_price],
             amount: concept[:amount]
