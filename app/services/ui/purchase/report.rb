@@ -9,7 +9,7 @@ class Ui::Purchase::Report
         <thead>
           <tr>
             <th>
-              <img src='http://lasalbardas.com/ADMIN/VIEWS/resources/IMG//logo.jpg' alt='logo' height='90'>
+              <img src='https://i.imgur.com/hp3fAsi.png' alt='logo' height='90'>
             </th>
             <th class='text-right' width='100%'>
               <span class='text-right'>#{Date.current.strftime('%B %Y %m')}</span>
