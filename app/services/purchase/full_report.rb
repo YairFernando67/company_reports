@@ -4,4 +4,8 @@ class Purchase::FullReport
   def initialize
     @data = {}
   end
+
+  def show_taxes
+    binding.pry
+  end
 end

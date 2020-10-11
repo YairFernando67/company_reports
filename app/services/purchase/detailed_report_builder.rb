@@ -50,7 +50,7 @@ class Purchase::DetailedReportBuilder < Purchase::Builder
 
   def add_client_info
     base_sale_level do |companies, sale, i, j|
-      Report.add_client_info(companies, sale. i, j)
+      Report.add_client_info(companies, sale, i, j)
     end
   end
 
