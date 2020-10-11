@@ -11,4 +11,8 @@ html
     = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js', 'data-turbolinks-track': 'reload'
     script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"
   body
-    = yield
+    nav
+    .nav-wrapper
+      a.brand-logo href=root_path  Builder Pattern
+    main.container role="main" 
+      = yield

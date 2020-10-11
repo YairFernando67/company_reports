@@ -1,0 +1,208 @@
+= javascript_pack_tag "charts"
+= javascript_include_tag "https://www.gstatic.com/charts/loader.js"
+= wicked_pdf_javascript_include_tag "https://www.gstatic.com/charts/loader.js"
+
+= raw @report.get_header
+= raw @report.ui.get_companies
+/ table.pt-2
+/   thead
+/     tr
+/       th Gerente
+/       th 
+/   tbody
+/     tr
+/       td Name:
+/       td 
+/         b = @report[:user][:name]
+/     tr
+/       td Email
+/       td 
+/         b = @report[:user][:email]
+/ br
+/ hr
+
+/ h3 Companies
+/ table.pt-2
+/   thead
+/     tr
+/     - keys = @report[:companies].first.keys.delete_if { |k| [:affiliation, :products, :address, :fiscal_information, :sales].include?(k) }
+/     - keys.each do |k|
+/       th = k
+/   tbody
+/     tr
+/       td Name:
+/       td 
+/         b = @report[:user][:name]
+/     tr
+/       td Email
+/       td 
+/         b = @report[:user][:email]
+
+
+/ table width="100%"
+/ 	thead
+/ 		tr
+/ 			th width="100%"
+/ 				table width="100%"
+/ 					th.text-left width="35%"
+/ 					th.text-left width="65%"
+/ 						h2.my-0 = @report
+/ 		tr
+/ 			th width="100%"
+/ 				table width="100%"
+/ 					tr
+/ 						td.text-left width="85%"
+/ 							h1.mb-1 = raw "Orden de venta:</i>"
+/ 						td.text-center width="15%" style="border: 1px solid gray; height: 30px;"
+/ 							span.s-18 = "@order_sale.order_sale_folio"
+/ 					tr
+/ 						td.text-left
+/ 							br
+/ 							i.s-16.text-normal = raw "Parras de la Fuente, Coah; <b><b>"
+/ 		tr
+/ 			th width="100%"
+/ 				table.mt-2 width="100%"
+/ 					tr
+/ 						th.text-left width="70%"
+/ 							h2.mt-0.mb-0 = "@order_sale.client.name.upcase"
+/ 							- client = "@order_sale.client"
+/ 							- rfc = "client.fiscals.any? ? client.fiscals.first.rfc : client.rfc"
+/ 							p.text-normal.mt-0.mb-0 = "RFC: "
+/ 							p.text-normal.mt-0.mb-0 = "TELÉFONO: "
+/ 							p.text-normal.mt-0 = "DIRECCIÓN: "
+/ 						th.text-right width="30%"
+/ 							/ - if @order_sale.appointments.any?
+/ 								/ - appointment = @order_sale.appointments.first
+/ 								/ - unless appointment.finished_at.nil?
+/ 								/ 	b = appointment.finished_at.strftime("%d/%m/%Y")
+/ 		tr
+/ 			th.text-left width="100%"
+/ 				br
+/ 				p.s-16.mt-0 =  "".upcase  
+/ 		tr
+/ 			th width="100%"
+/ 				table.pdf_table.s-16 width="100%"
+/ 					thead
+/ 						tr
+/ 							th.text-left width="64%"
+/ 								b DESCRIPCIÓN DEL PRODUCTO
+/ 							th width="12%"
+/ 								b CANTIDAD
+/ 							th width="12%"
+/ 								b U. MEDIDA
+/ 							th width="12%"
+/ 								b PRECIO
+/ 							th width="12%"
+/ 								b TOTAL 	
+/ 					tbody
+/ 						- neto = 0
+/ 						/ - @order_sale.shipments_products.each do |sp|
+/ 						/ 	tr
+/ 						/ 		td.text-left
+/ 						/ 			span.text-normal.s-14 = sp.product.name.upcase
+/ 						/ 		td
+/ 						/ 			span.text-normal = sp.quantity
+/ 						/ 		td
+/ 						/ 			span.text-normal = sp.unit_meassure
+/ 						/ 		td
+/ 						/ 			span.text-normal = "$#{sp.price}"
+/ 						/ 		td.text-left
+/ 						/ 			- total = sp.quantity * sp.price
+/ 						/ 			- neto += total
+/ 						/ 			b = "$#{total}"
+/ 		tr
+/ 			th width="100%"
+/ 				table width="100%" style="border: 1px color gray;"
+/ 					tr
+/ 						th width="70%"
+/ 							p
+/ 						th width="30%"
+/ 							table.mt-2.pdf_table.s-16 width="100%"
+/ 								tbody
+/ 									tr
+/ 										td.text-right
+/ 											span.text-normal NETO:
+/ 										td.text-left
+/ 											span.pl-r = "$"
+/ 									tr
+/ 										td.text-right
+/ 											span.text-normal.c-red DESCUENTO:
+/ 										td.text-left
+/ 											span.c-red.pl-r = "%"
+/ 									tr
+/ 										td.text-right
+/ 											span.text-normal SUB TOTAL:
+/ 										td.text-left
+/ 											- sub_total = 22
+/ 											span.pl-r = "$#{sub_total}"
+/ 									tr
+/ 										td.text-right
+/ 											span.text-normal IVA:
+/ 										td.text-left
+/ 											span.pl-r = "%"
+/ 									tr
+/ 										- total = sub_total + ( (sub_total / 100) * 33)
+/ 										td.text-right
+/ 											span TOTAL:
+/ 										td.text-left
+/ 											span.pl-r = "$#{total}"
+/ 		tr
+/ 			th.text-left
+/ 				p.s-16.mb COMENTARIOS 
+/ 				span.text-normal.s-14.mt-2 jjj
+
+
+.row
+  .col.s12
+    .card-panel
+      #company-sales
+
+/ javascript:
+/   google.charts.load('current', { packages: ['corechart']});
+/   google.charts.setOnLoadCallback(drawCharts);
+
+/   function drawCompanySales() {
+/     console.log("data: ")
+/     var data = google.visualization.arrayToDataTable([
+/       ['business name', 'sales'],
+/     ].concat(#{raw @report[:charts][:company_sales]}));
+
+/     var options = {
+/       title: 'Total sales',
+/       haxis: {
+/         title: 'Business name'
+/       },
+/       vaxis: {
+/         title: 'sales'
+/       }
+/     }
+
+/     var chart = new google.visualization.AreaChart(
+/       document.getElementById('company-sales')
+/     )
+/     chart.draw(data, options);
+/   }
+
+/   function drawDailySales() {
+
+/   }
+
+/   function drawEmployeeSales() {
+
+/   }
+
+/   function drawClientSales() {
+
+/   }
+
+/   function drawCompanyEarnings() {
+
+/   }
+
+/   function drawCharts() {
+/     drawCompanySales();
+/     drawDailySales();
+/     drawEmployeeSales();
+/     drawClientSales();
+/     drawCompanyEarnings();
+/   }

@@ -1,9 +1,11 @@
-h1 Home#index
+h1.mb-2 Home#index
 p Find me in app/views/home/index.html.slim
 = link_to "Log out", destroy_user_session_path, method: :delete 
 hr
-= link_to "Simple Report", purchase_report_path(type: "simple")
+= link_to "Simple Report", purchase_report_path(type: "simple", format: :pdf), target: "_blank"
 hr
-= link_to "Detailed Report", purchase_report_path(type: "detailed")
+= link_to "Detailed Report", purchase_report_path(type: "detailed", format: :pdf), target: "_blank"
 hr
-= link_to "Full Report", purchase_report_path(type: "full")
+= link_to "Full Report", purchase_report_path(type: "full", format: :pdf), target: "_blank"
+hr
+i.fas.fa-adjust

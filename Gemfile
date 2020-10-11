@@ -13,7 +13,10 @@ gem 'jbuilder', '~> 2.7'
 gem 'pry-rails'
 gem 'devise'
 gem 'slim-rails', '~> 3.2'
-
+gem 'wicked_pdf'
+# gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary'
+# gem 'wkhtmltopdf-binary-edge', '~> 0.12.6.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do  
