@@ -19,7 +19,7 @@ class PurchaseReportService
     @director = Purchase::Director.new
     builder = Purchase::SimpleReportBuilder.new(@user)
     @director.builder = builder
-    @director.build_simple_report
+    @director.build
     builder.report.data
   end
 
@@ -27,11 +27,15 @@ class PurchaseReportService
     @director = Purchase::Director.new
     builder = Purchase::DetailedReportBuilder.new(@user)
     @director.builder = builder
-    @director.build_detailed_report
+    @director.build
     builder.report.data
   end
 
   def get_full_report
-
+    @director = Purchase::Director.new
+    builder = Purchase::FullReportBuilder.new(@user)
+    @director.builder = builder
+    @director.build
+    builder.report.data
   end
 end

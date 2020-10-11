@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_10_190307) do
+ActiveRecord::Schema.define(version: 2020_10_10_232008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,13 +41,13 @@ ActiveRecord::Schema.define(version: 2020_10_10_190307) do
     t.string "rfc"
     t.string "email"
     t.string "phone"
-    t.string "active"
     t.string "contact"
     t.bigint "user_id", null: false
     t.string "fiscal_name"
     t.integer "company_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "active", default: false
     t.index ["company_type_id"], name: "index_companies_on_company_type_id"
     t.index ["user_id"], name: "index_companies_on_user_id"
   end

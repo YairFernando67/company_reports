@@ -1,6 +1,6 @@
-class Purchase::DetailedReportBuilder < Purchase::Builder
+class Purchase::FullReportBuilder < Purchase::Builder
   include Report
-
+  
   def initialize(user)
     @user = user
     @active_companies = @user.active_companies
@@ -8,7 +8,7 @@ class Purchase::DetailedReportBuilder < Purchase::Builder
   end
 
   def reset
-    @report = Purchase::DetailedReport.new
+    @report = Purchase::FullReport.new
   end
 
   def report
@@ -21,12 +21,18 @@ class Purchase::DetailedReportBuilder < Purchase::Builder
   end
 
   def add_company_info
-    Report.add_company_info(@active_companies, @report)
+    Report.add_company_info(@active_companies, @report) do |company|
+      company.address.slice(:street, :country, :city, :state)
+    end
   end
 
   def add_company_fiscal_information
     base_company_level do |companies, company, i|
-      companies[i][:fiscal_information] = company.fiscal_info.slice(:ri, :proof_of_address)
+      companies[i][:fiscal_information] = company.fiscal_info
+                                                  .slice(:ri, :proof_of_address, 
+                                                              :incorporation_act, 
+                                                              :start_of_operation, 
+                                                              :account_statement)
     end
   end
 
