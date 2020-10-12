@@ -1,4 +1,4 @@
-class Ui::Purchase::SimpleReportCreator < Ui::Purchase::Report
+class Ui::Purchase::DetailedReportCreator < Ui::Purchase::Report
 
   def initialize(data)
     @data = data
@@ -6,9 +6,9 @@ class Ui::Purchase::SimpleReportCreator < Ui::Purchase::Report
   end
 
   def ui
-    Ui::Purchase::SimpleReport.new(@data)
+    Ui::Purchase::DetailedReport.new(@data)
   end
-  
+
   def get_header
     super(@data)
   end

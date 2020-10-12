@@ -57,6 +57,7 @@ module Report
       companies[i][:sales][j][:sale_concepts] = concepts.map do |concept|
         {
           id: concept[:id],
+          sale_id: concept[:sale_id],
           total_before_taxes: concept[:total].to_f,
           total: (concept[:total].to_f + (concept[:total].to_f * 0.16)),
           unit_price: concept[:unit_price],
@@ -72,6 +73,8 @@ module Report
     employee = sale.seller
     sales_info = {
       sales:  employee.sales.size,
+      id: employee.id,
+      sale_id: sale.id,
       total_amount_sold_before_taxes: employee.sales.map(&:total).inject(:+).to_f,
       total_amount_sold: (employee.sales.map(&:total).inject(:+).to_f + (employee.sales.map(&:total).inject(:+) * 0.16)).to_f
     }      
@@ -79,18 +82,22 @@ module Report
     companies[i][:sales][j][:employee_info] = employee.slice(:name, :email)
                                                           .merge(sales_info)
                                                           .merge(address_info)
+    companies[i][:sales][j][:employee_info] = companies[i][:sales][j][:employee_info].symbolize_keys
   end
 
   def self.add_client_info(companies, sale, i, j)
     client = sale.buyer
     purchases_info = {
-      purchases:  client.purchases.size,
+      purchases: client.purchases.size,
+      sale_id: sale.id,
+      id: client.id,
       total_amount_purchased_before_taxes: client.purchases.map(&:total).inject(:+).to_f,
-      total_amount_sold: (client.purchases.map(&:total).inject(:+).to_f + (client.purchases.map(&:total).inject(:+) * 0.16)).to_f
+      total_amount_purchased: (client.purchases.map(&:total).inject(:+).to_f + (client.purchases.map(&:total).inject(:+) * 0.16)).to_f
     }
     address_info = client.address.slice(:street, :external_number, :country, :city, :state)   
     companies[i][:sales][j][:client_info] = client.slice(:name, :email)
                                                       .merge(purchases_info)
                                                       .merge(address_info)
+    companies[i][:sales][j][:client_info] = companies[i][:sales][j][:client_info].symbolize_keys
   end
 end

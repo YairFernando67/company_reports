@@ -3,7 +3,7 @@ class Ui::Purchase::Report
     raise NotImplementedError, "#{self.class} method not implemented yet #{__method__}"
   end
 
-  def get_header
+  def get_header(data)
     "
       <table>
         <thead>
@@ -12,7 +12,9 @@ class Ui::Purchase::Report
               <img src='https://i.imgur.com/hp3fAsi.png' alt='logo' height='90'>
             </th>
             <th class='text-right' width='100%'>
-              <span class='text-right'>#{Date.current.strftime('%B %Y %m')}</span>
+              <span class='text-right'>#{Date.current.strftime('%B %Y %m')}</span><br/>
+              <span class='text-right'>Gerente: #{data[:user][:name]}</span><br/>
+              <span class='text-right'>Email: #{data[:user][:email]}</span>
             </th>
           </tr>
         </thead>
