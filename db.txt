@@ -1,0 +1,902 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.4 (Ubuntu 12.4-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.4 (Ubuntu 12.4-0ubuntu0.20.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: addresses; Type: TABLE; Schema: public; Owner: yair
+--
+
+CREATE TABLE public.addresses (
+    id bigint NOT NULL,
+    street character varying,
+    external_number character varying,
+    country character varying,
+    city character varying,
+    state character varying,
+    zip_code character varying,
+    addressable_id integer,
+    addressable_type character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.addresses OWNER TO yair;
+
+--
+-- Name: addresses_id_seq; Type: SEQUENCE; Schema: public; Owner: yair
+--
+
+CREATE SEQUENCE public.addresses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.addresses_id_seq OWNER TO yair;
+
+--
+-- Name: addresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: yair
+--
+
+ALTER SEQUENCE public.addresses_id_seq OWNED BY public.addresses.id;
+
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: yair
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.ar_internal_metadata OWNER TO yair;
+
+--
+-- Name: clients; Type: TABLE; Schema: public; Owner: yair
+--
+
+CREATE TABLE public.clients (
+    id bigint NOT NULL,
+    name character varying,
+    email character varying,
+    phone character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.clients OWNER TO yair;
+
+--
+-- Name: clients_id_seq; Type: SEQUENCE; Schema: public; Owner: yair
+--
+
+CREATE SEQUENCE public.clients_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.clients_id_seq OWNER TO yair;
+
+--
+-- Name: clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: yair
+--
+
+ALTER SEQUENCE public.clients_id_seq OWNED BY public.clients.id;
+
+
+--
+-- Name: companies; Type: TABLE; Schema: public; Owner: yair
+--
+
+CREATE TABLE public.companies (
+    id bigint NOT NULL,
+    business_name character varying,
+    rfc character varying,
+    email character varying,
+    phone character varying,
+    contact character varying,
+    user_id bigint NOT NULL,
+    fiscal_name character varying,
+    company_type_id integer,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    active boolean DEFAULT false
+);
+
+
+ALTER TABLE public.companies OWNER TO yair;
+
+--
+-- Name: companies_id_seq; Type: SEQUENCE; Schema: public; Owner: yair
+--
+
+CREATE SEQUENCE public.companies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.companies_id_seq OWNER TO yair;
+
+--
+-- Name: companies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: yair
+--
+
+ALTER SEQUENCE public.companies_id_seq OWNED BY public.companies.id;
+
+
+--
+-- Name: company_types; Type: TABLE; Schema: public; Owner: yair
+--
+
+CREATE TABLE public.company_types (
+    id bigint NOT NULL,
+    name character varying,
+    code character varying,
+    affiliation character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.company_types OWNER TO yair;
+
+--
+-- Name: company_types_id_seq; Type: SEQUENCE; Schema: public; Owner: yair
+--
+
+CREATE SEQUENCE public.company_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.company_types_id_seq OWNER TO yair;
+
+--
+-- Name: company_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: yair
+--
+
+ALTER SEQUENCE public.company_types_id_seq OWNED BY public.company_types.id;
+
+
+--
+-- Name: fiscal_infos; Type: TABLE; Schema: public; Owner: yair
+--
+
+CREATE TABLE public.fiscal_infos (
+    id bigint NOT NULL,
+    ri character varying,
+    account_statement character varying,
+    proof_of_address character varying,
+    incorporation_act character varying,
+    start_of_operation timestamp without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    company_id bigint
+);
+
+
+ALTER TABLE public.fiscal_infos OWNER TO yair;
+
+--
+-- Name: fiscal_infos_id_seq; Type: SEQUENCE; Schema: public; Owner: yair
+--
+
+CREATE SEQUENCE public.fiscal_infos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.fiscal_infos_id_seq OWNER TO yair;
+
+--
+-- Name: fiscal_infos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: yair
+--
+
+ALTER SEQUENCE public.fiscal_infos_id_seq OWNED BY public.fiscal_infos.id;
+
+
+--
+-- Name: products; Type: TABLE; Schema: public; Owner: yair
+--
+
+CREATE TABLE public.products (
+    id bigint NOT NULL,
+    name character varying,
+    price integer,
+    uid character varying,
+    company_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.products OWNER TO yair;
+
+--
+-- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: yair
+--
+
+CREATE SEQUENCE public.products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.products_id_seq OWNER TO yair;
+
+--
+-- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: yair
+--
+
+ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
+
+
+--
+-- Name: sale_concepts; Type: TABLE; Schema: public; Owner: yair
+--
+
+CREATE TABLE public.sale_concepts (
+    id bigint NOT NULL,
+    sale_id bigint NOT NULL,
+    unit_price character varying,
+    total character varying,
+    amount character varying,
+    product_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.sale_concepts OWNER TO yair;
+
+--
+-- Name: sale_concepts_id_seq; Type: SEQUENCE; Schema: public; Owner: yair
+--
+
+CREATE SEQUENCE public.sale_concepts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sale_concepts_id_seq OWNER TO yair;
+
+--
+-- Name: sale_concepts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: yair
+--
+
+ALTER SEQUENCE public.sale_concepts_id_seq OWNED BY public.sale_concepts.id;
+
+
+--
+-- Name: sales; Type: TABLE; Schema: public; Owner: yair
+--
+
+CREATE TABLE public.sales (
+    id bigint NOT NULL,
+    seller_id integer,
+    buyer_id integer,
+    total numeric,
+    status integer,
+    sale_type character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    company_id bigint
+);
+
+
+ALTER TABLE public.sales OWNER TO yair;
+
+--
+-- Name: sales_id_seq; Type: SEQUENCE; Schema: public; Owner: yair
+--
+
+CREATE SEQUENCE public.sales_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sales_id_seq OWNER TO yair;
+
+--
+-- Name: sales_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: yair
+--
+
+ALTER SEQUENCE public.sales_id_seq OWNED BY public.sales.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: yair
+--
+
+CREATE TABLE public.schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO yair;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: yair
+--
+
+CREATE TABLE public.users (
+    id bigint NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    name character varying DEFAULT ''::character varying NOT NULL,
+    role integer NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO yair;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: yair
+--
+
+CREATE SEQUENCE public.users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO yair;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: yair
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: addresses id; Type: DEFAULT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.addresses ALTER COLUMN id SET DEFAULT nextval('public.addresses_id_seq'::regclass);
+
+
+--
+-- Name: clients id; Type: DEFAULT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.clients ALTER COLUMN id SET DEFAULT nextval('public.clients_id_seq'::regclass);
+
+
+--
+-- Name: companies id; Type: DEFAULT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.companies ALTER COLUMN id SET DEFAULT nextval('public.companies_id_seq'::regclass);
+
+
+--
+-- Name: company_types id; Type: DEFAULT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.company_types ALTER COLUMN id SET DEFAULT nextval('public.company_types_id_seq'::regclass);
+
+
+--
+-- Name: fiscal_infos id; Type: DEFAULT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.fiscal_infos ALTER COLUMN id SET DEFAULT nextval('public.fiscal_infos_id_seq'::regclass);
+
+
+--
+-- Name: products id; Type: DEFAULT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.products_id_seq'::regclass);
+
+
+--
+-- Name: sale_concepts id; Type: DEFAULT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.sale_concepts ALTER COLUMN id SET DEFAULT nextval('public.sale_concepts_id_seq'::regclass);
+
+
+--
+-- Name: sales id; Type: DEFAULT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.sales ALTER COLUMN id SET DEFAULT nextval('public.sales_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: addresses; Type: TABLE DATA; Schema: public; Owner: yair
+--
+
+COPY public.addresses (id, street, external_number, country, city, state, zip_code, addressable_id, addressable_type, created_at, updated_at) FROM stdin;
+1	Stark Street	23	USA	Portland	Oregon	\N	1	User	2020-10-10 23:27:27.167021	2020-10-10 23:27:27.167021
+2	82nd Avenue	156	USA	Portland	Oregon	\N	2	User	2020-10-10 23:27:27.192097	2020-10-10 23:27:27.192097
+3	Alberta District	19	USA	Portland	Oregon	\N	3	User	2020-10-10 23:27:27.214786	2020-10-10 23:27:27.214786
+4	Cornell Road	58	USA	Portland	Oregon	\N	4	User	2020-10-10 23:27:27.240107	2020-10-10 23:27:27.240107
+5	Centre Avenue	77	USA	Reading	Pensilvania	\N	1	Company	2020-10-10 23:27:27.49844	2020-10-10 23:27:27.49844
+6	Franklin Street	96	USA	Reading	Pensilvania	\N	2	Company	2020-10-10 23:27:27.527288	2020-10-10 23:27:27.527288
+7	Mineral Spring Road	425	USA	Reading	Pensilvania	\N	3	Company	2020-10-10 23:27:27.573964	2020-10-10 23:27:27.573964
+8	Washington Street	745	USA	Reading	Pensilvania	\N	4	Company	2020-10-10 23:27:27.59438	2020-10-10 23:27:27.59438
+9	Hartford Avenue	250	USA	Boston	Massachusetts 	\N	1	Client	2020-10-10 23:27:27.907857	2020-10-10 23:27:27.907857
+10	Thruway Plaza	105	USA	Lowell	Massachusetts	\N	2	Client	2020-10-10 23:27:27.93279	2020-10-10 23:27:27.93279
+11	Oak Street	547	USA	Brockton	Massachusetts	\N	3	Client	2020-10-10 23:27:27.951415	2020-10-10 23:27:27.951415
+\.
+
+
+--
+-- Data for Name: ar_internal_metadata; Type: TABLE DATA; Schema: public; Owner: yair
+--
+
+COPY public.ar_internal_metadata (key, value, created_at, updated_at) FROM stdin;
+environment	development	2020-10-10 23:27:24.029962	2020-10-10 23:27:24.029962
+schema_sha1	2475403334b9a12f65632d1a0f4d9bf85f00cc5d	2020-10-10 23:27:24.05866	2020-10-10 23:27:24.05866
+\.
+
+
+--
+-- Data for Name: clients; Type: TABLE DATA; Schema: public; Owner: yair
+--
+
+COPY public.clients (id, name, email, phone, created_at, updated_at) FROM stdin;
+1	Amanda	amanda@gmail.com	7452145698	2020-10-10 23:27:27.862198	2020-10-10 23:27:27.862198
+2	Emma	emma@gmail.com	5214589744	2020-10-10 23:27:27.878384	2020-10-10 23:27:27.878384
+3	Olivia	olivia@gmail.com	1254784521	2020-10-10 23:27:27.888988	2020-10-10 23:27:27.888988
+\.
+
+
+--
+-- Data for Name: companies; Type: TABLE DATA; Schema: public; Owner: yair
+--
+
+COPY public.companies (id, business_name, rfc, email, phone, contact, user_id, fiscal_name, company_type_id, created_at, updated_at, active) FROM stdin;
+1	ServiceNow	qwer9605066d6	service_now@gmail.com	8547963215	Michelle Perl	1	Services Now TR	1	2020-10-10 23:27:27.337321	2020-10-10 23:27:27.337321	t
+2	ADP	ERTY7406055F5	adp_team@gmail.com	8547412548	Angel Phill	1	ADP	1	2020-10-10 23:27:27.36575	2020-10-10 23:27:27.36575	t
+3	PayPal	yuio8505065d5	paypal@gmail.com	2541253698	Rachel Walcker	2	Paypal CO	1	2020-10-10 23:27:27.409119	2020-10-10 23:27:27.409119	t
+4	Verizon	tgyh8562364d	verizon@gmail.com	7458965214	Emily Ino	2	Verizon SA	1	2020-10-10 23:27:27.452278	2020-10-10 23:27:27.452278	t
+\.
+
+
+--
+-- Data for Name: company_types; Type: TABLE DATA; Schema: public; Owner: yair
+--
+
+COPY public.company_types (id, name, code, affiliation, created_at, updated_at) FROM stdin;
+1	IT Companies	001	FullTime	2020-10-10 23:27:27.282566	2020-10-10 23:27:27.282566
+\.
+
+
+--
+-- Data for Name: fiscal_infos; Type: TABLE DATA; Schema: public; Owner: yair
+--
+
+COPY public.fiscal_infos (id, ri, account_statement, proof_of_address, incorporation_act, start_of_operation, created_at, updated_at, company_id) FROM stdin;
+1	tghy7452	content.xml	proof_of_address.pdf	incorporation_act.pdf	2018-10-10 23:27:27.61139	2020-10-10 23:27:27.631911	2020-10-10 23:27:27.631911	1
+2	yhju8542	content.xml	proof_of_address.pdf	incorporation_act.pdf	2019-10-10 23:27:27.642274	2020-10-10 23:27:27.643024	2020-10-10 23:27:27.643024	2
+3	ojkn8412	content.xml	proof_of_address.pdf	incorporation_act.pdf	2017-10-10 23:27:27.653473	2020-10-10 23:27:27.654179	2020-10-10 23:27:27.654179	3
+4	ffsg9514	content.xml	proof_of_address.pdf	incorporation_act.pdf	2016-10-10 23:27:27.66523	2020-10-10 23:27:27.66592	2020-10-10 23:27:27.66592	4
+\.
+
+
+--
+-- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: yair
+--
+
+COPY public.products (id, name, price, uid, company_id, created_at, updated_at) FROM stdin;
+1	Computer	750	7bb139af-36d5-42d5-9c8e-fe67a06349d2	1	2020-10-10 23:27:27.697077	2020-10-10 23:27:27.697077
+2	Mouse	250	6d759b82-e7e4-41a4-8dd6-ef29e0718331	1	2020-10-10 23:27:27.710666	2020-10-10 23:27:27.710666
+3	Laptop	1100	a0002e3c-c5e2-47b4-a736-7c87b4291970	1	2020-10-10 23:27:27.721972	2020-10-10 23:27:27.721972
+4	WebService	900	1361d109-c98c-4fda-8147-554582d1aa30	2	2020-10-10 23:27:27.733579	2020-10-10 23:27:27.733579
+5	Web app	5000	59dfd637-3c9f-470f-8d47-28176ee6674c	3	2020-10-10 23:27:27.756066	2020-10-10 23:27:27.756066
+6	Training Courses	4500	7a5de1cb-1cbe-427d-a91f-53cb507aeb4e	3	2020-10-10 23:27:27.778813	2020-10-10 23:27:27.778813
+7	Coaching	1500	af212433-4447-4fc2-a4ea-83c20e3083ea	3	2020-10-10 23:27:27.80122	2020-10-10 23:27:27.80122
+8	IT Consulting	2100	3a8e06d1-239c-4d57-8837-5c3a8e7ca759	4	2020-10-10 23:27:27.82405	2020-10-10 23:27:27.82405
+\.
+
+
+--
+-- Data for Name: sale_concepts; Type: TABLE DATA; Schema: public; Owner: yair
+--
+
+COPY public.sale_concepts (id, sale_id, unit_price, total, amount, product_id, created_at, updated_at) FROM stdin;
+1	1	750	750	1	1	2020-10-10 23:27:28.09754	2020-10-10 23:27:28.09754
+2	1	250	250	1	2	2020-10-10 23:27:28.11996	2020-10-10 23:27:28.11996
+3	2	250	500	2	2	2020-10-10 23:27:28.169299	2020-10-10 23:27:28.169299
+4	3	250	250	1	2	2020-10-10 23:27:28.185779	2020-10-10 23:27:28.185779
+5	3	1100	1100	1	3	2020-10-10 23:27:28.220336	2020-10-10 23:27:28.220336
+6	4	5000	10000	2	5	2020-10-10 23:27:28.343537	2020-10-10 23:27:28.343537
+7	4	4500	4500	1	6	2020-10-10 23:27:28.366215	2020-10-10 23:27:28.366215
+8	5	4500	9000	2	6	2020-10-10 23:27:28.388581	2020-10-10 23:27:28.388581
+9	5	1500	3000	2	7	2020-10-10 23:27:28.411457	2020-10-10 23:27:28.411457
+10	6	5000	10000	2	5	2020-10-10 23:27:28.432536	2020-10-10 23:27:28.432536
+11	6	4500	9000	2	6	2020-10-10 23:27:28.454896	2020-10-10 23:27:28.454896
+12	6	1500	3000	2	7	2020-10-10 23:27:28.476609	2020-10-10 23:27:28.476609
+\.
+
+
+--
+-- Data for Name: sales; Type: TABLE DATA; Schema: public; Owner: yair
+--
+
+COPY public.sales (id, seller_id, buyer_id, total, status, sale_type, created_at, updated_at, company_id) FROM stdin;
+1	3	1	1000.0	0	IT	2020-10-10 23:27:28.00291	2020-10-10 23:27:28.00291	1
+2	3	2	500.0	0	IT	2020-10-10 23:27:28.035206	2020-10-10 23:27:28.035206	1
+3	4	2	1350.0	0	IT	2020-10-10 23:27:28.054513	2020-10-10 23:27:28.054513	1
+4	4	3	14500.0	0	IT	2020-10-10 23:27:28.271398	2020-10-10 23:27:28.271398	3
+5	3	3	12000.0	0	IT	2020-10-10 23:27:28.301814	2020-10-10 23:27:28.301814	3
+6	4	2	22000.0	0	IT	2020-10-10 23:27:28.323585	2020-10-10 23:27:28.323585	3
+\.
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: yair
+--
+
+COPY public.schema_migrations (version) FROM stdin;
+20201010232008
+20201009010716
+20201009011043
+20201009011121
+20201009011230
+20201009011315
+20201009011336
+20201009011419
+20201009011529
+20201009011617
+20201009051159
+20201010190307
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: yair
+--
+
+COPY public.users (id, email, name, role, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, created_at, updated_at) FROM stdin;
+1	carl@gmail.com	carl	0	$2a$12$XJlfuOls8o7FmD/vZ8hFMOqUxzh8hferB3rfGJx0q1hmMjvimBQuu	\N	\N	\N	2020-10-10 23:27:26.020618	2020-10-10 23:27:26.020618
+2	john@gmail.com	john	0	$2a$12$grj2/zeZB1GrythE7/CctuTI.r9hikyxb1OMH0cBIuzk3SIStAuUm	\N	\N	\N	2020-10-10 23:27:26.450983	2020-10-10 23:27:26.450983
+3	rebeca@gmail.com	rebeca	1	$2a$12$AC4mnms6QuH75m7mHVKyUeBvbV7MQvV2ifVl89LDgNlMAPE6vBYsC	\N	\N	\N	2020-10-10 23:27:26.784891	2020-10-10 23:27:26.784891
+4	jack@gmail.com	jack	1	$2a$12$z95L7nOkqn7bbiyrEQdL3ONt/6KvD1Aw.haiN154clpZkAE/Du/c.	\N	\N	\N	2020-10-10 23:27:27.118623	2020-10-10 23:27:27.118623
+\.
+
+
+--
+-- Name: addresses_id_seq; Type: SEQUENCE SET; Schema: public; Owner: yair
+--
+
+SELECT pg_catalog.setval('public.addresses_id_seq', 11, true);
+
+
+--
+-- Name: clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: yair
+--
+
+SELECT pg_catalog.setval('public.clients_id_seq', 3, true);
+
+
+--
+-- Name: companies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: yair
+--
+
+SELECT pg_catalog.setval('public.companies_id_seq', 4, true);
+
+
+--
+-- Name: company_types_id_seq; Type: SEQUENCE SET; Schema: public; Owner: yair
+--
+
+SELECT pg_catalog.setval('public.company_types_id_seq', 1, true);
+
+
+--
+-- Name: fiscal_infos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: yair
+--
+
+SELECT pg_catalog.setval('public.fiscal_infos_id_seq', 4, true);
+
+
+--
+-- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: yair
+--
+
+SELECT pg_catalog.setval('public.products_id_seq', 8, true);
+
+
+--
+-- Name: sale_concepts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: yair
+--
+
+SELECT pg_catalog.setval('public.sale_concepts_id_seq', 12, true);
+
+
+--
+-- Name: sales_id_seq; Type: SEQUENCE SET; Schema: public; Owner: yair
+--
+
+SELECT pg_catalog.setval('public.sales_id_seq', 6, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: yair
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 4, true);
+
+
+--
+-- Name: addresses addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.addresses
+    ADD CONSTRAINT addresses_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: clients clients_pkey; Type: CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.clients
+    ADD CONSTRAINT clients_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: companies companies_pkey; Type: CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.companies
+    ADD CONSTRAINT companies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: company_types company_types_pkey; Type: CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.company_types
+    ADD CONSTRAINT company_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: fiscal_infos fiscal_infos_pkey; Type: CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.fiscal_infos
+    ADD CONSTRAINT fiscal_infos_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.products
+    ADD CONSTRAINT products_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sale_concepts sale_concepts_pkey; Type: CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.sale_concepts
+    ADD CONSTRAINT sale_concepts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sales sales_pkey; Type: CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.sales
+    ADD CONSTRAINT sales_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_companies_on_company_type_id; Type: INDEX; Schema: public; Owner: yair
+--
+
+CREATE INDEX index_companies_on_company_type_id ON public.companies USING btree (company_type_id);
+
+
+--
+-- Name: index_companies_on_user_id; Type: INDEX; Schema: public; Owner: yair
+--
+
+CREATE INDEX index_companies_on_user_id ON public.companies USING btree (user_id);
+
+
+--
+-- Name: index_fiscal_infos_on_company_id; Type: INDEX; Schema: public; Owner: yair
+--
+
+CREATE INDEX index_fiscal_infos_on_company_id ON public.fiscal_infos USING btree (company_id);
+
+
+--
+-- Name: index_products_on_company_id; Type: INDEX; Schema: public; Owner: yair
+--
+
+CREATE INDEX index_products_on_company_id ON public.products USING btree (company_id);
+
+
+--
+-- Name: index_sale_concepts_on_product_id; Type: INDEX; Schema: public; Owner: yair
+--
+
+CREATE INDEX index_sale_concepts_on_product_id ON public.sale_concepts USING btree (product_id);
+
+
+--
+-- Name: index_sale_concepts_on_sale_id; Type: INDEX; Schema: public; Owner: yair
+--
+
+CREATE INDEX index_sale_concepts_on_sale_id ON public.sale_concepts USING btree (sale_id);
+
+
+--
+-- Name: index_sales_on_buyer_id; Type: INDEX; Schema: public; Owner: yair
+--
+
+CREATE INDEX index_sales_on_buyer_id ON public.sales USING btree (buyer_id);
+
+
+--
+-- Name: index_sales_on_company_id; Type: INDEX; Schema: public; Owner: yair
+--
+
+CREATE INDEX index_sales_on_company_id ON public.sales USING btree (company_id);
+
+
+--
+-- Name: index_sales_on_seller_id; Type: INDEX; Schema: public; Owner: yair
+--
+
+CREATE INDEX index_sales_on_seller_id ON public.sales USING btree (seller_id);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: yair
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
+
+
+--
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: yair
+--
+
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
+
+
+--
+-- Name: products fk_rails_438d5b34ce; Type: FK CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.products
+    ADD CONSTRAINT fk_rails_438d5b34ce FOREIGN KEY (company_id) REFERENCES public.companies(id);
+
+
+--
+-- Name: sales fk_rails_591fb63f1a; Type: FK CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.sales
+    ADD CONSTRAINT fk_rails_591fb63f1a FOREIGN KEY (company_id) REFERENCES public.companies(id);
+
+
+--
+-- Name: sale_concepts fk_rails_5d390c84cd; Type: FK CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.sale_concepts
+    ADD CONSTRAINT fk_rails_5d390c84cd FOREIGN KEY (sale_id) REFERENCES public.sales(id);
+
+
+--
+-- Name: companies fk_rails_e57cb42012; Type: FK CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.companies
+    ADD CONSTRAINT fk_rails_e57cb42012 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: fiscal_infos fk_rails_f4e1d2fc7a; Type: FK CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.fiscal_infos
+    ADD CONSTRAINT fk_rails_f4e1d2fc7a FOREIGN KEY (company_id) REFERENCES public.companies(id);
+
+
+--
+-- Name: sale_concepts fk_rails_f7075dd959; Type: FK CONSTRAINT; Schema: public; Owner: yair
+--
+
+ALTER TABLE ONLY public.sale_concepts
+    ADD CONSTRAINT fk_rails_f7075dd959 FOREIGN KEY (product_id) REFERENCES public.products(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
