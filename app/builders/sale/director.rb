@@ -1,4 +1,4 @@
-class Purchase::Director  
+class Sale::Director  
   attr_accessor :builder
 
   def initialize

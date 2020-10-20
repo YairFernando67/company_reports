@@ -1,4 +1,4 @@
-class Ui::Purchase::Report
+class Ui::Sale::Report
   def ui
     raise NotImplementedError, "#{self.class} method not implemented yet #{__method__}"
   end
