@@ -1,4 +1,4 @@
-class Purchase::DetailedReportBuilder < Purchase::Builder
+class Sale::DetailedReportBuilder < Sale::Builder
   include Report
 
   def initialize(user)
@@ -8,7 +8,7 @@ class Purchase::DetailedReportBuilder < Purchase::Builder
   end
 
   def reset
-    @report = Purchase::DetailedReport.new
+    @report = Sale::DetailedReport.new
   end
 
   def report

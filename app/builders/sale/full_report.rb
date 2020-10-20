@@ -1,4 +1,4 @@
-class Purchase::SimpleReport
+class Sale::FullReport
   attr_accessor :data
 
   def initialize

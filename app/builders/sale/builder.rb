@@ -1,4 +1,4 @@
-class Purchase::Builder
+class Sale::Builder
   
   def add_user_info
     raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"

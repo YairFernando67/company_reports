@@ -1,8 +1,10 @@
-= link_to "Log out", destroy_user_session_path, method: :delete 
-hr
-= link_to "Simple Report", purchase_report_path(type: "simple", format: :pdf), target: "_blank"
-hr
-= link_to "Detailed Report", purchase_report_path(type: "detailed", format: :pdf), target: "_blank"
-hr
-= link_to "Full Report", purchase_report_path(type: "full", format: :pdf), target: "_blank"
-hr
+
+.container
+  h5 Company Sale Reports
+  hr
+  = link_to "Simple Report", sale_report_path(type: "simple", format: :pdf), target: "_blank"
+  hr
+  = link_to "Detailed Report", sale_report_path(type: "detailed", format: :pdf), target: "_blank"
+  hr
+  = link_to "Full Report", sale_report_path(type: "full", format: :pdf), target: "_blank"
+  hr

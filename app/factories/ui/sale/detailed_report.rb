@@ -1,4 +1,4 @@
-class Ui::Purchase::DetailedReport < Ui::Purchase::UiElements 
+class Ui::Sale::DetailedReport < Ui::Sale::UiElements 
   attr_accessor :data
 
   def initialize(data)
