@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.3'
+ruby '2.6.0'
 
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -18,6 +18,9 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 # gem 'wkhtmltopdf-binary-edge', '~> 0.12.6.0'
 gem 'bootsnap', '>= 1.4.2', require: false
+# gem 'material_design_lite-sass'
+gem 'materialize-sass'
+gem 'material_icons'
 
 group :development, :test do  
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
