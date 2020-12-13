@@ -1,0 +1,8 @@
+nav.light-blue.darken-2
+  .nav-wrapper.mx-3
+    a.brand-logo href=root_path Design Patterns
+    ul#nav-mobile.right.hide-on-med-and-down
+        li
+          = link_to "Log out", destroy_user_session_path, method: :delete
+        
+        

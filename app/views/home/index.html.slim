@@ -1,10 +1,138 @@
-
-.container
-  h5 Company Sale Reports
-  hr
-  = link_to "Simple Report", sale_report_path(type: "simple", format: :pdf), target: "_blank"
-  hr
-  = link_to "Detailed Report", sale_report_path(type: "detailed", format: :pdf), target: "_blank"
-  hr
-  = link_to "Full Report", sale_report_path(type: "full", format: :pdf), target: "_blank"
-  hr
+.container.mt-2
+  .row
+    .col.m6
+      .card
+        .card-image.waves-effect.waves-block.waves-light
+          = image_tag("builder", withd: 100, class: "activator mh-5")
+        .card-content
+          span.card-title.activator.grey-text.text-darken-4
+            | Builder Pattern
+            i.material-icons.right
+              | more_vert
+          p
+            = link_to "Creational Design Pattern", builder_index_path
+        .card-reveal
+          span.card-title.grey-text.text-darken-4
+            | Builder Pattern
+            i.material-icons.right
+              | close
+          p.fz-20.lh-35
+            | It is a creational design pattern that lets you construct complex objects step by step.
+            | This pattern allows you to produce different types and representations of an object using 
+            | the same contruction code. The builder pattern suggests that you extract the object construction 
+            | code out of its own class and move it to separate objects called builders. the builder pattern 
+            | does not allow other objects to access the product while it is being built. With this pattern 
+            | you execute a series of steps on a builder object to construct the final object. Some of the 
+            | steps might require different implementations when you need to build multiple representations 
+            | of the product. 
+    .col.m6
+      .card
+        .card-image.waves-effect.waves-block.waves-light
+          = image_tag("factory_method", withd: 100, class: "activator mh-5")
+        .card-content
+          span.card-title.activator.grey-text.text-darken-4
+            | Factory Method
+            i.material-icons.right
+              | more_vert
+          p
+            = link_to "Creational Design Pattern", builder_index_path
+        .card-reveal
+          span.card-title.grey-text.text-darken-4
+            | Factory Method
+            i.material-icons.right
+              | close
+          p.fz-20.lh-35
+            | The Factory Method design pattern allows you to create objects in a super class by providing an interface, 
+            | but allows subclasses(concrete factories) to change the type of objects that will be created. 
+            | The Factory Method pattern suggests 
+            | that you replace direct object construction calls (using the new operator) with calls to a special factory method.
+          p.fz-20.lh-35
+            | All subclasses should return different types of objects but only when these objects have a common base contract interface. 
+            | So with the Factory Method pattern we have a Factory that returns a product, then the ConcreateFactories overrides 
+            | the Factory Method that creates the product and instantiate a particular type of object, with this set up if you 
+            | want to create a different type of product you can just create a new subclass(ConcreateFactory) that returns another 
+            | particular type or product, all types of products should implement a base interface that declared the shared methods 
+            | among all products. 
+          p.fz-20.lh-35  
+            |You can use this pattern when you don't know the exact types and dependencies of the objects your 
+            | code should work with or when you want to be able to extend the internal logic of your components by using inheritance. 
+            | The Factory Methods helps you to avoid tight coupling between the creator and the sub classes, you also follow the 
+            | Single Responsability Principle 
+            | and the Open/Closed Principle because now you can extend the functionality without changing the existing code.
+            | For the subclasses in a Factory Method pattern you can create an interface that all subclasses follow, this interface 
+            | should declare methods that make sense in every subclass.
+    .col.m6
+      .card
+        .card-image.waves-effect.waves-block.waves-light
+          = image_tag("abstract_factory", withd: 100, class: "activator mh-5")
+        .card-content
+          span.card-title.activator.grey-text.text-darken-4
+            | Abstract Factory
+            i.material-icons.right
+              | more_vert
+          p
+            = link_to "Creational Design Pattern", builder_index_path
+        .card-reveal
+          span.card-title.grey-text.text-darken-4
+            | Abstract Factory
+            i.material-icons.right
+              | close
+          p.fz-20.lh-35
+            | It is a creational design pattern that lets you construct complex objects step by step.
+            | This pattern allows you to produce different types and representations of an object using 
+            | the same contruction code. The builder pattern suggests that you extract the object construction 
+            | code out of its own class and move it to separate objects called builders. the builder pattern 
+            | does not allow other objects to access the product while it is being built. With this pattern 
+            | you execute a series of steps on a builder object to construct the final object. Some of the 
+            | steps might require different implementations when you need to build multiple representations 
+            | of the product. 
+    .col.m6
+      .card
+        .card-image.waves-effect.waves-block.waves-light
+          = image_tag("prototype", withd: 100, class: "activator mh-5")
+        .card-content
+          span.card-title.activator.grey-text.text-darken-4
+            | Prototype
+            i.material-icons.right
+              | more_vert
+          p
+            = link_to "Creational Design Pattern", builder_index_path
+        .card-reveal
+          span.card-title.grey-text.text-darken-4
+            | Prototype
+            i.material-icons.right
+              | close
+          p.fz-20.lh-35
+            | It is a creational design pattern that lets you construct complex objects step by step.
+            | This pattern allows you to produce different types and representations of an object using 
+            | the same contruction code. The builder pattern suggests that you extract the object construction 
+            | code out of its own class and move it to separate objects called builders. the builder pattern 
+            | does not allow other objects to access the product while it is being built. With this pattern 
+            | you execute a series of steps on a builder object to construct the final object. Some of the 
+            | steps might require different implementations when you need to build multiple representations 
+            | of the product. 
+    .col.m6
+      .card
+        .card-image.waves-effect.waves-block.waves-light
+          = image_tag("singleton", withd: 100, class: "activator mh-5")
+        .card-content
+          span.card-title.activator.grey-text.text-darken-4
+            | Singleton
+            i.material-icons.right
+              | more_vert
+          p
+            = link_to "Creational Design Pattern", builder_index_path
+        .card-reveal
+          span.card-title.grey-text.text-darken-4
+            | Singleton
+            i.material-icons.right
+              | close
+          p.fz-20.lh-35
+            | It is a creational design pattern that lets you construct complex objects step by step.
+            | This pattern allows you to produce different types and representations of an object using 
+            | the same contruction code. The builder pattern suggests that you extract the object construction 
+            | code out of its own class and move it to separate objects called builders. the builder pattern 
+            | does not allow other objects to access the product while it is being built. With this pattern 
+            | you execute a series of steps on a builder object to construct the final object. Some of the 
+            | steps might require different implementations when you need to build multiple representations 
+            | of the product. 

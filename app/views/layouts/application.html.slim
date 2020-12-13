@@ -7,13 +7,22 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js', 'data-turbolinks-track': 'reload'
-    script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"
-  body
-    nav
-      .nav-wrapper
-        a.brand-logo href=root_path  Builder Pattern
-        = link_to "Log out", destroy_user_session_path, method: :delete, class: "logout"
-    main.container role="main" 
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+    link[href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"]
+    link[href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"]
+    / = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css', media: 'all', 'data-turbolinks-track': 'reload'
+    / = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js', 'data-turbolinks-track': 'reload'
+    / script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"
+  body.vh-100
+    - if user_signed_in?
+      = render "layouts/partials/navbar"
+      .preloader-wrapper.big.active
+        .spinner-layer.spinner-blue-only
+          .circle-clipper.left
+            .circle
+          .gap-patch
+            .circle
+          .circle-clipper.right
+            .circle
+    main.h-100 role="main" 
       = yield

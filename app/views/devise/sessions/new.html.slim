@@ -1,17 +1,29 @@
-h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    br/
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+
+
+.container-flex.light-blue.darken-2
+  .content.absolute-center
+    .card
+      .card-content
+        .card-title.center-align
+          h4 Log in
+        .center-align
+          = render "shared/alerts"
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .field
+            .input-field.col
+              = f.email_field :email, autocomplete: "email", id: "email", class: "validate"
+              label[for="email"]
+                | Email
+            br/
+          .field
+            .input-field.col
+              = f.password_field :password, autocomplete: "password", id: "password", class: "validate"
+              label[for="password"]
+                | Password
+          .actions
+            button.btn.waves-effect.waves-light.light-blue[type="submit" name="action"]
+              | Submit 
+              i.material-icons.right
+                | send
+  
+    = render "devise/shared/links"

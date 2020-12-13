@@ -14,11 +14,6 @@ class SalesController < ApplicationController
             locals: { user: @report },
           }
         },
-        footer: {
-          html: {
-            template: 'sales/footer.html.slim'
-          }
-        },
         page_size: 'A4',
         template: "sales/generate_report.html.slim",
         layout: "pdf.html",
