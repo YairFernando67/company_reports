@@ -14,28 +14,18 @@
  *= require_self
  */
 
- .nav-wrapper {
-  padding: 0px 20px;
-  display: flex;
-  justify-content: space-between;
-  margin: 0 30px;
- }
+////  *= require material_icons
+//  @import "materialize";
 
- .brand-logo {
-   position: absolute;
-   text-align: center;
- }
-
- .logout {
-  text-align: right;
-  left: 0;
+.absolute-center {
   position: absolute;
-  right: 0;
-  color: #fff;
-  font-size: 20px;
-  text-decoration: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-  &:hover {
-    color: #fff;
-  }
- }
+.preloader-wrapper {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+}

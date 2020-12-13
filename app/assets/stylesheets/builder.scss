@@ -1,0 +1,40 @@
+// Place all the styles related to the Builder controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.container {
+  z-index: 2;
+
+}
+
+.company_report-img {
+  width: 900px;
+  opacity: 0.5;
+}
+
+.grid-container {
+  width: 100%;
+  height: 90%;
+  opacity: 0.4;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .grid-right,
+  .grid-left {
+    height: 300px;
+    width: 32%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .grid-right {
+    align-items: end;
+  }
+
+  .grid-left {
+    align-items: flex-end;
+  }
+}
