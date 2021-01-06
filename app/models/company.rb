@@ -4,7 +4,8 @@ class Company < ApplicationRecord
   has_one :address, as: :addressable
   has_many :products, inverse_of: :company, dependent: :destroy
   has_many :sales, foreign_key: :company_id, class_name: "Sale"
-  has_one :fiscal_info
-
+  has_many :shipments, through: :sales
+  has_one :fiscal_info, as: :fiscal_infoable
+  has_many :carriers
   delegate :name, :code, :affiliation, to: :company_type, prefix: "company_type", allow_nil: true
 end

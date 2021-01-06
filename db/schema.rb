@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_10_232008) do
+ActiveRecord::Schema.define(version: 2021_01_06_055227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,17 @@ ActiveRecord::Schema.define(version: 2020_10_10_232008) do
     t.string "addressable_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "carriers", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.string "email"
+    t.string "carrier_type"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_carriers_on_company_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -69,6 +80,8 @@ ActiveRecord::Schema.define(version: 2020_10_10_232008) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "company_id"
+    t.string "fiscal_infoable_type"
+    t.integer "fiscal_infoable_id"
     t.index ["company_id"], name: "index_fiscal_infos_on_company_id"
   end
 
@@ -108,6 +121,32 @@ ActiveRecord::Schema.define(version: 2020_10_10_232008) do
     t.index ["seller_id"], name: "index_sales_on_seller_id"
   end
 
+  create_table "shipment_carriers", force: :cascade do |t|
+    t.bigint "carrier_id", null: false
+    t.bigint "shipment_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["carrier_id"], name: "index_shipment_carriers_on_carrier_id"
+    t.index ["shipment_id"], name: "index_shipment_carriers_on_shipment_id"
+  end
+
+  create_table "shipments", force: :cascade do |t|
+    t.bigint "sale_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "client_id", null: false
+    t.text "instructions"
+    t.integer "status"
+    t.integer "total_products"
+    t.integer "sale_number"
+    t.datetime "issued_at"
+    t.datetime "shiped_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_shipments_on_client_id"
+    t.index ["sale_id"], name: "index_shipments_on_sale_id"
+    t.index ["user_id"], name: "index_shipments_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "name", default: "", null: false
@@ -122,10 +161,16 @@ ActiveRecord::Schema.define(version: 2020_10_10_232008) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "carriers", "companies"
   add_foreign_key "companies", "users"
   add_foreign_key "fiscal_infos", "companies"
   add_foreign_key "products", "companies"
   add_foreign_key "sale_concepts", "products"
   add_foreign_key "sale_concepts", "sales"
   add_foreign_key "sales", "companies"
+  add_foreign_key "shipment_carriers", "carriers"
+  add_foreign_key "shipment_carriers", "shipments"
+  add_foreign_key "shipments", "clients"
+  add_foreign_key "shipments", "sales"
+  add_foreign_key "shipments", "users"
 end
