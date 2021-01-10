@@ -123,7 +123,62 @@ sale_six.sale_concepts.create(unit_price: "5000", total: "10000", amount: "2", p
 sale_six.sale_concepts.create(unit_price: "4500", total: "9000", amount: "2", product_id: product_six.id)
 sale_six.sale_concepts.create(unit_price: "1500", total: "3000", amount: "2", product_id: product_seven.id)
 
+# Create shipment for sale_one
+shipment_one = Shipment.create(sale_id: sale_one.id, user_id: rebeca_employee.id, client_id: client_amanda.id, instructions: "Deliver this package to the front door of the house, and wrap the computer and mouse in a blue box.", status: :accepted, total_products: 2, sale_number:  "SG-38G", issued_at: Time.now, shiped_at: Time.now + 3.days)
 
-shipment = Shipment.create(sale_id: sale_one.id, user_id: rebeca_employee.id, client_id: client_amanda.id, instructions: "Deliver this package to the front door of the house, and wrap the computer and mouse in a blue box.", status: :accepted, total_products: 2, sale_number:  "SG-38G", issued_at: Time.now, shiped_at: Time.now + 3.days)
+# Create shipment address
+Address.create(street: 'Russell St', external_number: "854", country: "USA", city: "Amsterdam", state: "NY", addressable_type: "Shipment", addressable_id: shipment_one.id)
 
-# TODO Create the address for this shipment and the carriers records too, using the join table ShipmentCarrier.
+# Create carriers for this shipment
+ShipmentCarrier.create(shipment_id: shipment_one.id, carrier_id: company_one.carriers.first.id)
+ShipmentCarrier.create(shipment_id: shipment_one.id, carrier_id: company_one.carriers.second.id)
+
+# Create shipment for sale_two
+shipment_two = Shipment.create(sale_id: sale_two.id, user_id: rebeca_employee.id, client_id: client_emma.id, instructions: "Wrap the mouse in a black box.", status: :completed, total_products: 1, sale_number:  "SG-39F", issued_at: Time.now, shiped_at: Time.now + 10.minutes)
+
+# Create shipment address
+Address.create(street: 'Brockport Spencerport Rd', external_number: "968", country: "USA", city: "Brockport", state: "NY", addressable_type: "Shipment", addressable_id: shipment_two.id)
+
+# Create carriers for this shipment
+ShipmentCarrier.create(shipment_id: shipment_two.id, carrier_id: company_one.carriers.third.id)
+
+# Create shipment for sale_three
+shipment_three = Shipment.create(sale_id: sale_three.id, user_id: jack_employee.id, client_id: client_emma.id, instructions: "Laptop and mouse in a slim package.", status: :pending, total_products: 2, sale_number:  "SG-45AF", issued_at: Time.now + 1.day)
+
+# Create shipment address
+Address.create(street: 'East Ave', external_number: "3018", country: "USA", city: "Central Square", state: "NY", addressable_type: "Shipment", addressable_id: shipment_three.id)
+
+# Create carriers for this shipment
+ShipmentCarrier.create(shipment_id: shipment_three.id, carrier_id: company_one.carriers.third.id)
+ShipmentCarrier.create(shipment_id: shipment_three.id, carrier_id: company_one.carriers.last.id)
+
+# Create shipment for sale_four
+shipment_four = Shipment.create(sale_id: sale_four.id, user_id: jack_employee.id, client_id: client_olivia.id, instructions: "Send manuals and login info for the platform.", status: :blocked, total_products: 2, sale_number:  "SG-99D")
+
+# Create shipment address
+Address.create(street: 'Thruway Plaza', external_number: "14225", country: "USA", city: "Cheektowaga", state: "NY", addressable_type: "Shipment", addressable_id: shipment_four.id)
+
+# Create carriers for this shipment
+ShipmentCarrier.create(shipment_id: shipment_four.id, carrier_id: company_three.carriers.first.id)
+ShipmentCarrier.create(shipment_id: shipment_four.id, carrier_id: company_three.carriers.second.id)
+ShipmentCarrier.create(shipment_id: shipment_four.id, carrier_id: company_three.carriers.last.id)
+
+# Create shipment for sale_five
+shipment_five = Shipment.create(sale_id: sale_five.id, user_id: rebeca_employee.id, client_id: client_olivia.id, instructions: "Send couching program, manuals and login info.", status: :progress, total_products: 2, sale_number:  "SG-52F", issued_at: Time.now + 5.hours, shiped_at: Time.now + 2.days)
+
+# Create shipment address
+Address.create(street: 'Troy Road', external_number: "254", country: "USA", city: "East Greenbush", state: "NY", addressable_type: "Shipment", addressable_id: shipment_five.id)
+
+# Create carriers for this shipment
+ShipmentCarrier.create(shipment_id: shipment_five.id, carrier_id: company_three.carriers.third.id)
+ShipmentCarrier.create(shipment_id: shipment_five.id, carrier_id: company_three.carriers.second.id)
+
+# Create shipment for sale_six
+shipment_six = Shipment.create(sale_id: sale_six.id, user_id: jack_employee.id, client_id: client_emma.id, instructions: "Send couching program, platform uri, manuals and login info.", status: :completed, total_products: 3, sale_number:  "SG-72W", issued_at: Time.now + 2.hours, shiped_at: Time.now + 1.days)
+
+# Create shipment address
+Address.create(street: 'State Route 3', external_number: "8542", country: "USA", city: "Fulton", state: "NY", addressable_type: "Shipment", addressable_id: shipment_six.id)
+
+# Create carriers for this shipment
+ShipmentCarrier.create(shipment_id: shipment_six.id, carrier_id: company_three.carriers.third.id)
+ShipmentCarrier.create(shipment_id: shipment_six.id, carrier_id: company_three.carriers.last.id)
