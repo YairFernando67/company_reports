@@ -1,0 +1,106 @@
+// Place all the styles related to the Companies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.card-transition {
+  transform: translateY(-100px);
+  opacity: 0;
+}
+
+.company-card {
+  transition: ease-out 0.3s;
+  
+  .card-content {
+    padding: 0 !important;
+
+    .card-title {
+      height: 37rem;
+      margin-bottom: 0 !important;
+
+      .background-image-1 {
+        background: image-url('back_img_1.png') no-repeat;
+        background-size: cover;
+        background-position: center center;
+        height: 100%;
+        position: relative;
+      
+        h2 {
+          font-size: 9rem;
+          text-align: left;
+          padding: 2rem;
+          background-image: linear-gradient(to right bottom, #f06292, #004d40 );
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+      }
+
+      .description {
+        position: absolute;
+        height: 10rem;
+        background-color: #e0e0e0;
+        bottom: 30%;
+        width: 90%;
+        opacity: 0.8;
+        color: #212121;
+        font-size: 1.2rem;
+        box-shadow: 1px 1px 3px 1px #fff;
+        text-align: left;
+        padding: 1rem;
+      }
+
+      // Second Card
+      .content {
+        height: 55%;
+        margin-bottom: 6rem;
+
+        .background-image-2 {
+          background: image-url('back_img_2.png') no-repeat;
+          background-size: cover;
+          background-position: center center;
+          height: 100%;
+          
+        }
+      }
+
+      .general {
+        display: flex;
+        flex-direction: column;
+        font-size: 1.5rem;
+        font-weight: 100;
+
+        i { margin-right: 1rem;}
+
+        span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          &:hover {
+            color: #424242;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  .card-action {
+    .company-details {
+      padding: 0 1rem 1rem 1rem;
+      color: #fff;
+      font-weight: 100;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #eee;
+    }
+  }
+}
+
+
+
+
+
+
+// Card two
