@@ -19,13 +19,14 @@ Address.create(street: 'Alberta District', external_number: "19", country: "USA"
 Address.create(street: 'Cornell Road', external_number: "58", country: "USA", city: "Portland", state: "Oregon", addressable_type: "User", addressable_id: jack_employee.id)
 
 # Create company types
-company_type = CompanyType.create(name: "IT Companies", code: "001", affiliation: "FullTime")
+company_type_one = CompanyType.create(name: "IT Companies", code: "001", affiliation: "FullTime")
+company_type_two = CompanyType.create(name: "Web Design Solutions", code: "002", affiliation: "FullTime")
 
 # Create one company per user
-company_one = carl_admin.companies.create(business_name: "ServiceNow", rfc: "qwer9605066d6", email: "service_now@gmail.com", phone: "8547963215", active: true, contact: "Michelle Perl", fiscal_name: "Services Now TR", company_type_id: company_type.id)
-company_two = carl_admin.companies.create(business_name: "ADP", rfc: "ERTY7406055F5", email: "adp_team@gmail.com", phone: "8547412548", active: true, contact: "Angel Phill", fiscal_name: "ADP", company_type_id: company_type.id)
-company_three = john_admin.companies.create(business_name: "PayPal", rfc: "yuio8505065d5", email: "paypal@gmail.com", phone: "2541253698", active: true, contact: "Rachel Walcker", fiscal_name: "Paypal CO", company_type_id: company_type.id)
-company_four = john_admin.companies.create(business_name: "Verizon", rfc: "tgyh8562364d", email: "verizon@gmail.com", phone: "7458965214", active: true, contact: "Emily Ino", fiscal_name: "Verizon SA", company_type_id: company_type.id)
+company_one = carl_admin.companies.create(business_name: "ServiceNow", rfc: "qwer9605066d6", email: "service_now@gmail.com", phone: "8547963215", active: true, contact: "Michelle Perl", fiscal_name: "Services Now TR", company_type_id: company_type_one.id)
+company_two = carl_admin.companies.create(business_name: "ADP", rfc: "ERTY7406055F5", email: "adp_team@gmail.com", phone: "8547412548", active: true, contact: "Angel Phill", fiscal_name: "ADP", company_type_id: company_type_one.id)
+company_three = john_admin.companies.create(business_name: "PayPal", rfc: "yuio8505065d5", email: "paypal@gmail.com", phone: "2541253698", active: true, contact: "Rachel Walcker", fiscal_name: "Paypal CO", company_type_id: company_type_two.id)
+company_four = john_admin.companies.create(business_name: "Verizon", rfc: "tgyh8562364d", email: "verizon@gmail.com", phone: "7458965214", active: true, contact: "Emily Ino", fiscal_name: "Verizon SA", company_type_id: company_type_two.id)
 
 # Create carriers for company one
 carrier_one = company_one.carriers.create(name: "DHL Express", phone: "1-800-225-5345", email: "dhlservices@outlook.com", carrier_type: :national)
