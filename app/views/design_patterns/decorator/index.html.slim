@@ -1,0 +1,20 @@
+.container.center-align data-controller="company"
+  h2.center-align Companies
+  a.mb-1.dropdown-trigger.btn[href="#" data-target="dropdown1" data-action="change->company#cardTransition"]
+    | Select a company
+    i.material-icons.right
+      | expand_more
+  ul#dropdown1.dropdown-content
+    - @companies.each do |company|
+      li
+        = link_to decorator_path(company: company.id) do
+          i.material-icons
+            | assessment
+          = company.business_name
+      li.divider[tabindex="-1"]
+
+
+  .row
+    = render "design_patterns/decorator/company", obj: @decorated_company if @decorated_company
+  / .row
+  /   = render partial: "design_patterns/decorator/company", collection: @companies
