@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_06_055227) do
+ActiveRecord::Schema.define(version: 2021_01_16_054948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,20 @@ ActiveRecord::Schema.define(version: 2021_01_06_055227) do
     t.string "affiliation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "drivers", force: :cascade do |t|
+    t.string "name"
+    t.string "last_name"
+    t.string "email"
+    t.string "phone"
+    t.integer "driver_number"
+    t.integer "status"
+    t.bigint "carrier_id", null: false
+    t.string "licence_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["carrier_id"], name: "index_drivers_on_carrier_id"
   end
 
   create_table "fiscal_infos", force: :cascade do |t|
@@ -163,6 +177,7 @@ ActiveRecord::Schema.define(version: 2021_01_06_055227) do
 
   add_foreign_key "carriers", "companies"
   add_foreign_key "companies", "users"
+  add_foreign_key "drivers", "carriers"
   add_foreign_key "fiscal_infos", "companies"
   add_foreign_key "products", "companies"
   add_foreign_key "sale_concepts", "products"

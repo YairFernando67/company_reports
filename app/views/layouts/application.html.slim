@@ -16,13 +16,13 @@ html
   body.vh-100
     - if user_signed_in?
       = render "layouts/partials/navbar"
-      .preloader-wrapper.big.active
-        .spinner-layer.spinner-blue-only
-          .circle-clipper.left
-            .circle
-          .gap-patch
-            .circle
-          .circle-clipper.right
-            .circle
+      / .preloader-wrapper.big.active
+      /   .spinner-layer.spinner-blue-only
+      /     .circle-clipper.left
+      /       .circle
+      /     .gap-patch
+      /       .circle
+      /     .circle-clipper.right
+      /       .circle
     main.h-100 role="main" 
       = yield

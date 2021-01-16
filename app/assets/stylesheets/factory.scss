@@ -1,0 +1,50 @@
+// Place all the styles related to the factory controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.jumbotron {
+  height: 42rem;
+  background: #6A48EA;
+  margin-top: -2.37rem;
+  --webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+  z-index: 2;
+  position: relative;
+
+  img {
+    width: 48rem;
+    transform: rotate(-5deg);
+    position: absolute;
+    left: 7%;
+    bottom: 10%;
+  }
+
+  h2 {
+    color: #fff;
+    padding: 1rem;
+  }
+
+  .content {
+    width: 40rem;
+    text-align: left;
+    padding: 1rem 2rem;
+    position: absolute;
+    right: 5%;
+    top: 25%;
+    color: #fff;
+    font-weight: 100;
+  }
+}
+
+.jumbotron-2 {
+  height: 39rem;
+  background: #D2D0F2;
+  width: 100%;
+  position: absolute;
+  top: 7%;
+  z-index: -2;
+  /* z-index: 200; */
+  --webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 65%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 65%);
+}
