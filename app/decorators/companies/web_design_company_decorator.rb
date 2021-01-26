@@ -3,7 +3,7 @@ class Companies::WebDesignCompanyDecorator < Companies::BaseDecorator
   def name
     "
       <div class='background-image-1'>
-        <h2>#{@object.business_name}</h2>
+        <h2>#{@company.business_name}</h2>
       </div>
     "
   end
@@ -13,19 +13,19 @@ class Companies::WebDesignCompanyDecorator < Companies::BaseDecorator
       <div class='description'>
         <div class='row'>
           <div class='col s6'>
-            <span>  Rfc: <strong>#{object.rfc} </strong> </span> 
+            <span>  Rfc: <strong>#{company.rfc} </strong> </span> 
           </div>
           <div class='col s6'>
-            <span>  Contact: <strong>#{object.contact} </strong> </span> 
+            <span>  Contact: <strong>#{company.contact} </strong> </span> 
           </div>
           <div class='col s6'>
-            <span>  Email: <strong>#{object.email} </strong> </span> 
+            <span>  Email: <strong>#{company.email} </strong> </span> 
           </div>
           <div class='col s6'>
-            <span>  Phone: <strong>#{object.phone} </strong> </span> 
+            <span>  Phone: <strong>#{company.phone} </strong> </span> 
           </div>
           <div class='col s6'>
-            <span>  Fiscal Name: <strong>#{object.fiscal_name} </strong> </span> 
+            <span>  Fiscal Name: <strong>#{company.fiscal_name} </strong> </span> 
           </div>
         </div>
       </div>
@@ -33,15 +33,15 @@ class Companies::WebDesignCompanyDecorator < Companies::BaseDecorator
   end
 
   def company_details
-    active = @object.active ? "<i class='material-icons'>done</i>" : "<i class='material-icons'>mood_bad</i>"
+    active = @company.active ? "<i class='material-icons'>done</i>" : "<i class='material-icons'>mood_bad</i>"
     "
       <div class='company-details'>
         <span class='company-active'>#{active}</span>
         <div class='company-type'>
-          #{@object.company_type_name}
+          #{@company.company_type_name}
         </div>
         <span class='company-address'>
-          #{[@object.address_street, @object.address_external_number, @object.address_city, @object.address_country].join(" ")}
+          #{[@company.address_street, @company.address_external_number, @company.address_city, @company.address_country].join(" ")}
         </span>
       </div>
     "

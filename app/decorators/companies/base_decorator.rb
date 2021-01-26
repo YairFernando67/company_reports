@@ -1,7 +1,7 @@
 class Companies::BaseDecorator < Companies::BaseInterface
-  def initialize(object)
-    @object = object
+  def initialize(company)
+    @company = company
   end
 
-  attr_reader :object
+  attr_reader :company
 end
