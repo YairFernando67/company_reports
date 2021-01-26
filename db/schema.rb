@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_16_054948) do
+ActiveRecord::Schema.define(version: 2021_01_26_054834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,10 +32,10 @@ ActiveRecord::Schema.define(version: 2021_01_16_054948) do
     t.string "name"
     t.string "phone"
     t.string "email"
-    t.string "carrier_type"
     t.bigint "company_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "carrier_type"
     t.index ["company_id"], name: "index_carriers_on_company_id"
   end
 
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2021_01_16_054948) do
     t.string "last_name"
     t.string "email"
     t.string "phone"
-    t.integer "driver_number"
+    t.string "driver_number"
     t.integer "status"
     t.bigint "carrier_id", null: false
     t.string "licence_number"
@@ -93,10 +93,8 @@ ActiveRecord::Schema.define(version: 2021_01_16_054948) do
     t.datetime "start_of_operation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "company_id"
     t.string "fiscal_infoable_type"
     t.integer "fiscal_infoable_id"
-    t.index ["company_id"], name: "index_fiscal_infos_on_company_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -151,7 +149,7 @@ ActiveRecord::Schema.define(version: 2021_01_16_054948) do
     t.text "instructions"
     t.integer "status"
     t.integer "total_products"
-    t.integer "sale_number"
+    t.string "sale_number"
     t.datetime "issued_at"
     t.datetime "shiped_at"
     t.datetime "created_at", precision: 6, null: false
@@ -178,7 +176,6 @@ ActiveRecord::Schema.define(version: 2021_01_16_054948) do
   add_foreign_key "carriers", "companies"
   add_foreign_key "companies", "users"
   add_foreign_key "drivers", "carriers"
-  add_foreign_key "fiscal_infos", "companies"
   add_foreign_key "products", "companies"
   add_foreign_key "sale_concepts", "products"
   add_foreign_key "sale_concepts", "sales"
