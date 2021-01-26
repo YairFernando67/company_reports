@@ -1,6 +1,6 @@
 class CompanyService 
 
-  COMPANT_DECORATORS = {
+  COMPANY_DECORATORS = {
     "Web Design Solutions": Companies::WebDesignCompanyDecorator,
     "IT Companies": Companies::ItCompanyDecorator
   }
@@ -9,7 +9,7 @@ class CompanyService
     def get_company(company_id)
       company_id = company_id.nil? ? Company.first.id : company_id
       company = Company.find(company_id)
-      decorator = COMPANT_DECORATORS[company.company_type_name.to_sym]
+      decorator = COMPANY_DECORATORS[company.company_type_name.to_sym]
       decorator.new(company)
     end
   end

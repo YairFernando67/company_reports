@@ -8,3 +8,8 @@
       | Aspernatur repudiandae cum repellendus, ipsam, illo tenetur 
       | temporibus iure atque, sint numquam ex cupiditate hic!
   .jumbotron-2
+
+.row
+  - @carriers.each do |carrier|
+    .col.s12 
+      h2 = carrier.address
