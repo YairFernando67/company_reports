@@ -7,4 +7,7 @@ class Shipment < ApplicationRecord
   has_many :shipment_carriers, class_name: "ShipmentCarrier"
   has_many :carriers, through: :shipment_carriers
   has_one :address, as: :addressable
+
+  delegate :name, :email, :phone, to: :client, prefix: "client", allow_nil: true
+  # delegate :name, :code, :affiliation, to: :company_type, prefix: "company_type", allow_nil: true
 end
