@@ -2,7 +2,7 @@ class Carriers::InternationalCompanyDecorator < Carriers::BaseDecorator
   columns(*Carrier::COLUMNS)
 
   def address
-    "contact info.."
+    carrier.address
   end
 
   def fiscal_info
