@@ -9,7 +9,11 @@
       | temporibus iure atque, sint numquam ex cupiditate hic!
   .jumbotron-2
 
-.row
-  - @carriers.each do |carrier|
-    .col.s12 
-      h2 = carrier.address
+.container.mb-5
+  .row
+    - @carriers.each do |carrier|
+      .col.s12.mt-5
+        = sanitize carrier.address
+        = sanitize carrier.fiscal_info
+        = sanitize carrier.shipments
+        = sanitize carrier.drivers
