@@ -18,7 +18,7 @@ class CarrierService
     # @international_carriers = Carrier.international.map { |c| Carriers::InternationalCarrier.new(c) }
 
     # append_carriers(national_carriers, international_carriers)
-    carriers.map do |c|
+    carriers.shuffle.map do |c|
       COMPANY_DECORATORS[c.carrier_type.to_sym].new(c).decorate
     end
   end
