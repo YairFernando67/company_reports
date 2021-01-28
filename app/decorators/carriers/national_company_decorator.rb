@@ -1,5 +1,6 @@
 class Carriers::NationalCompanyDecorator < Carriers::BaseDecorator
   columns(*Carrier::COLUMNS)
+  include CarriersDecoratorHelper
 
   def address
     "
@@ -61,18 +62,4 @@ class Carriers::NationalCompanyDecorator < Carriers::BaseDecorator
   end
 
   alias carrier resource
-
-  private
-
-  def carrier_name
-    carrier.carrier.name
-  end
-
-  def carrier_email
-    carrier.carrier.email
-  end
-
-  def carrier_phone
-    carrier.carrier.phone
-  end
 end
