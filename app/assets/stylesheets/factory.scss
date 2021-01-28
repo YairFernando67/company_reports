@@ -172,3 +172,89 @@
     }
   }
 }
+
+
+.int-address {
+  padding: 1rem;
+  text-align: center;
+  background: #45494d;
+  color: #fff;
+  font-weight: 100;
+  font-size: 1.3rem;
+  padding: 1rem 0;
+
+  h3 {
+    letter-spacing: 9px;
+    font-weight: 100;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1rem;
+  }
+}
+
+.int-fiscal-info {
+  background: #45494d;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  padding: 1rem 0;
+
+  strong {
+    font-weight: 300;
+
+    span {
+      color: rgba(255,255,255,0.502);
+      font-weight: 100;
+    }
+  }
+}
+
+.int-shipments {
+  background: #45494d;
+  color: rgba(255,255,255,0.502);
+  display: flex;
+  justify-content: space-evenly;
+  padding: 4rem 0;
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    span {
+      color: #fff;
+      font-size: 1.3rem;
+    }
+
+    h3 {
+      font-weight: 200;
+    }
+  }
+}
+
+
+.int-drivers {
+  background: #45494d;
+  padding: 0 3rem;
+  border-top: 1px solid #5A5E62;
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem;
+  font-weight: 200;
+
+  .driver-numbers {
+    color: #fff;
+
+    h5 {
+      margin: 0;
+      font-weight: 200;
+    }
+  }
+
+  .driver-details {
+    color: rgba(255, 255, 255, 0.502);
+  }
+}
