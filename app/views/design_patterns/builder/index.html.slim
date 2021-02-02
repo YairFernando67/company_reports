@@ -8,19 +8,19 @@
       | expand_more
   ul#dropdown1.dropdown-content
     li
-      = link_to sale_report_path(type: "simple", format: :pdf), target: "_blank" do
+      = link_to sale_report_path(type: "simple", format: :html) do
         i.material-icons
           | dashboard
         | Simple Report
     li.divider[tabindex="-1"]
     li
-      = link_to sale_report_path(type: "detailed", format: :pdf), target: "_blank" do
+      = link_to sale_report_path(type: "detailed", format: :html) do
         i.material-icons
           | assessment
         | Detailed Report
     li.divider[tabindex="-1"]
     li
-      = link_to sale_report_path(type: "full", format: :pdf), target: "_blank" do
+      = link_to sale_report_path(type: "full", format: :html) do
         i.material-icons
           | assignment_turned_in
         | Full Report
