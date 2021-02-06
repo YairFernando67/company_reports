@@ -1,6 +1,21 @@
 class Sale::DetailedReportBuilder < Sale::Builder
   include Report
 
+  ADDRESS_ATTR = %i[street city state country external_number zip_code].freeze
+  COMPANY_ATTR = %i[
+    business_name 
+    rfc 
+    email 
+    phone 
+    contact 
+    fiscal_name 
+    created_at
+    company_type
+    code
+    affiliation
+  ].freeze
+  PRODUCT_ATTR = %i[id name price identifier].freeze
+
   def initialize(user)
     @user = user
     @active_companies = @user.active_companies
@@ -8,7 +23,7 @@ class Sale::DetailedReportBuilder < Sale::Builder
   end
 
   def reset
-    @report = Sale::DetailedReport.new
+    @report = {}
   end
 
   def report
@@ -17,11 +32,11 @@ class Sale::DetailedReportBuilder < Sale::Builder
   end
 
   def add_user_info
-    Report.add_user_info(@user, @report)
+    Report.add_user_info(@user, @report, ADDRESS_ATTR)
   end
 
   def add_company_info
-    Report.add_company_info(@active_companies, @report)
+    Report.add_company_info(@active_companies, @report, COMPANY_ATTR, PRODUCT_ATTR)
   end
 
   def add_company_fiscal_information
@@ -55,13 +70,13 @@ class Sale::DetailedReportBuilder < Sale::Builder
   end
 
   def add_charts
-    @report.data[:charts] = {}
+    @report[:charts] = {}
   end
 
   private
 
   def base_company_level(&blk)
-    companies = @report.data[:companies]
+    companies = @report[:companies]
     @active_companies.each.with_index do |company, i|
       blk.call(companies, company, i)
     end

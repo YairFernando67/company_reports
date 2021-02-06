@@ -1,47 +1,27 @@
 class Sale::SimpleReportBuilder < Sale::Builder
   include Report 
 
+  ADDRESS_ATTR = %i[street city state].freeze
+  COMPANY_ATTR = %i[business_name rfc email phone contact].freeze
+  PRODUCT_ATTR = %i[id name price].freeze
+
   def initialize(user)
     @user = user
     @active_companies = @user.active_companies
-    reset
-  end
-
-  def reset
-    @report = Sale::SimpleReport.new
-  end
-
-  def report
-    report = @report
-    report
+    @report = {}
   end
 
   def add_user_info
-    Report.add_user_info(@user, @report)
+    Report.add_user_info(@user, @report, ADDRESS_ATTR)
   end
 
   def add_company_info
-    @report.data[:companies] = @active_companies.map do |company|
-      products = company.products
-      {
-        business_name: company[:business_name],
-        rfc: company[:rfc],
-        email: company[:email],
-        phone: company[:phone],
-        contact: company[:contact],
-        products: products.map do |product|
-          { 
-            id: product[:id],
-            name: product[:name] ,
-            price: product[:price]
-          }
-        end
-      }
-    end
+    Report.add_company_info(@active_companies, @report, COMPANY_ATTR, PRODUCT_ATTR)
   end
 
   def add_company_fiscal_information
-    @report.data[:companies].each do |company|
+    binding.pry
+    @report[:companies].each do |company|
       company[:fiscal_information] = nil
     end
   end
@@ -92,13 +72,15 @@ class Sale::SimpleReportBuilder < Sale::Builder
   end
 
   def add_charts
-    @report.data[:charts] = {}
+    @report[:charts] = {}
   end
+
+  attr_accessor :report
 
   private
 
   def base_company_level(&blk)
-    companies = @report.data[:companies]
+    companies = @report[:companies]
     @active_companies.each.with_index do |company, i|
       blk.call(companies, company, i)
     end

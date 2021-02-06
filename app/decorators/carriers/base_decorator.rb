@@ -8,13 +8,15 @@ class Carriers::BaseDecorator
     end
 
     def columns(*attrs)
+      # binding.pry
       @@columns[object_id] = attrs.map(&:to_sym)
 
       attrs.each do |column|
-        
+        # binding.pry
         define_method("#{column}") do
           instance_variable_get("@#{column}")
         end
+        # binding.pry
         define_method("#{column}=") do |value|
           instance_variable_set("@#{column}", value)
         end
@@ -33,9 +35,11 @@ class Carriers::BaseDecorator
   attr_reader :resource
 
   def set_columns
+    # binding.pry
     return unless @@columns[decorator_id]
 
     @@columns[decorator_id].each do |key|
+      # binding.pry
       send("#{key}=", carrier_instance.send(key)) if carrier_instance.respond_to?(key)
     end
   end

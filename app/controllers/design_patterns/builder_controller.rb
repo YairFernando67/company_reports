@@ -3,8 +3,10 @@ module DesignPatterns
     before_action :authenticate_user!
 
     def index
+      @report = SaleReportService.new(params, current_user).call if params[:type].present?
+      binding.pry
+      # @company_earnings = @report.ui.data[:charts][:company_earnings]
     end
-
 
     def generate_report
       @report = SaleReportService.new(params, current_user).call

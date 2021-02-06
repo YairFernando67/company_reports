@@ -1,34 +1,17 @@
 module Report
-  def self.add_user_info(user, report)
-    address = user.address.slice(:street, :city, :state, :country)
-    report.data[:user] = user.slice(:email, :name).merge(address)
+  def self.add_user_info(user, report, address_attr)
+    address = user.address.slice(*address_attr)
+    report[:user] = user.slice(:email, :name).merge(address)
   end
-
-  def self.add_company_info(active_companies, report, &blk)
-    report.data[:companies] = active_companies.map do |company|
-      products = company.products
-      hash = {
-        business_name: company[:business_name],
-        rfc: company[:rfc],
-        email: company[:email],
-        phone: company[:phone],
-        contact: company[:contact],
-        fiscal_name: company[:fiscal_name],
-        created_at: company[:created_at],
-        company_type: company.company_type_name,
-        code: company.company_type_code,
-        affiliation: company.company_type_affiliation,
-        products: products.map do |product|
-          { 
-            id: product[:id],
-            name: product[:name] ,
-            price: product[:price],
-            identifier: product[:uid]
-          }
-        end
-      }
-      hash.store(:address, blk.call(company)) if block_given?
-      hash
+  
+  def self.add_company_info(active_companies, report, company_attr, product_attr)
+    report[:companies] = active_companies.map do |company|
+      company.slice(*company_attr).tap do |hash|
+        products = company.products
+        products_array = products.map { |p| p.slice(*product_attr) }
+        hash.store(:products, products_array)
+        hash.store(:address, yield(company.address)) if defined?(yield)
+      end
     end
   end
 

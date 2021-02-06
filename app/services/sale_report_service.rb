@@ -2,14 +2,11 @@ class SaleReportService
   def initialize(params, user)
     @params = params
     @user = user
+    @message = "Select a Report!"
   end
 
   def call
-    case @params[:type]
-    when "simple" then get_simple_report
-    when "detailed" then get_detailed_report
-    when "full" then get_full_report
-    end
+    send("get_#{params[:type]}_report")
   end
 
   private
@@ -19,7 +16,7 @@ class SaleReportService
     builder = Sale::SimpleReportBuilder.new(@user)
     @director.builder = builder
     @director.build
-    Ui::Sale::SimpleReportCreator.new(builder.report.data)    
+    Ui::Sale::SimpleReportCreator.new(builder.report)
   end
 
   def get_detailed_report
@@ -27,7 +24,8 @@ class SaleReportService
     builder = Sale::DetailedReportBuilder.new(@user)
     @director.builder = builder
     @director.build
-    Ui::Sale::DetailedReportCreator.new(builder.report.data)    
+    binding.pry
+    Ui::Sale::DetailedReportCreator.new(builder.report)
   end
 
   def get_full_report
@@ -35,6 +33,8 @@ class SaleReportService
     builder = Sale::FullReportBuilder.new(@user)
     @director.builder = builder
     @director.build
-    Ui::Sale::DetailedReportCreator.new(builder.report.data)    
+    Ui::Sale::DetailedReportCreator.new(builder.report)
   end
+
+  attr_reader :message, :params
 end

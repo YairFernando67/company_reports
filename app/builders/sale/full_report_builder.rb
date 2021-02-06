@@ -1,5 +1,20 @@
 class Sale::FullReportBuilder < Sale::Builder
   include Report
+
+  ADDRESS_ATTR = %i[street city state country external_number zip_code].freeze
+  COMPANY_ATTR = %i[
+      business_name 
+      rfc 
+      email 
+      phone 
+      contact 
+      fiscal_name 
+      created_at
+      company_type_name
+      company_type_code
+      company_type_affiliation
+  ].freeze
+  PRODUCT_ATTR = %i[id name price uid].freeze
   
   def initialize(user, params={})
     @user = user
@@ -9,7 +24,7 @@ class Sale::FullReportBuilder < Sale::Builder
   end
 
   def reset
-    @report = Sale::FullReport.new
+    @report = {}
   end
 
   def report
@@ -18,16 +33,17 @@ class Sale::FullReportBuilder < Sale::Builder
   end
 
   def add_user_info
-    Report.add_user_info(@user, @report)
+    Report.add_user_info(@user, @report, ADDRESS_ATTR)
   end
 
   def add_company_info
-    Report.add_company_info(@active_companies, @report) do |company|
-      company.address.slice(:street, :country, :city, :state)
+    Report.add_company_info(@active_companies, @report, COMPANY_ATTR, PRODUCT_ATTR) do |address|
+      address.slice(*ADDRESS_ATTR)
     end
   end
 
   def add_company_fiscal_information
+    binding.pry
     base_company_level do |companies, company, i|
       companies[i][:fiscal_information] = company.fiscal_info
                                                   .slice(:ri, :proof_of_address, 
