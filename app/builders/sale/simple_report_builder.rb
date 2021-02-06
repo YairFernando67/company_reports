@@ -1,22 +1,28 @@
 class Sale::SimpleReportBuilder < Sale::Builder
-  include Report 
-
   ADDRESS_ATTR = %i[street city state].freeze
   COMPANY_ATTR = %i[business_name rfc email phone contact].freeze
   PRODUCT_ATTR = %i[id name price].freeze
 
-  def initialize(user)
-    @user = user
-    @active_companies = @user.active_companies
-    @report = {}
+  def initialize(reporter)
+    @user = reporter.user
+    @reporter = reporter
+    post_initialize
+  end
+
+  def post_initialize
+    reporter.report = {}
+  end
+
+  def report
+    reporter.report
   end
 
   def add_user_info
-    Report.add_user_info(@user, @report, ADDRESS_ATTR)
+    reporter.add_user_info(ADDRESS_ATTR)
   end
 
   def add_company_info
-    Report.add_company_info(@active_companies, @report, COMPANY_ATTR, PRODUCT_ATTR)
+    reporter.add_company_info(COMPANY_ATTR, PRODUCT_ATTR)
   end
 
   def add_company_fiscal_information
@@ -75,7 +81,7 @@ class Sale::SimpleReportBuilder < Sale::Builder
     @report[:charts] = {}
   end
 
-  attr_accessor :report
+  attr_accessor :reporter, :user
 
   private
 

@@ -1,44 +1,30 @@
-class Sale::FullReportBuilder < Sale::Builder
-  include Report
-
-  ADDRESS_ATTR = %i[street city state country external_number zip_code].freeze
-  COMPANY_ATTR = %i[
-      business_name 
-      rfc 
-      email 
-      phone 
-      contact 
-      fiscal_name 
-      created_at
-      company_type_name
-      company_type_code
-      company_type_affiliation
-  ].freeze
-  PRODUCT_ATTR = %i[id name price uid].freeze
-  
-  def initialize(user, params={})
-    @user = user
-    @params = params
-    @active_companies = @user.active_companies
-    reset
+class Sale::FullReportBuilder < Sale::Builder  
+  def initialize(reporter)
+    @user = reporter.user
+    @reporter = reporter
+    post_initialize
   end
 
-  def reset
-    @report = {}
+  def post_initialize
+    reporter.report = {}
+    reporter.set_config(
+      address_fields: address_fields,
+      company_fields: company_fields,
+      product_fields: product_fields
+    )
   end
 
   def report
-    report = @report
-    report
+    reporter.report
   end
 
   def add_user_info
-    Report.add_user_info(@user, @report, ADDRESS_ATTR)
+    reporter.add_user_info
   end
 
   def add_company_info
-    Report.add_company_info(@active_companies, @report, COMPANY_ATTR, PRODUCT_ATTR) do |address|
-      address.slice(*ADDRESS_ATTR)
+    reporter.add_company_info do |address|
+      address.slice(*address_fields)
     end
   end
 
@@ -105,10 +91,12 @@ class Sale::FullReportBuilder < Sale::Builder
     }
   end
 
+  attr_accessor :reporter, :user
+
   private
 
   def base_company_level(&blk)
-    companies = @report.data[:companies]
+    companies = @report[:companies]
     @active_companies.each.with_index do |company, i|
       blk.call(companies, company, i)
     end
@@ -135,5 +123,28 @@ class Sale::FullReportBuilder < Sale::Builder
     sales.each do |total, date|  
       @sales_by_month[date][1] += total if @sales_by_month[date]
     end
+  end
+
+  def company_fields
+    %i[
+        business_name 
+        rfc 
+        email 
+        phone 
+        contact 
+        fiscal_name 
+        created_at
+        company_type_name
+        company_type_code
+        company_type_affiliation
+    ]
+  end
+
+  def address_fields
+    %i[street city state country external_number zip_code]
+  end
+
+  def product_fields
+    %i[id name price uid]
   end
 end

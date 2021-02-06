@@ -1,8 +1,8 @@
 class SaleReportService 
-  def initialize(params, user)
+  def initialize(params, reporter)
     @params = params
-    @user = user
-    @message = "Select a Report!"
+    @reporter = reporter
+    @director = Sale::Director.new
   end
 
   def call
@@ -12,29 +12,29 @@ class SaleReportService
   private
 
   def get_simple_report
-    @director = Sale::Director.new
-    builder = Sale::SimpleReportBuilder.new(@user)
-    @director.builder = builder
-    @director.build
-    Ui::Sale::SimpleReportCreator.new(builder.report)
+    builder = Sale::SimpleReportBuilder.new(reporter)
+    director.builder = builder
+    # Ui::Sale::SimpleReportCreator.new(builder.report)
+    director.build
   end
 
   def get_detailed_report
-    @director = Sale::Director.new
-    builder = Sale::DetailedReportBuilder.new(@user)
-    @director.builder = builder
-    @director.build
-    binding.pry
-    Ui::Sale::DetailedReportCreator.new(builder.report)
+    builder = Sale::DetailedReportBuilder.new(reporter)
+    director.builder = builder
+    # Ui::Sale::DetailedReportCreator.new(builder.report)
+    director.build
   end
 
   def get_full_report
-    @director = Sale::Director.new
-    builder = Sale::FullReportBuilder.new(@user)
-    @director.builder = builder
-    @director.build
-    Ui::Sale::DetailedReportCreator.new(builder.report)
+    builder = Sale::FullReportBuilder.new(reporter)
+    director.builder = builder
+    # Ui::Sale::DetailedReportCreator.new(builder.report)
+    director.build
   end
 
-  attr_reader :message, :params
+  attr_reader :params, :user, :director
+  attr_accessor :reporter
+
+  private
+
 end

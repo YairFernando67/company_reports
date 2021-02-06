@@ -1,5 +1,4 @@
 class Sale::DetailedReportBuilder < Sale::Builder
-  include Report
 
   ADDRESS_ATTR = %i[street city state country external_number zip_code].freeze
   COMPANY_ATTR = %i[
@@ -10,36 +9,36 @@ class Sale::DetailedReportBuilder < Sale::Builder
     contact 
     fiscal_name 
     created_at
-    company_type
-    code
-    affiliation
+    company_type_name
+    company_type_code
+    company_type_affiliation
   ].freeze
   PRODUCT_ATTR = %i[id name price identifier].freeze
 
-  def initialize(user)
-    @user = user
-    @active_companies = @user.active_companies
-    reset
+  def initialize(reporter)
+    @user = reporter.user
+    @reporter = reporter
+    post_initialize
   end
 
-  def reset
-    @report = {}
+  def post_initialize
+    reporter.report = {}
   end
 
   def report
-    report = @report
-    report
+    reporter.report
   end
 
   def add_user_info
-    Report.add_user_info(@user, @report, ADDRESS_ATTR)
+    reporter.add_user_info(ADDRESS_ATTR)
   end
 
   def add_company_info
-    Report.add_company_info(@active_companies, @report, COMPANY_ATTR, PRODUCT_ATTR)
+    reporter.add_company_info(COMPANY_ATTR, PRODUCT_ATTR)
   end
 
   def add_company_fiscal_information
+    binding.pry
     base_company_level do |companies, company, i|
       companies[i][:fiscal_information] = company.fiscal_info.slice(:ri, :proof_of_address)
     end
@@ -72,6 +71,8 @@ class Sale::DetailedReportBuilder < Sale::Builder
   def add_charts
     @report[:charts] = {}
   end
+
+  attr_accessor :reporter, :user
 
   private
 

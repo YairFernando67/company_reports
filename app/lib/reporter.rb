@@ -1,21 +1,35 @@
-module Report
-  def self.add_user_info(user, report, address_attr)
-    address = user.address.slice(*address_attr)
-    report[:user] = user.slice(:email, :name).merge(address)
+class Reporter
+  @@config = {}
+
+  def set_config(company_fields:, address_fields:, product_fields:)
+    @@config[object_id][:company_fields] = company_fields.map(&:to_sym)
+    @@config[object_id][:address_fields] = address_fields.map(&:to_sym)
+    @@config[object_id][:product_fields] = product_fields.map(&:to_sym)
+  end
+
+  def initialize(user, active_companies, report= {})
+    @user = user
+    @report = report
+    @active_companies = active_companies
+    @@config[object_id] = {}
+  end
+
+  def add_user_info
+    report[:user] = user.slice(:email, :name).merge(address_fields)
   end
   
-  def self.add_company_info(active_companies, report, company_attr, product_attr)
+  def add_company_info
     report[:companies] = active_companies.map do |company|
-      company.slice(*company_attr).tap do |hash|
+      company.slice(*config_company_fields).tap do |hash|
         products = company.products
-        products_array = products.map { |p| p.slice(*product_attr) }
+        products_array = products.map { |p| p.slice(*config_product_fields) }
         hash.store(:products, products_array)
         hash.store(:address, yield(company.address)) if defined?(yield)
       end
     end
   end
 
-  def self.add_sales(companies, company, i)
+  def add_sales(companies, company, i)
     sales = company.sales
     companies[i][:sales] = sales.map do |sale|
       {
@@ -33,7 +47,7 @@ module Report
     end
   end
 
-  def self.add_sale_concepts(companies, company, i)
+  def add_sale_concepts(companies, company, i)
     sales = company.sales
     sales.each.with_index do |sale, j|        
       concepts = sale.sale_concepts
@@ -52,7 +66,7 @@ module Report
     end
   end
 
-  def self.add_employee_info(companies, sale, i, j)
+  def add_employee_info(companies, sale, i, j)
     employee = sale.seller
     sales_info = {
       sales:  employee.sales.size,
@@ -68,7 +82,7 @@ module Report
     companies[i][:sales][j][:employee_info] = companies[i][:sales][j][:employee_info].symbolize_keys
   end
 
-  def self.add_client_info(companies, sale, i, j)
+  def add_client_info(companies, sale, i, j)
     client = sale.buyer
     purchases_info = {
       purchases: client.purchases.size,
@@ -83,4 +97,26 @@ module Report
                                                       .merge(address_info)
     companies[i][:sales][j][:client_info] = companies[i][:sales][j][:client_info].symbolize_keys
   end
+
+  attr_accessor :report
+  attr_reader :user, :active_companies
+  private
+
+
+  def address_fields
+    user.address.slice(*config_address_fields)
+  end
+
+  def config_company_fields
+    @@config[object_id][:company_fields]
+  end
+
+  def config_product_fields
+    @@config[object_id][:product_fields]
+  end
+
+  def config_address_fields
+    @@config[object_id][:address_fields]
+  end
+
 end

@@ -3,7 +3,8 @@ module DesignPatterns
     before_action :authenticate_user!
 
     def index
-      @report = SaleReportService.new(params, current_user).call if params[:type].present?
+      reporter = Reporter.new(current_user, active_companies)
+      @report = SaleReportService.new(params, reporter).call if params[:type].present?
       binding.pry
       # @company_earnings = @report.ui.data[:charts][:company_earnings]
     end
@@ -31,6 +32,12 @@ module DesignPatterns
       #     dpi: 75
       #   end
       # end
+    end
+
+    private
+
+    def active_companies
+      current_user.active_companies
     end
   end
 end
