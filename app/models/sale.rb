@@ -10,4 +10,5 @@ class Sale < ApplicationRecord
 
   delegate :name, to: :seller, prefix: "seller", allow_nil: true
   delegate :name, to: :buyer, prefix: "buyer", allow_nil: true
+  delegate :business_name, to: :company, prefix: "company", allow_nil: true
 end
