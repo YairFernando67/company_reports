@@ -1,10 +1,11 @@
 class Reporter
   @@config = {}
 
-  def set_config(company_fields:, address_fields:, product_fields:)
+  def set_config(company_fields:, address_fields:, product_fields:, fiscal_fields:)
     @@config[object_id][:company_fields] = company_fields.map(&:to_sym)
     @@config[object_id][:address_fields] = address_fields.map(&:to_sym)
     @@config[object_id][:product_fields] = product_fields.map(&:to_sym)
+    @@config[object_id][:fiscal_fields] = fiscal_fields.map(&:to_sym)
   end
 
   def initialize(user, active_companies, report= {})
@@ -15,36 +16,34 @@ class Reporter
   end
 
   def add_user_info
-    report[:user] = user.slice(:email, :name).merge(address_fields)
+    report[:user] = user.slice(:email, :name).merge(address_fields).symbolize_keys
   end
   
   def add_company_info
     report[:companies] = active_companies.map do |company|
       company.slice(*config_company_fields).tap do |hash|
-        products = company.products
+        products, fiscal_info = company.products, company.fiscal_info
         products_array = products.map { |p| p.slice(*config_product_fields) }
         hash.store(:products, products_array)
+        hash.store(:fiscal_information, fiscal_info.slice(*config_fiscal_fields))
         hash.store(:address, yield(company.address)) if defined?(yield)
-      end
+      end.deep_symbolize_keys
     end
   end
 
-  def add_sales(companies, company, i)
-    sales = company.sales
-    companies[i][:sales] = sales.map do |sale|
-      {
-        id: sale[:id],
-        status: sale[:status],
-        total_before_taxes: sale[:total].to_f,
-        iva: (sale[:total].to_f * 0.16),
-        ieps: '0%',
-        discount: (sale[:total] > 800 ? (sale[:total].to_f * 0.1) : 0),
-        extra_fees: 0,
-        total: (sale[:total].to_f + (sale[:total].to_f * 0.16)) - (sale[:total] > 800 ? (sale[:total].to_f * 0.1) : 0),
-        date: sale[:created_at].strftime('%b %Y %m'),
-        sale_type: sale[:sale_type]
-      }
-    end
+  def add_sales
+    report[:sales] = active_companies.map do |company|
+      sales = company.sales
+      sales.map do |sale|
+        {
+          id: sale.id,
+          company_name: sale.company_business_name,
+          status: sale.status,
+          total_before_taxes: sale.total.to_f,
+          date: sale.created_at.strftime('%b %Y %m'),
+        }.merge(yield(sale))
+      end
+    end.flatten
   end
 
   def add_sale_concepts(companies, company, i)
@@ -117,6 +116,10 @@ class Reporter
 
   def config_address_fields
     @@config[object_id][:address_fields]
+  end
+
+  def config_fiscal_fields
+    @@config[object_id][:fiscal_fields]
   end
 
 end
