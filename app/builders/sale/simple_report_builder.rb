@@ -1,53 +1,22 @@
 class Sale::SimpleReportBuilder < Sale::Builder
-  ADDRESS_ATTR = %i[street city state].freeze
-  COMPANY_ATTR = %i[business_name rfc email phone contact].freeze
-  PRODUCT_ATTR = %i[id name price].freeze
-
-  def initialize(reporter)
-    @user = reporter.user
-    @reporter = reporter
-    post_initialize
-  end
-
-  def post_initialize
-    reporter.report = {}
-  end
-
-  def report
-    reporter.report
-  end
-
   def add_user_info
-    reporter.add_user_info(ADDRESS_ATTR)
+    reporter.add_user_info
   end
 
   def add_company_info
-    reporter.add_company_info(COMPANY_ATTR, PRODUCT_ATTR)
-  end
-
-  def add_company_fiscal_information
-    binding.pry
-    @report[:companies].each do |company|
-      company[:fiscal_information] = nil
-    end
+    reporter.add_company_info
   end
 
   def add_sales
-    base_company_level do |companies, company, i|
-      sales = company.sales
-      companies[i][:sales] = sales.map do |sale|
-        {
-          id: sale[:id],
-          status: sale[:status],
-          total_before_taxes: sale[:total].to_f,
-          total: sale[:total].to_f + (sale[:total].to_f * 0.16),
-          date: sale[:created_at].strftime('%b %Y %m'),
-        }
-      end
+    reporter.add_sales do |sale|
+      {
+        total: sale.total.to_f + (sale.total.to_f * 0.16)
+      }
     end
   end
 
   def add_sale_concepts
+    binding.pry
     base_company_level do |companies, company, i|
       sales = company.sales
       sales.each.with_index do |sale, j|
@@ -99,5 +68,21 @@ class Sale::SimpleReportBuilder < Sale::Builder
         blk.call(companies, sale, i, j)
       end
     end
+  end
+
+  def company_fields
+    %i[business_name rfc email phone contact]
+  end
+
+  def address_fields
+    %i[street city state]
+  end
+
+  def product_fields
+    %i[id name price]
+  end
+
+  def fiscal_fields
+    %i[]
   end
 end

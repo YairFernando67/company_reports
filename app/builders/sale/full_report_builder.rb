@@ -1,23 +1,4 @@
-class Sale::FullReportBuilder < Sale::Builder  
-  def initialize(reporter)
-    @user = reporter.user
-    @reporter = reporter
-    post_initialize
-  end
-
-  def post_initialize
-    reporter.report = {}
-    reporter.set_config(
-      address_fields: address_fields,
-      company_fields: company_fields,
-      product_fields: product_fields
-    )
-  end
-
-  def report
-    reporter.report
-  end
-
+class Sale::FullReportBuilder < Sale::Builder
   def add_user_info
     reporter.add_user_info
   end
@@ -28,24 +9,22 @@ class Sale::FullReportBuilder < Sale::Builder
     end
   end
 
-  def add_company_fiscal_information
-    binding.pry
-    base_company_level do |companies, company, i|
-      companies[i][:fiscal_information] = company.fiscal_info
-                                                  .slice(:ri, :proof_of_address, 
-                                                              :incorporation_act, 
-                                                              :start_of_operation, 
-                                                              :account_statement)
-    end
-  end
-
   def add_sales
-    base_company_level do |companies, company, i|
-      Report.add_sales(companies, company, i)
+    reporter.add_sales do |sale|
+      {
+        iva: (sale.total.to_f * 0.16),
+        ieps: '0%',
+        discount: (sale.total > 800 ? (sale.total.to_f * 0.1) : 0),
+        extra_fees: 0,
+        total: (sale.total.to_f + (sale.total.to_f * 0.16)) - (sale.total > 800 ? (sale.total.to_f * 0.1) : 0),
+        date: sale.created_at.strftime('%b %Y %m'),
+        sale_type: sale.sale_type
+      }
     end
   end
 
   def add_sale_concepts
+    binding.pry
     base_company_level do |companies, company, i|
       Report.add_sale_concepts(companies, company, i)
     end
@@ -146,5 +125,9 @@ class Sale::FullReportBuilder < Sale::Builder
 
   def product_fields
     %i[id name price uid]
+  end
+
+  def fiscal_fields
+    %i[ri proof_of_address incorporation_act start_of_operation account_statement]
   end
 end

@@ -1,56 +1,28 @@
 class Sale::DetailedReportBuilder < Sale::Builder
-
-  ADDRESS_ATTR = %i[street city state country external_number zip_code].freeze
-  COMPANY_ATTR = %i[
-    business_name 
-    rfc 
-    email 
-    phone 
-    contact 
-    fiscal_name 
-    created_at
-    company_type_name
-    company_type_code
-    company_type_affiliation
-  ].freeze
-  PRODUCT_ATTR = %i[id name price identifier].freeze
-
-  def initialize(reporter)
-    @user = reporter.user
-    @reporter = reporter
-    post_initialize
-  end
-
-  def post_initialize
-    reporter.report = {}
-  end
-
-  def report
-    reporter.report
-  end
-
   def add_user_info
-    reporter.add_user_info(ADDRESS_ATTR)
+    reporter.add_user_info
   end
 
   def add_company_info
-    reporter.add_company_info(COMPANY_ATTR, PRODUCT_ATTR)
-  end
-
-  def add_company_fiscal_information
-    binding.pry
-    base_company_level do |companies, company, i|
-      companies[i][:fiscal_information] = company.fiscal_info.slice(:ri, :proof_of_address)
-    end
+    reporter.add_company_info
   end
 
   def add_sales
-    base_company_level do |companies, company, i|
-      Report.add_sales(companies, company, i)
+    reporter.add_sales do |sale|
+      {
+        iva: (sale.total.to_f * 0.16),
+        ieps: '0%',
+        discount: (sale.total > 800 ? (sale.total.to_f * 0.1) : 0),
+        extra_fees: 0,
+        total: (sale.total.to_f + (sale.total.to_f * 0.16)) - (sale.total > 800 ? (sale.total.to_f * 0.1) : 0),
+        date: sale.created_at.strftime('%b %Y %m'),
+        sale_type: sale.sale_type
+      }
     end
   end
 
   def add_sale_concepts
+    binding.pry
     base_company_level do |companies, company, i|
       Report.add_sale_concepts(companies, company, i)
     end
@@ -90,5 +62,32 @@ class Sale::DetailedReportBuilder < Sale::Builder
         blk.call(companies, sale, i, j)
       end
     end
+  end
+
+  def company_fields
+    %i[
+        business_name 
+        rfc 
+        email 
+        phone 
+        contact 
+        fiscal_name 
+        created_at
+        company_type_name
+        company_type_code
+        company_type_affiliation
+    ]
+  end
+
+  def address_fields
+    %i[street city state country external_number zip_code]
+  end
+
+  def product_fields
+    %i[id name price uid]
+  end
+
+  def fiscal_fields
+    %i[ri proof_of_address]
   end
 end
