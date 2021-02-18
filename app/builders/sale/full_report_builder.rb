@@ -16,21 +16,17 @@ class Sale::FullReportBuilder < Sale::Builder
         ieps: '0%',
         discount: (sale.total > 800 ? (sale.total.to_f * 0.1) : 0),
         extra_fees: 0,
-        total: (sale.total.to_f + (sale.total.to_f * 0.16)) - (sale.total > 800 ? (sale.total.to_f * 0.1) : 0),
-        date: sale.created_at.strftime('%b %Y %m'),
         sale_type: sale.sale_type
       }
     end
   end
 
   def add_sale_concepts
-    binding.pry
-    base_company_level do |companies, company, i|
-      Report.add_sale_concepts(companies, company, i)
-    end
+    reporter.add_sale_concepts
   end
 
   def add_employee_info
+    binding.pry
     base_sale_level do |companies, sale, i, j|
       Report.add_employee_info(companies, sale, i, j)
     end
@@ -129,5 +125,13 @@ class Sale::FullReportBuilder < Sale::Builder
 
   def fiscal_fields
     %i[ri proof_of_address incorporation_act start_of_operation account_statement]
+  end
+
+  def concepts_fields
+    %i[id sale_id amount unit_price]
+  end
+
+  def employee_fields
+    %i[name email]
   end
 end

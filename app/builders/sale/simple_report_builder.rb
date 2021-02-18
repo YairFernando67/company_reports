@@ -8,33 +8,15 @@ class Sale::SimpleReportBuilder < Sale::Builder
   end
 
   def add_sales
-    reporter.add_sales do |sale|
-      {
-        total: sale.total.to_f + (sale.total.to_f * 0.16)
-      }
-    end
+    reporter.add_sales
   end
 
   def add_sale_concepts
-    binding.pry
-    base_company_level do |companies, company, i|
-      sales = company.sales
-      sales.each.with_index do |sale, j|
-        concepts = sale.sale_concepts
-        companies[i][:sales][j][:sale_concepts] = concepts.map do |concept|
-          {
-            id: concept[:id],
-            sale_id: concept[:sale_id],
-            total: concept[:total].to_f,
-            unit_price: concept[:unit_price],
-            amount: concept[:amount]
-          }
-        end
-      end
-    end
+    reporter.add_sale_concepts
   end
 
   def add_employee_info
+    binding.pry
     base_sale_level do |companies, purchase, i, j|
       companies[i][:sales][j][:employee_info] = {}
     end
@@ -84,5 +66,13 @@ class Sale::SimpleReportBuilder < Sale::Builder
 
   def fiscal_fields
     %i[]
+  end
+
+  def concepts_fields
+    %i[id sale_id]
+  end
+
+  def employee_fields
+    %i[name]
   end
 end

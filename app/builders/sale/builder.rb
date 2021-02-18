@@ -11,7 +11,9 @@ class Sale::Builder
       address_fields: address_fields,
       company_fields: company_fields,
       product_fields: product_fields,
-      fiscal_fields: fiscal_fields
+      fiscal_fields: fiscal_fields,
+      concepts_fields: concepts_fields,
+      employee_fields: employee_fields
     )
   end
 
@@ -62,6 +64,10 @@ class Sale::Builder
   end
 
   def fiscal_fields
+    raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
+  end
+
+  def concepts_fields
     raise NotImplementedError, "#{self.class} has not implemented method '#{__method__}'"
   end
 end
