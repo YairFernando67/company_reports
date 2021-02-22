@@ -45,14 +45,13 @@ class Carriers::InternationalCompanyDecorator < Carriers::BaseDecorator
   end
 
   def drivers
-    # binding.pry
     "
     <div class='int-drivers'>
       <div class='driver-numbers'>
-        <h5>Active Drivers: 
+        <h5>Active Drivers:
           <span>#{carrier.drivers[:active_drivers]} </span>
         </h5>
-        <h5>Total Drivers: 
+        <h5>Total Drivers:
           <span>#{carrier.drivers[:total_drivers]} </span>
         </h5>
       </div>

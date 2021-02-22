@@ -6,7 +6,6 @@ class Sale::Builder
   end
 
   def post_initialize
-    reporter.report = {}
     reporter.set_config(
       address_fields: address_fields,
       company_fields: company_fields,
@@ -20,6 +19,10 @@ class Sale::Builder
 
   def report
     reporter.report
+  end
+
+  def active_companies
+    reporter.active_companies
   end
 
   def add_user_info

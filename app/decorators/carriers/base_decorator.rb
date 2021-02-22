@@ -8,7 +8,6 @@ class Carriers::BaseDecorator
     end
 
     def columns(*attrs)
-      # binding.pry
       @@columns[object_id] = attrs.map(&:to_sym)
 
       attrs.each do |column|

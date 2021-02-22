@@ -53,22 +53,6 @@ class Reporter < ReporterBase
     end.flatten
   end
 
-  # def add_client_info(companies, sale, i, j)
-  #   client = sale.buyer
-  #   purchases_info = {
-  #     purchases: client.purchases.size,
-  #     sale_id: sale.id,
-  #     id: client.id,
-  #     total_amount_purchased_before_taxes: client.purchases.map(&:total).inject(:+).to_f,
-  #     total_amount_purchased: (client.purchases.map(&:total).inject(:+).to_f + (client.purchases.map(&:total).inject(:+) * 0.16)).to_f
-  #   }
-  #   address_info = client.address.slice(:street, :external_number, :country, :city, :state)
-  #   companies[i][:sales][j][:client_info] = client.slice(:name, :email)
-  #                                                     .merge(purchases_info)
-  #                                                     .merge(address_info)
-  #   companies[i][:sales][j][:client_info] = companies[i][:sales][j][:client_info].symbolize_keys
-  # end
-
   private
 
   def address_fields

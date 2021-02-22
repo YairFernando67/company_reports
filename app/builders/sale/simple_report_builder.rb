@@ -46,4 +46,8 @@ class Sale::SimpleReportBuilder < Sale::Builder
   def employee_fields
     %i[name]
   end
+
+  def client_fields
+    %i[name]
+  end
 end

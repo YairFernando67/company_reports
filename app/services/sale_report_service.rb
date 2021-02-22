@@ -1,4 +1,4 @@
-class SaleReportService 
+class SaleReportService
   def initialize(params, reporter)
     @params = params
     @reporter = reporter
@@ -7,6 +7,7 @@ class SaleReportService
 
   def call
     send("get_#{params[:type]}_report")
+    report
   end
 
   private
@@ -14,21 +15,18 @@ class SaleReportService
   def get_simple_report
     builder = Sale::SimpleReportBuilder.new(reporter)
     director.builder = builder
-    # Ui::Sale::SimpleReportCreator.new(builder.report)
     director.build
   end
 
   def get_detailed_report
     builder = Sale::DetailedReportBuilder.new(reporter)
     director.builder = builder
-    # Ui::Sale::DetailedReportCreator.new(builder.report)
     director.build
   end
 
   def get_full_report
     builder = Sale::FullReportBuilder.new(reporter)
     director.builder = builder
-    # Ui::Sale::DetailedReportCreator.new(builder.report)
     director.build
   end
 
@@ -37,4 +35,7 @@ class SaleReportService
 
   private
 
+  def report
+    reporter.report
+  end
 end
