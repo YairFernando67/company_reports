@@ -1,4 +1,4 @@
-class Sale::SimpleReportBuilder < Sale::Builder
+class Sales::SimpleReportBuilder < Sales::Builder
   def add_user_info
     reporter.add_user_info
   end
@@ -17,6 +17,10 @@ class Sale::SimpleReportBuilder < Sale::Builder
 
   def add_charts
     report[:charts] = {}
+  end
+
+  def decorate
+    Sales::SimpleReportDecorator.decorate(report)
   end
 
   attr_accessor :reporter, :user

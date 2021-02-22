@@ -27,14 +27,14 @@ class Carriers::NationalCarrier < Carriers::BaseCarrier
 
   def address
     [
-      carrier.address_city, 
-      carrier.address_state, 
+      carrier.address_city,
+      carrier.address_state,
       carrier.address_country
     ].join(" ")
   end
 
   def decorate
-    Carriers::NationalCompanyDecorator.decorate(self)
+    Carriers::NationalCompanyDecorator.decorate(self, self.carrier)
   end
 
 end

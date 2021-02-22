@@ -1,13 +1,13 @@
 module CarriersDecoratorHelper
-  def carrier_name
-    carrier.carrier.name
+  def carrier_shipments
+    carrier_hash.shipments
   end
 
-  def carrier_email
-    carrier.carrier.email
+  def carrier_drivers
+    carrier_hash.drivers
   end
 
-  def carrier_phone
-    carrier.carrier.phone
+  def carrier_fiscal_info
+    carrier_hash.fiscal_info
   end
 end

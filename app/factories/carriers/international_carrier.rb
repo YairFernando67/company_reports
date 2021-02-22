@@ -28,15 +28,15 @@ class Carriers::InternationalCarrier < Carriers::BaseCarrier
 
   def address
     [
-      carrier.address_street, 
-      carrier.address_external_number, 
-      carrier.address_city, 
-      carrier.address_state, 
+      carrier.address_street,
+      carrier.address_external_number,
+      carrier.address_city,
+      carrier.address_state,
       carrier.address_country
     ].join(" ")
   end
 
   def decorate
-    Carriers::InternationalCompanyDecorator.decorate(self)
+    Carriers::InternationalCompanyDecorator.decorate(self, self.carrier)
   end
 end

@@ -1,4 +1,4 @@
-class Sale::DetailedReportBuilder < Sale::Builder
+class Sales::DetailedReportBuilder < Sales::Builder
   def add_user_info
     reporter.add_user_info
   end
@@ -23,7 +23,11 @@ class Sale::DetailedReportBuilder < Sale::Builder
   end
 
   def add_charts
-    @report[:charts] = {}
+    report[:charts] = {}
+  end
+
+  def decorate
+    Sales::DetailedReportDecorator.decorate(report)
   end
 
   attr_accessor :reporter, :user
@@ -63,5 +67,9 @@ class Sale::DetailedReportBuilder < Sale::Builder
 
   def employee_fields
     %i[name email]
+  end
+
+  def client_fields
+    %i[name email phone]
   end
 end

@@ -1,4 +1,4 @@
-class Sale::Builder
+class Sales::Builder
   def initialize(reporter)
     @user = reporter.user
     @reporter = reporter
