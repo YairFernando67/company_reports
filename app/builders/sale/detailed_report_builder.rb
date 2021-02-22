@@ -22,19 +22,6 @@ class Sale::DetailedReportBuilder < Sale::Builder
     reporter.add_sale_concepts
   end
 
-  def add_employee_info
-    binding.pry
-    base_sale_level do |companies, sale, i, j|
-      Report.add_employee_info(companies, sale, i, j)
-    end
-  end
-
-  def add_client_info
-    base_sale_level do |companies, sale, i, j|
-      Report.add_client_info(companies, sale, i, j)
-    end
-  end
-
   def add_charts
     @report[:charts] = {}
   end
@@ -61,12 +48,12 @@ class Sale::DetailedReportBuilder < Sale::Builder
 
   def company_fields
     %i[
-        business_name 
-        rfc 
-        email 
-        phone 
-        contact 
-        fiscal_name 
+        business_name
+        rfc
+        email
+        phone
+        contact
+        fiscal_name
         created_at
         company_type_name
         company_type_code

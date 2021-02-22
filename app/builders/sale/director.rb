@@ -1,4 +1,4 @@
-class Sale::Director  
+class Sale::Director
   attr_accessor :builder
 
   def initialize
@@ -14,8 +14,6 @@ class Sale::Director
     @builder.add_company_info
     @builder.add_sales
     @builder.add_sale_concepts
-    @builder.add_employee_info
-    @builder.add_client_info
     @builder.add_charts
   end
 end

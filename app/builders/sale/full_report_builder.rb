@@ -25,20 +25,8 @@ class Sale::FullReportBuilder < Sale::Builder
     reporter.add_sale_concepts
   end
 
-  def add_employee_info
-    binding.pry
-    base_sale_level do |companies, sale, i, j|
-      Report.add_employee_info(companies, sale, i, j)
-    end
-  end
-
-  def add_client_info
-    base_sale_level do |companies, sale, i, j|
-      Report.add_client_info(companies, sale, i, j)
-    end
-  end
-
   def add_charts
+    binding.pry
     @sales_by_month = {}
     months = (get_start_date(@params).to_date..get_end_date(@params).to_date).map { |d| [d.strftime('%Y %B')] }.uniq
     months.delete_at(0) if @params[:start_date].nil? && @params[:end_date].nil?
@@ -47,18 +35,18 @@ class Sale::FullReportBuilder < Sale::Builder
     get_sales_filtered(sales)
     @report.data[:charts] = {
       company_sales: @active_companies.map { |company| [company[:business_name], company.sales.size] },
-      daily_sales: [@active_companies.map do |company| 
-        company.sales.group_by { |sale| sale.created_at.strftime('%Y %b %m') }.map do |key, val| 
+      daily_sales: [@active_companies.map do |company|
+        company.sales.group_by { |sale| sale.created_at.strftime('%Y %b %m') }.map do |key, val|
           [key, val.size]
         end
       end.flatten!],
-      employee_sales: [@active_companies.map do |company| 
-        company.sales.group_by { |sale| sale.seller_name }.map do |key, val| 
+      employee_sales: [@active_companies.map do |company|
+        company.sales.group_by { |sale| sale.seller_name }.map do |key, val|
           [key, val.size]
         end
       end.flatten!],
-      client_sales: [@active_companies.map do |company| 
-        company.sales.group_by { |sale| sale.buyer_name }.map do |key, val| 
+      client_sales: [@active_companies.map do |company|
+        company.sales.group_by { |sale| sale.buyer_name }.map do |key, val|
           [key, val.size]
         end
       end.flatten!],
@@ -88,26 +76,26 @@ class Sale::FullReportBuilder < Sale::Builder
 
   def get_start_date(params)
     params[:start_date].nil? ? Time.current.beginning_of_day - 6.months : Time.zone.parse(params[:start_date]).beginning_of_day
-  end 
+  end
 
   def get_end_date(params)
     params[:end_date].nil? ? Time.current.end_of_day : Time.zone.parse(params[:end_date]).end_of_day
   end
 
   def get_sales_filtered(sales)
-    sales.each do |total, date|  
+    sales.each do |total, date|
       @sales_by_month[date][1] += total if @sales_by_month[date]
     end
   end
 
   def company_fields
     %i[
-        business_name 
-        rfc 
-        email 
-        phone 
-        contact 
-        fiscal_name 
+        business_name
+        rfc
+        email
+        phone
+        contact
+        fiscal_name
         created_at
         company_type_name
         company_type_code
@@ -133,5 +121,9 @@ class Sale::FullReportBuilder < Sale::Builder
 
   def employee_fields
     %i[name email]
+  end
+
+  def client_fields
+    %i[name email phone]
   end
 end

@@ -15,42 +15,13 @@ class Sale::SimpleReportBuilder < Sale::Builder
     reporter.add_sale_concepts
   end
 
-  def add_employee_info
-    binding.pry
-    base_sale_level do |companies, purchase, i, j|
-      companies[i][:sales][j][:employee_info] = {}
-    end
-  end
-
-  def add_client_info
-    base_sale_level do |companies, purchase, i, j|
-      companies[i][:sales][j][:client_info] = {}
-    end
-  end
-
   def add_charts
-    @report[:charts] = {}
+    report[:charts] = {}
   end
 
   attr_accessor :reporter, :user
 
   private
-
-  def base_company_level(&blk)
-    companies = @report[:companies]
-    @active_companies.each.with_index do |company, i|
-      blk.call(companies, company, i)
-    end
-  end
-
-  def base_sale_level(&blk)
-    base_company_level do |companies, company, i|
-      sales = company.sales
-      sales.each.with_index do |sale, j|
-        blk.call(companies, sale, i, j)
-      end
-    end
-  end
 
   def company_fields
     %i[business_name rfc email phone contact]

@@ -1,7 +1,7 @@
 class ReporterBase
   @@config = {}
 
-  def set_config(company_fields:, address_fields:, product_fields:, fiscal_fields:, concepts_fields:, employee_fields:)
+  def set_config(company_fields:, address_fields:, product_fields:, fiscal_fields:, concepts_fields:, employee_fields:, client_fields:)
     @@config[object_id][:company_fields] = company_fields.map(&:to_sym)
     @@config[object_id][:address_fields] = address_fields.map(&:to_sym)
     @@config[object_id][:product_fields] = product_fields.map(&:to_sym)
@@ -9,6 +9,7 @@ class ReporterBase
     @@config[object_id][:fiscal_fields] = fiscal_fields.map(&:to_sym)
     @@config[object_id][:concepts_fields] = concepts_fields.map(&:to_sym)
     @@config[object_id][:employee_fields] = employee_fields.map(&:to_sym)
+    @@config[object_id][:client_fields] = client_fields.map(&:to_sym)
   end
 
   def initialize(user, active_companies, report= {})
@@ -45,5 +46,9 @@ class ReporterBase
 
   def config_employee_fields
     @@config[object_id][:employee_fields]
+  end
+
+  def config_client_fields
+    @@config[object_id][:client_fields]
   end
 end
