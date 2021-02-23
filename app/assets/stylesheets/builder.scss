@@ -29,12 +29,24 @@
     justify-content: center;
     flex-direction: column;
   }
-  
+
   .grid-right {
     align-items: end;
   }
 
   .grid-left {
     align-items: flex-end;
+  }
+}
+
+.user-info {
+  display: flex;
+  justify-content: right;
+  flex-direction: column;
+  align-items: flex-end;
+
+  li {
+    color: #fff;
+    font-size: 1.3rem;
   }
 }
