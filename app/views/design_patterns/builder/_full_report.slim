@@ -1,7 +1,130 @@
 h4.title
   | Full Report
   span = 2021
-= render "design_patterns/builder/shared/manager_info", user: @report[:user]
+= render "design_patterns/shared/manager_info", user: @report[:user]
+
+section.companies.mt-3
+  = render "design_patterns/shared/section_header", \
+            icon_name: :business, \
+            header_title: "Companies"
+  .row
+    - @report[:companies].each do |c|
+      .col.s12
+        .company-list
+          h5 = c[:business_name]
+          .row
+            .col.s6
+              span
+                | RFC: &nbsp;
+                span = c[:rfc]
+              span
+                | Email: &nbsp;
+                span = c[:email]
+              span
+                | Phone: &nbsp;
+                span = c[:phone]
+              span
+                | Contact: &nbsp;
+                span = c[:contact]
+              span
+                | Fiscal Name: &nbsp;
+                span = c[:fiscal_name]
+            .col.s6
+              span
+                | Created: &nbsp;
+                span = c[:created_at].strftime("%B %Y %m")
+              span
+                | Company Type: &nbsp;
+                span = c[:company_type_name]
+              span
+                | Company Code: &nbsp;
+                span = c[:company_type_code]
+              span
+                | Company Affiliation: &nbsp;
+                span = c[:company_type_affiliation]
+
+          .divider
+          .row
+            .col.s6
+              h6 FiscalInfo
+              .company-fiscal-info
+                span
+                  | RI: &nbsp;
+                  span = c[:fiscal_information][:ri]
+                span
+                  | Proof Of Address: &nbsp;
+                  span = c[:fiscal_information][:proof_of_address]
+                span
+                  | Incorporation Act: &nbsp;
+                  span = c[:fiscal_information][:incorporation_act]
+                span
+                  | Start Of Operation: &nbsp;
+                  span = c[:fiscal_information][:start_of_operation].strftime("%B %Y %m")
+                span
+                  | Account Statement: &nbsp;
+                  span = c[:fiscal_information][:account_statement]
+
+            .col.s6
+              h6 Address
+              .company-address
+                span
+                  | Street: &nbsp;
+                  span = c[:address][:street]
+                span
+                  | City: &nbsp;
+                  span = c[:address][:city]
+                span
+                  | State: &nbsp;
+                  span = c[:address][:state]
+                span
+                  | Country: &nbsp;
+                  span = c[:address][:country]
+                span
+                  | External Number: &nbsp;
+                  span = c[:address][:external_number]
+                span
+                  | Zip Code: &nbsp;
+                  span = c[:address][:zip_code]
+          .divider
+          .row
+            .col.s12.products
+              h6 Products
+              table.responsive.striped.highlight.centered
+                thead
+                  tr
+                    th
+                      | ID
+                    th
+                      | Name
+                    th
+                      | Price
+                    th
+                      | UID
+                tbody
+                  - c[:products].each do |p|
+                    tr
+                      td = p[:id]
+                      td = p[:name]
+                      td
+                        | $
+                        = p[:price]
+                      td = p[:uid]
+
+
+section.sales.mt-3
+  = render "design_patterns/shared/section_header", \
+            icon_name: :attach_money, \
+            header_title: "Sales"
+
+section.sale-concepts.mt-3
+  = render "design_patterns/shared/section_header", \
+            icon_name: :add_shopping_cart, \
+            header_title: "Sale Concepts"
+
+section.charts.mt-3
+  = render "design_patterns/shared/section_header", \
+            icon_name: :bubble_chart, \
+            header_title: "Charts"
 
 br
 br
