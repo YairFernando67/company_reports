@@ -58,7 +58,7 @@
     margin: 0 auto;
     background: white;
     border: solid 0.05rem #e5e9f2;
-    padding: 2rem 4rem;
+    padding: 3rem 4rem;
     height: auto;
 
     img.corner_img_one {
@@ -89,12 +89,40 @@
       font-weight: 100;
       font-size: 4rem;
       text-align: center;
+      position: relative;
+      width: fit-content;
+      margin: 0 auto;
 
-      span {
-        color: #1976d2;
-        font-weight: 400;
-        margin-left: 1rem;
+      .figure_year {
+        position: absolute;
+        height: 7rem;
+        width: 7rem;
+        top: 0;
+        right: -8rem;
+
+        span {
+          color: #1976d2;
+          font-weight: 200;
+          margin-left: 1rem;
+          position: absolute;
+          top: -1px;
+          right: 11%;
+          font-size: 2.5rem;
+          z-index: 3;
+          transform: rotate(9deg);
+          letter-spacing: 0px;
+        }
+
+        .img {
+          position: absolute;
+          width: 7rem;
+          height: 7rem;
+          top: -18px;
+          right: 2%;
+          transform: rotate(15deg);
+        }
       }
+
     }
 
     .manager-info{

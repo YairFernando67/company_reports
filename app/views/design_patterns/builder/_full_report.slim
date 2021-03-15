@@ -1,6 +1,8 @@
 h4.title
   | Full Report
-  span = 2021
+  .figure_year
+    span = 2021
+    = image_tag("figure3", class: "img")
 = render "design_patterns/shared/manager_info", user: @report[:user]
 
 section.companies.mt-3
