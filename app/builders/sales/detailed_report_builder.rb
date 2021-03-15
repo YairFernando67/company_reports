@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Sales::DetailedReportBuilder < Sales::Builder
   def add_user_info
     reporter.add_user_info
@@ -36,16 +38,16 @@ class Sales::DetailedReportBuilder < Sales::Builder
 
   def company_fields
     %i[
-        business_name
-        rfc
-        email
-        phone
-        contact
-        fiscal_name
-        created_at
-        company_type_name
-        company_type_code
-        company_type_affiliation
+      business_name
+      rfc
+      email
+      phone
+      contact
+      fiscal_name
+      created_at
+      company_type_name
+      company_type_code
+      company_type_affiliation
     ]
   end
 

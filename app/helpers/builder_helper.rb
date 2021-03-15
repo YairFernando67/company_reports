@@ -1,5 +1,6 @@
-module BuilderHelper
+# frozen_string_literal: true
 
+module BuilderHelper
   def user_name
     report[:user][:name]
   end
@@ -18,5 +19,9 @@ module BuilderHelper
 
   def user_address_state
     report[:user][:state]
+  end
+
+  def companies
+    report[:companies]
   end
 end

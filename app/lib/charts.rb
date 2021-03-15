@@ -1,5 +1,6 @@
-class Charts
+# frozen_string_literal: true
 
+class Charts
   def initialize(companies)
     @companies = companies
   end
@@ -29,7 +30,7 @@ class Charts
   private
 
   def build_months_array
-    (get_start_date.to_date..get_end_date.to_date).map { |d| [d.strftime('%Y %B')] }.uniq
+    (get_start_date.to_date..get_end_date.to_date).map { |d| [d.strftime("%Y %B")] }.uniq
   end
 
   def build_sales_base_hash
@@ -37,14 +38,16 @@ class Charts
   end
 
   def get_sales_from_companies
-    companies.map { |company| company.sales.group_by { |s| s.total }
-                    .map { |key, val| [key.to_f, val[0][:created_at].strftime('%Y %B')]}}
-                    .flatten(1)
+    companies.map do |company|
+      company.sales.group_by(&:total)
+        .map { |key, val| [key.to_f, val[0][:created_at].strftime("%Y %B")] }
+    end
+      .flatten(1)
   end
 
   def daily_sales
     [companies.map do |company|
-      company.sales.group_by { |sale| sale.created_at.strftime('%Y %b %m') }.map do |key, val|
+      company.sales.group_by { |sale| sale.created_at.strftime("%Y %b %m") }.map do |key, val|
         [key, val.size]
       end
     end.flatten!]
@@ -52,7 +55,7 @@ class Charts
 
   def employee_sales
     [companies.map do |company|
-      company.sales.group_by { |sale| sale.seller_name }.map do |key, val|
+      company.sales.group_by(&:seller_name).map do |key, val|
         [key, val.size]
       end
     end.flatten!]
@@ -60,7 +63,7 @@ class Charts
 
   def client_sales
     [companies.map do |company|
-      company.sales.group_by { |sale| sale.buyer_name }.map do |key, val|
+      company.sales.group_by(&:buyer_name).map do |key, val|
         [key, val.size]
       end
     end.flatten!]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Carriers::NationalCarrier < Carriers::BaseCarrier
   def fiscal_info
     fi = carrier.fiscal_info
@@ -34,7 +36,6 @@ class Carriers::NationalCarrier < Carriers::BaseCarrier
   end
 
   def decorate
-    Carriers::NationalCompanyDecorator.decorate(self, self.carrier)
+    Carriers::NationalCompanyDecorator.decorate(self, carrier)
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -13,10 +15,10 @@ rebeca_employee = User.create(email: "rebeca@gmail.com", name: "rebeca", role: :
 jack_employee = User.create(email: "jack@gmail.com", name: "jack", role: :employee, password: "password", password_confirmation: "password")
 
 # Create Users addressess
-Address.create(street: 'Stark Street', external_number: "23", country: "USA", city: "Portland", state: "Oregon", addressable_type: "User", addressable_id: carl_admin.id)
-Address.create(street: '82nd Avenue', external_number: "156", country: "USA", city: "Portland", state: "Oregon", addressable_type: "User", addressable_id: john_admin.id)
-Address.create(street: 'Alberta District', external_number: "19", country: "USA", city: "Portland", state: "Oregon", addressable_type: "User", addressable_id: rebeca_employee.id)
-Address.create(street: 'Cornell Road', external_number: "58", country: "USA", city: "Portland", state: "Oregon", addressable_type: "User", addressable_id: jack_employee.id)
+Address.create(street: "Stark Street", external_number: "23", country: "USA", city: "Portland", state: "Oregon", addressable_type: "User", addressable_id: carl_admin.id)
+Address.create(street: "82nd Avenue", external_number: "156", country: "USA", city: "Portland", state: "Oregon", addressable_type: "User", addressable_id: john_admin.id)
+Address.create(street: "Alberta District", external_number: "19", country: "USA", city: "Portland", state: "Oregon", addressable_type: "User", addressable_id: rebeca_employee.id)
+Address.create(street: "Cornell Road", external_number: "58", country: "USA", city: "Portland", state: "Oregon", addressable_type: "User", addressable_id: jack_employee.id)
 
 # Create company types
 company_type_one = CompanyType.create(name: "IT Companies", code: "001", affiliation: "FullTime")
@@ -85,41 +87,41 @@ driver_twenty_one = carrier_eight.drivers.create(name: "Carter", last_name: "Gon
 driver_twenty_two = carrier_eight.drivers.create(name: "Scott", last_name: "Lopez", email: "scott@gmail.com", phone: "123-321-9541", driver_number: "C-98O", status: "limited", licence_number: "P985-7458-33-753-4")
 
 # Create Drivers Addressess
-Address.create(street: 'Carraway Cutoff', external_number: "951", country: "USA", city: "Crawfordville", state: "Florida", addressable_type: "Driver", addressable_id: driver_one.id)
-Address.create(street: 'Deen Still Rd', external_number: "159", country: "USA", city: "Davenport", state: "Florida", addressable_type: "Driver", addressable_id: driver_two.id)
-Address.create(street: 'Keith Ct', external_number: "357", country: "USA", city: "Gretna", state: "Florida", addressable_type: "Driver", addressable_id: driver_three.id)
-Address.create(street: 'Ravenna Blvd', external_number: "754", country: "USA", city: "Naples", state: "Florida", addressable_type: "Driver", addressable_id: driver_four.id)
-Address.create(street: 'Lydia St', external_number: "95", country: "USA", city: "Lake Wales", state: "Florida", addressable_type: "Driver", addressable_id: driver_five.id)
-Address.create(street: 'Cobblefield Cir', external_number: "365", country: "USA", city: "Apopka", state: "Florida", addressable_type: "Driver", addressable_id: driver_six.id)
+Address.create(street: "Carraway Cutoff", external_number: "951", country: "USA", city: "Crawfordville", state: "Florida", addressable_type: "Driver", addressable_id: driver_one.id)
+Address.create(street: "Deen Still Rd", external_number: "159", country: "USA", city: "Davenport", state: "Florida", addressable_type: "Driver", addressable_id: driver_two.id)
+Address.create(street: "Keith Ct", external_number: "357", country: "USA", city: "Gretna", state: "Florida", addressable_type: "Driver", addressable_id: driver_three.id)
+Address.create(street: "Ravenna Blvd", external_number: "754", country: "USA", city: "Naples", state: "Florida", addressable_type: "Driver", addressable_id: driver_four.id)
+Address.create(street: "Lydia St", external_number: "95", country: "USA", city: "Lake Wales", state: "Florida", addressable_type: "Driver", addressable_id: driver_five.id)
+Address.create(street: "Cobblefield Cir", external_number: "365", country: "USA", city: "Apopka", state: "Florida", addressable_type: "Driver", addressable_id: driver_six.id)
 
-Address.create(street: 'N 114th Ave', external_number: "12", country: "USA", city: "Youngtown", state: "Arizona", addressable_type: "Driver", addressable_id: driver_seven.id)
-Address.create(street: 'Po Box 2530', external_number: "955", country: "USA", city: "Snowflake", state: "Arizona", addressable_type: "Driver", addressable_id: driver_eight.id)
-Address.create(street: 'W Ironwood Dr', external_number: "745", country: "USA", city: "Peoria", state: "Arizona", addressable_type: "Driver", addressable_id: driver_nine.id)
-Address.create(street: 'W Dunlap Ave', external_number: "632", country: "USA", city: "Phoenix", state: "Arizona", addressable_type: "Driver", addressable_id: driver_ten.id)
-Address.create(street: 'Rr 1', external_number: "125", country: "USA", city: "Duncan", state: "Arizona", addressable_type: "Driver", addressable_id: driver_eleven.id)
+Address.create(street: "N 114th Ave", external_number: "12", country: "USA", city: "Youngtown", state: "Arizona", addressable_type: "Driver", addressable_id: driver_seven.id)
+Address.create(street: "Po Box 2530", external_number: "955", country: "USA", city: "Snowflake", state: "Arizona", addressable_type: "Driver", addressable_id: driver_eight.id)
+Address.create(street: "W Ironwood Dr", external_number: "745", country: "USA", city: "Peoria", state: "Arizona", addressable_type: "Driver", addressable_id: driver_nine.id)
+Address.create(street: "W Dunlap Ave", external_number: "632", country: "USA", city: "Phoenix", state: "Arizona", addressable_type: "Driver", addressable_id: driver_ten.id)
+Address.create(street: "Rr 1", external_number: "125", country: "USA", city: "Duncan", state: "Arizona", addressable_type: "Driver", addressable_id: driver_eleven.id)
 
-Address.create(street: 'W Erie St #6', external_number: "965", country: "USA", city: "Jefferson", state: "Ohio", addressable_type: "Driver", addressable_id: driver_twelve.id)
-Address.create(street: 'S 6th St', external_number: "854", country: "USA", city: "Coshocton", state: "Ohio", addressable_type: "Driver", addressable_id: driver_thirteen.id)
-Address.create(street: 'Park Dr', external_number: "521", country: "USA", city: "Campbell", state: "Ohio", addressable_type: "Driver", addressable_id: driver_fourteen.id)
-Address.create(street: 'E Water St', external_number: "632", country: "USA", city: "Urbana", state: "Ohio", addressable_type: "Driver", addressable_id: driver_fifteen.id)
-Address.create(street: 'Albright Mckay Rd NE', external_number: "996", country: "USA", city: "Brookfield", state: "Ohio", addressable_type: "Driver", addressable_id: driver_sixteen.id)
-Address.create(street: 'Addison Rd', external_number: "88", country: "USA", city: "Masury", state: "Ohio", addressable_type: "Driver", addressable_id: driver_seventeen.id)
+Address.create(street: "W Erie St #6", external_number: "965", country: "USA", city: "Jefferson", state: "Ohio", addressable_type: "Driver", addressable_id: driver_twelve.id)
+Address.create(street: "S 6th St", external_number: "854", country: "USA", city: "Coshocton", state: "Ohio", addressable_type: "Driver", addressable_id: driver_thirteen.id)
+Address.create(street: "Park Dr", external_number: "521", country: "USA", city: "Campbell", state: "Ohio", addressable_type: "Driver", addressable_id: driver_fourteen.id)
+Address.create(street: "E Water St", external_number: "632", country: "USA", city: "Urbana", state: "Ohio", addressable_type: "Driver", addressable_id: driver_fifteen.id)
+Address.create(street: "Albright Mckay Rd NE", external_number: "996", country: "USA", city: "Brookfield", state: "Ohio", addressable_type: "Driver", addressable_id: driver_sixteen.id)
+Address.create(street: "Addison Rd", external_number: "88", country: "USA", city: "Masury", state: "Ohio", addressable_type: "Driver", addressable_id: driver_seventeen.id)
 
-Address.create(street: 'Main St #204', external_number: "45", country: "USA", city: "Baker City", state: "Oregon", addressable_type: "Driver", addressable_id: driver_eighteen.id)
-Address.create(street: 'Leah Ct', external_number: "657", country: "USA", city: "Oakland", state: "Oregon", addressable_type: "Driver", addressable_id: driver_nineteen.id)
-Address.create(street: 'Crowfoot Rd', external_number: "985", country: "USA", city: "Lebanon", state: "Oregon", addressable_type: "Driver", addressable_id: driver_twenty.id)
-Address.create(street: 'Curtis Rd #4', external_number: "658", country: "USA", city: "Harrisburg", state: "Oregon", addressable_type: "Driver", addressable_id: driver_twenty_one.id)
-Address.create(street: 'Ettlin Loop', external_number: "112", country: "USA", city: "Scotts Mills", state: "Oregon", addressable_type: "Driver", addressable_id: driver_twenty_two.id)
+Address.create(street: "Main St #204", external_number: "45", country: "USA", city: "Baker City", state: "Oregon", addressable_type: "Driver", addressable_id: driver_eighteen.id)
+Address.create(street: "Leah Ct", external_number: "657", country: "USA", city: "Oakland", state: "Oregon", addressable_type: "Driver", addressable_id: driver_nineteen.id)
+Address.create(street: "Crowfoot Rd", external_number: "985", country: "USA", city: "Lebanon", state: "Oregon", addressable_type: "Driver", addressable_id: driver_twenty.id)
+Address.create(street: "Curtis Rd #4", external_number: "658", country: "USA", city: "Harrisburg", state: "Oregon", addressable_type: "Driver", addressable_id: driver_twenty_one.id)
+Address.create(street: "Ettlin Loop", external_number: "112", country: "USA", city: "Scotts Mills", state: "Oregon", addressable_type: "Driver", addressable_id: driver_twenty_two.id)
 
 # Create Carriers Addresses
-Address.create(street: 'W Erie St #6', external_number: "965", country: "USA", city: "Jefferson", state: "Ohio", addressable_type: "Carrier", addressable_id: carrier_one.id)
-Address.create(street: 'S 6th St', external_number: "854", country: "USA", city: "Coshocton", state: "Ohio", addressable_type: "Carrier", addressable_id: carrier_two.id)
-Address.create(street: 'Park Dr', external_number: "521", country: "USA", city: "Campbell", state: "Ohio", addressable_type: "Carrier", addressable_id: carrier_three.id)
-Address.create(street: 'E Water St', external_number: "632", country: "USA", city: "Urbana", state: "Ohio", addressable_type: "Carrier", addressable_id: carrier_four.id)
-Address.create(street: 'Albright Mckay Rd NE', external_number: "996", country: "USA", city: "Brookfield", state: "Ohio", addressable_type: "Carrier", addressable_id: carrier_five.id)
-Address.create(street: 'Addison Rd', external_number: "88", country: "USA", city: "Masury", state: "Ohio", addressable_type: "Carrier", addressable_id: carrier_six.id)
-Address.create(street: 'Main St #204', external_number: "45", country: "USA", city: "Baker City", state: "Oregon", addressable_type: "Carrier", addressable_id: carrier_seven.id)
-Address.create(street: 'Leah Ct', external_number: "657", country: "USA", city: "Oakland", state: "Oregon", addressable_type: "Carrier", addressable_id: carrier_eight.id)
+Address.create(street: "W Erie St #6", external_number: "965", country: "USA", city: "Jefferson", state: "Ohio", addressable_type: "Carrier", addressable_id: carrier_one.id)
+Address.create(street: "S 6th St", external_number: "854", country: "USA", city: "Coshocton", state: "Ohio", addressable_type: "Carrier", addressable_id: carrier_two.id)
+Address.create(street: "Park Dr", external_number: "521", country: "USA", city: "Campbell", state: "Ohio", addressable_type: "Carrier", addressable_id: carrier_three.id)
+Address.create(street: "E Water St", external_number: "632", country: "USA", city: "Urbana", state: "Ohio", addressable_type: "Carrier", addressable_id: carrier_four.id)
+Address.create(street: "Albright Mckay Rd NE", external_number: "996", country: "USA", city: "Brookfield", state: "Ohio", addressable_type: "Carrier", addressable_id: carrier_five.id)
+Address.create(street: "Addison Rd", external_number: "88", country: "USA", city: "Masury", state: "Ohio", addressable_type: "Carrier", addressable_id: carrier_six.id)
+Address.create(street: "Main St #204", external_number: "45", country: "USA", city: "Baker City", state: "Oregon", addressable_type: "Carrier", addressable_id: carrier_seven.id)
+Address.create(street: "Leah Ct", external_number: "657", country: "USA", city: "Oakland", state: "Oregon", addressable_type: "Carrier", addressable_id: carrier_eight.id)
 
 # Create fiscal info records for each carrier of company three
 FiscalInfo.create(ri: "jdhd8ehw", account_statement: "content.xml", proof_of_address: "proof_of_address.pdf", incorporation_act: "incorporation_act.pdf", start_of_operation: DateTime.now - 5.years, fiscal_infoable_id: carrier_five.id, fiscal_infoable_type: "Carrier")
@@ -128,10 +130,10 @@ FiscalInfo.create(ri: "pqla0si3", account_statement: "content.xml", proof_of_add
 FiscalInfo.create(ri: "mcjd8i3k", account_statement: "content.xml", proof_of_address: "proof_of_address.pdf", incorporation_act: "incorporation_act.pdf", start_of_operation: DateTime.now - 7.years, fiscal_infoable_id: carrier_eight.id, fiscal_infoable_type: "Carrier")
 
 # Create Companies Addressess
-Address.create(street: 'Centre Avenue', external_number: "77", country: "USA", city: "Reading", state: "Pensilvania", addressable_type: "Company", addressable_id: company_one.id)
-Address.create(street: 'Franklin Street', external_number: "96", country: "USA", city: "Reading", state: "Pensilvania", addressable_type: "Company", addressable_id: company_two.id)
-Address.create(street: 'Mineral Spring Road', external_number: "425", country: "USA", city: "Reading", state: "Pensilvania", addressable_type: "Company", addressable_id: company_three.id)
-Address.create(street: 'Washington Street', external_number: "745", country: "USA", city: "Reading", state: "Pensilvania", addressable_type: "Company", addressable_id: company_four.id)
+Address.create(street: "Centre Avenue", external_number: "77", country: "USA", city: "Reading", state: "Pensilvania", addressable_type: "Company", addressable_id: company_one.id)
+Address.create(street: "Franklin Street", external_number: "96", country: "USA", city: "Reading", state: "Pensilvania", addressable_type: "Company", addressable_id: company_two.id)
+Address.create(street: "Mineral Spring Road", external_number: "425", country: "USA", city: "Reading", state: "Pensilvania", addressable_type: "Company", addressable_id: company_three.id)
+Address.create(street: "Washington Street", external_number: "745", country: "USA", city: "Reading", state: "Pensilvania", addressable_type: "Company", addressable_id: company_four.id)
 
 # Create Fiscal Information records for each company
 FiscalInfo.create(ri: "tghy7452", account_statement: "content.xml", proof_of_address: "proof_of_address.pdf", incorporation_act: "incorporation_act.pdf", start_of_operation: DateTime.now - 2.years, fiscal_infoable_id: company_one.id, fiscal_infoable_type: "Company")
@@ -161,9 +163,9 @@ client_emma = Client.create(name: "Emma", email: "emma@gmail.com", phone: "52145
 client_olivia = Client.create(name: "Olivia", email: "olivia@gmail.com", phone: "1254784521")
 
 # Create client's addressess
-Address.create(street: 'Hartford Avenue', external_number: "250", country: "USA", city: "Boston", state: "Massachusetts ", addressable_type: "Client", addressable_id: client_amanda.id)
-Address.create(street: 'Thruway Plaza', external_number: "105", country: "USA", city: "Lowell", state: "Massachusetts", addressable_type: "Client", addressable_id: client_emma.id)
-Address.create(street: 'Oak Street', external_number: "547", country: "USA", city: "Brockton", state: "Massachusetts", addressable_type: "Client", addressable_id: client_olivia.id)
+Address.create(street: "Hartford Avenue", external_number: "250", country: "USA", city: "Boston", state: "Massachusetts ", addressable_type: "Client", addressable_id: client_amanda.id)
+Address.create(street: "Thruway Plaza", external_number: "105", country: "USA", city: "Lowell", state: "Massachusetts", addressable_type: "Client", addressable_id: client_emma.id)
+Address.create(street: "Oak Street", external_number: "547", country: "USA", city: "Brockton", state: "Massachusetts", addressable_type: "Client", addressable_id: client_olivia.id)
 
 # Create sales for company one
 sale_one = Sale.create(company_id: company_one.id, seller_id: rebeca_employee.id, buyer_id: client_amanda.id, total: 1000, status: :completed, sale_type: "IT")
@@ -182,9 +184,9 @@ sale_three.sale_concepts.create(unit_price: "250", total: "250", amount: "1", pr
 sale_three.sale_concepts.create(unit_price: "1100", total: "1100", amount: "1", product_id: product_three.id)
 
 # Create sales for company three
-sale_four = Sale.create(company_id: company_three.id, seller_id: jack_employee.id, buyer_id: client_olivia.id, total: 14500, status: :completed, sale_type: "IT")
-sale_five = Sale.create(company_id: company_three.id, seller_id: rebeca_employee.id, buyer_id: client_olivia.id, total: 12000, status: :completed, sale_type: "IT")
-sale_six = Sale.create(company_id: company_three.id, seller_id: jack_employee.id, buyer_id: client_emma.id, total: 22000, status: :completed, sale_type: "IT")
+sale_four = Sale.create(company_id: company_three.id, seller_id: jack_employee.id, buyer_id: client_olivia.id, total: 14_500, status: :completed, sale_type: "IT")
+sale_five = Sale.create(company_id: company_three.id, seller_id: rebeca_employee.id, buyer_id: client_olivia.id, total: 12_000, status: :completed, sale_type: "IT")
+sale_six = Sale.create(company_id: company_three.id, seller_id: jack_employee.id, buyer_id: client_emma.id, total: 22_000, status: :completed, sale_type: "IT")
 
 # Create sale concepts for sale four
 sale_four.sale_concepts.create(unit_price: "5000", total: "10000", amount: "2", product_id: product_five.id)
@@ -203,7 +205,7 @@ sale_six.sale_concepts.create(unit_price: "1500", total: "3000", amount: "2", pr
 shipment_one = Shipment.create(sale_id: sale_one.id, user_id: rebeca_employee.id, client_id: client_amanda.id, instructions: "Deliver this package to the front door of the house, and wrap the computer and mouse in a blue box.", status: :accepted, total_products: 2, sale_number: "SG-38G", issued_at: Time.now, shiped_at: Time.now + 3.days)
 
 # Create shipment address
-Address.create(street: 'Russell St', external_number: "854", country: "USA", city: "Amsterdam", state: "NY", addressable_type: "Shipment", addressable_id: shipment_one.id)
+Address.create(street: "Russell St", external_number: "854", country: "USA", city: "Amsterdam", state: "NY", addressable_type: "Shipment", addressable_id: shipment_one.id)
 
 # Create carriers for this shipment
 ShipmentCarrier.create(shipment_id: shipment_one.id, carrier_id: company_one.carriers.first.id)
@@ -213,7 +215,7 @@ ShipmentCarrier.create(shipment_id: shipment_one.id, carrier_id: company_one.car
 shipment_two = Shipment.create(sale_id: sale_two.id, user_id: rebeca_employee.id, client_id: client_emma.id, instructions: "Wrap the mouse in a black box.", status: :accepted, total_products: 1, sale_number: "SG-39F", issued_at: Time.now, shiped_at: Time.now + 10.minutes)
 
 # Create shipment address
-Address.create(street: 'Brockport Spencerport Rd', external_number: "968", country: "USA", city: "Brockport", state: "NY", addressable_type: "Shipment", addressable_id: shipment_two.id)
+Address.create(street: "Brockport Spencerport Rd", external_number: "968", country: "USA", city: "Brockport", state: "NY", addressable_type: "Shipment", addressable_id: shipment_two.id)
 
 # Create carriers for this shipment
 ShipmentCarrier.create(shipment_id: shipment_two.id, carrier_id: company_one.carriers.third.id)
@@ -222,7 +224,7 @@ ShipmentCarrier.create(shipment_id: shipment_two.id, carrier_id: company_one.car
 shipment_three = Shipment.create(sale_id: sale_three.id, user_id: jack_employee.id, client_id: client_emma.id, instructions: "Laptop and mouse in a slim package.", status: :pending, total_products: 2, sale_number: "SG-45AF", issued_at: Time.now + 1.day)
 
 # Create shipment address
-Address.create(street: 'East Ave', external_number: "3018", country: "USA", city: "Central Square", state: "NY", addressable_type: "Shipment", addressable_id: shipment_three.id)
+Address.create(street: "East Ave", external_number: "3018", country: "USA", city: "Central Square", state: "NY", addressable_type: "Shipment", addressable_id: shipment_three.id)
 
 # Create carriers for this shipment
 ShipmentCarrier.create(shipment_id: shipment_three.id, carrier_id: company_one.carriers.third.id)
@@ -232,7 +234,7 @@ ShipmentCarrier.create(shipment_id: shipment_three.id, carrier_id: company_one.c
 shipment_four = Shipment.create(sale_id: sale_four.id, user_id: jack_employee.id, client_id: client_olivia.id, instructions: "Send manuals and login info for the platform.", status: :accepted, total_products: 2, sale_number: "SG-99D")
 
 # Create shipment address
-Address.create(street: 'Thruway Plaza', external_number: "14225", country: "USA", city: "Cheektowaga", state: "NY", addressable_type: "Shipment", addressable_id: shipment_four.id)
+Address.create(street: "Thruway Plaza", external_number: "14225", country: "USA", city: "Cheektowaga", state: "NY", addressable_type: "Shipment", addressable_id: shipment_four.id)
 
 # Create carriers for this shipment
 ShipmentCarrier.create(shipment_id: shipment_four.id, carrier_id: company_three.carriers.first.id)
@@ -243,7 +245,7 @@ ShipmentCarrier.create(shipment_id: shipment_four.id, carrier_id: company_three.
 shipment_five = Shipment.create(sale_id: sale_five.id, user_id: rebeca_employee.id, client_id: client_olivia.id, instructions: "Send couching program, manuals and login info.", status: :accepted, total_products: 2, sale_number: "SG-52F", issued_at: Time.now + 5.hours, shiped_at: Time.now + 2.days)
 
 # Create shipment address
-Address.create(street: 'Troy Road', external_number: "254", country: "USA", city: "East Greenbush", state: "NY", addressable_type: "Shipment", addressable_id: shipment_five.id)
+Address.create(street: "Troy Road", external_number: "254", country: "USA", city: "East Greenbush", state: "NY", addressable_type: "Shipment", addressable_id: shipment_five.id)
 
 # Create carriers for this shipment
 ShipmentCarrier.create(shipment_id: shipment_five.id, carrier_id: company_three.carriers.third.id)
@@ -253,7 +255,7 @@ ShipmentCarrier.create(shipment_id: shipment_five.id, carrier_id: company_three.
 shipment_six = Shipment.create(sale_id: sale_six.id, user_id: jack_employee.id, client_id: client_emma.id, instructions: "Send couching program, platform uri, manuals and login info.", status: :accepted, total_products: 3, sale_number: "SG-72W", issued_at: Time.now + 2.hours, shiped_at: Time.now + 1.days)
 
 # Create shipment address
-Address.create(street: 'State Route 3', external_number: "8542", country: "USA", city: "Fulton", state: "NY", addressable_type: "Shipment", addressable_id: shipment_six.id)
+Address.create(street: "State Route 3", external_number: "8542", country: "USA", city: "Fulton", state: "NY", addressable_type: "Shipment", addressable_id: shipment_six.id)
 
 # Create carriers for this shipment
 ShipmentCarrier.create(shipment_id: shipment_six.id, carrier_id: company_three.carriers.third.id)

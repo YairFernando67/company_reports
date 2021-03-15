@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StructureQueue
   include Enumerable
   attr_accessor :data
@@ -18,10 +20,10 @@ class StructureQueue
     @data.last
   end
 
-  def each 
-    return if !self.peek
+  def each
+    return unless peek
 
-    self.data.each do |obj|
+    data.each do |obj|
       yield(obj) if defined?(yield)
     end
   end

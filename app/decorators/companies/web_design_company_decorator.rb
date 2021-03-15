@@ -1,5 +1,6 @@
-class Companies::WebDesignCompanyDecorator < Companies::BaseDecorator
+# frozen_string_literal: true
 
+class Companies::WebDesignCompanyDecorator < Companies::BaseDecorator
   def name
     "
       <div class='background-image-1'>
@@ -13,19 +14,19 @@ class Companies::WebDesignCompanyDecorator < Companies::BaseDecorator
       <div class='description'>
         <div class='row'>
           <div class='col s6'>
-            <span>  Rfc: <strong>#{company.rfc} </strong> </span> 
+            <span>  Rfc: <strong>#{company.rfc} </strong> </span>
           </div>
           <div class='col s6'>
-            <span>  Contact: <strong>#{company.contact} </strong> </span> 
+            <span>  Contact: <strong>#{company.contact} </strong> </span>
           </div>
           <div class='col s6'>
-            <span>  Email: <strong>#{company.email} </strong> </span> 
+            <span>  Email: <strong>#{company.email} </strong> </span>
           </div>
           <div class='col s6'>
-            <span>  Phone: <strong>#{company.phone} </strong> </span> 
+            <span>  Phone: <strong>#{company.phone} </strong> </span>
           </div>
           <div class='col s6'>
-            <span>  Fiscal Name: <strong>#{company.fiscal_name} </strong> </span> 
+            <span>  Fiscal Name: <strong>#{company.fiscal_name} </strong> </span>
           </div>
         </div>
       </div>

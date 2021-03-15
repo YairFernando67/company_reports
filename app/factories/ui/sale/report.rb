@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Ui::Sale::Report
   def ui
     raise NotImplementedError, "#{self.class} method not implemented yet #{__method__}"
@@ -12,7 +14,7 @@ class Ui::Sale::Report
               <img src='https://i.imgur.com/hp3fAsi.png' alt='logo' height='90'>
             </th>
             <th class='text-right' width='100%'>
-              <span class='text-right'>#{Date.current.strftime('%B %Y %m')}</span><br/>
+              <span class='text-right'>#{Date.current.strftime("%B %Y %m")}</span><br/>
               <span class='text-right'>Gerente: #{data[:user][:name]}</span><br/>
               <span class='text-right'>Email: #{data[:user][:email]}</span>
             </th>
@@ -34,7 +36,7 @@ class Ui::Sale::Report
         <thead>
           <tr>
             <th class='text-right' width='100%'>
-              <span class='text-right'>#{Date.current.strftime('%B %Y %m')}</span>
+              <span class='text-right'>#{Date.current.strftime("%B %Y %m")}</span>
             </th>
             <th class='text-right' width='100%'>
               <span class='text-right'>Footer</span>

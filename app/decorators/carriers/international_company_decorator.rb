@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Carriers::InternationalCompanyDecorator < BaseDecorator
   columns(*Carrier::COLUMNS)
   include CarriersDecoratorHelper

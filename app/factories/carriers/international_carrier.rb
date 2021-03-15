@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Carriers::InternationalCarrier < Carriers::BaseCarrier
   def fiscal_info
     fi = carrier.fiscal_info
@@ -13,7 +15,7 @@ class Carriers::InternationalCarrier < Carriers::BaseCarrier
     {
       total_shipments: carrier_shipments.size,
       total_products: carrier_shipments.inject(0) { |total, shipment| total += shipment.total_products },
-      clients: carrier_shipments.map { |s| s.client_name }.uniq
+      clients: carrier_shipments.map(&:client_name).uniq
     }
   end
 
@@ -21,7 +23,7 @@ class Carriers::InternationalCarrier < Carriers::BaseCarrier
     carrier_drivers = carrier.drivers
     {
       active_drivers: carrier_drivers.active.size,
-      drivers: carrier_drivers.map { |d| { name: d.name, email: d.email }},
+      drivers: carrier_drivers.map { |d| { name: d.name, email: d.email } },
       total_drivers: carrier_drivers.size
     }
   end
@@ -37,6 +39,6 @@ class Carriers::InternationalCarrier < Carriers::BaseCarrier
   end
 
   def decorate
-    Carriers::InternationalCompanyDecorator.decorate(self, self.carrier)
+    Carriers::InternationalCompanyDecorator.decorate(self, carrier)
   end
 end

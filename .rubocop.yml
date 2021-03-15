@@ -1,0 +1,63 @@
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+    - "Rakefile"
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Security/YAMLLoad:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+  ConsistentQuotesInMultiline: true
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+
+Layout/MultilineMethodCallIndentation:
+    EnforcedStyle: indented
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*.rb"
+    - "db/migrate/*.rb"
+    - "db/seeds/*.rb"
+    - "*.gemspec"
+
+Layout/LineLength:
+  Max: 120
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+
+Metrics/AbcSize:
+  Max: 40
+  Exclude:
+    - "app/models/element/element_dataset_methods.rb"
+
+Metrics/MethodLength:
+  Max: 15
+  Exclude:
+    - "spec/**/*.rb"
+    - "db/migrate/*.rb"
+    - "*.gemspec"
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*"

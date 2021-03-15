@@ -1,4 +1,6 @@
-class Ui::Sale::SimpleReport < Ui::Sale::UiElements 
+# frozen_string_literal: true
+
+class Ui::Sale::SimpleReport < Ui::Sale::UiElements
   attr_accessor :data
 
   def initialize(data)
@@ -56,8 +58,8 @@ class Ui::Sale::SimpleReport < Ui::Sale::UiElements
           <td></td>
         </tr>
         <tr>
-          #{company[:products].size == 0 ?
-            '<h4>THERE ARE NO PRODUCTS</h4>'
+          #{company[:products].empty? ?
+            "<h4>THERE ARE NO PRODUCTS</h4>"
           :
             "
               <table class='mt-1'>
@@ -70,7 +72,7 @@ class Ui::Sale::SimpleReport < Ui::Sale::UiElements
                 </thead>
                 <tbody>
                   #{company[:products].map do |product|
-                  "
+                    "
                     <tr>
                       <td class='p-1 bg-color-green'><b>#{product[:id]}</b></td>
                       <td class='p-1 bg-color-green'><b>#{product[:name]}</b></td>
@@ -86,8 +88,8 @@ class Ui::Sale::SimpleReport < Ui::Sale::UiElements
         <tr>
           <h4 class='m-1 p-0'>Sales</h4>
           <hr/>
-          #{company[:sales].size == 0 ?
-            '<h4>THERE ARE NO SALES</h4>'
+          #{company[:sales].empty? ?
+            "<h4>THERE ARE NO SALES</h4>"
           :
             "
               <table class='mt-1'>
@@ -103,7 +105,7 @@ class Ui::Sale::SimpleReport < Ui::Sale::UiElements
                 </thead>
                 <tbody>
                   #{company[:sales].map do |sale|
-                  "
+                    "
                     <tr>
                       <td class='bg-color-green p-1'><b>#{sale[:id]}</b></td>
                       <td class='bg-color-green p-1'><b>#{sale[:status]}</b></td>

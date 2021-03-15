@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Sales::Builder
   def initialize(reporter)
     @user = reporter.user

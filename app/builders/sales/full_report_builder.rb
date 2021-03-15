@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Sales::FullReportBuilder < Sales::Builder
   def add_user_info
     reporter.add_user_info
@@ -13,7 +15,7 @@ class Sales::FullReportBuilder < Sales::Builder
     reporter.add_sales do |sale|
       {
         iva: (sale.total.to_f * 0.16),
-        ieps: '0%',
+        ieps: "0%",
         discount: (sale.total > 800 ? (sale.total.to_f * 0.1) : 0),
         extra_fees: 0,
         sale_type: sale.sale_type
@@ -39,16 +41,16 @@ class Sales::FullReportBuilder < Sales::Builder
 
   def company_fields
     %i[
-        business_name
-        rfc
-        email
-        phone
-        contact
-        fiscal_name
-        created_at
-        company_type_name
-        company_type_code
-        company_type_affiliation
+      business_name
+      rfc
+      email
+      phone
+      contact
+      fiscal_name
+      created_at
+      company_type_name
+      company_type_code
+      company_type_affiliation
     ]
   end
 

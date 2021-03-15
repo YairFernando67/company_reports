@@ -1,5 +1,6 @@
-class Ui::Sale::SimpleReportCreator < Ui::Sale::Report
+# frozen_string_literal: true
 
+class Ui::Sale::SimpleReportCreator < Ui::Sale::Report
   def initialize(data)
     @data = data
     @ui = ui
@@ -8,7 +9,7 @@ class Ui::Sale::SimpleReportCreator < Ui::Sale::Report
   def ui
     Ui::Sale::SimpleReport.new(@data)
   end
-  
+
   def get_header
     super(@data)
   end

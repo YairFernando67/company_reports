@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CarriersDecoratorHelper
   def carrier_shipments
     carrier_hash.shipments

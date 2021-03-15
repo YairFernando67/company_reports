@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Companies::ItCompanyDecorator < Companies::BaseDecorator
   def name
     "
@@ -11,11 +13,11 @@ class Companies::ItCompanyDecorator < Companies::BaseDecorator
   def company_description
     "
       <div class='general'>
-        <span>  <i class='material-icons'>confirmation_number</i> #{company.rfc} </span> 
-        <span>  <i class='material-icons'>mood</i> #{company.contact} </span> 
-        <span>  <i class='material-icons'>email</i> #{company.email} </span> 
-        <span>  <i class='material-icons'>local_phone</i> #{company.phone} </span> 
-        <span>  <i class='material-icons'>business</i> #{company.fiscal_name} </span> 
+        <span>  <i class='material-icons'>confirmation_number</i> #{company.rfc} </span>
+        <span>  <i class='material-icons'>mood</i> #{company.contact} </span>
+        <span>  <i class='material-icons'>email</i> #{company.email} </span>
+        <span>  <i class='material-icons'>local_phone</i> #{company.phone} </span>
+        <span>  <i class='material-icons'>business</i> #{company.fiscal_name} </span>
       </div>
     "
   end

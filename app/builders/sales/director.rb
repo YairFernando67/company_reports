@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Sales::Director
   attr_accessor :builder
 
@@ -5,9 +7,7 @@ class Sales::Director
     @builder = nil
   end
 
-  def builder=(builder)
-    @builder = builder
-  end
+  attr_writer :builder
 
   def build
     @builder.add_user_info
@@ -15,6 +15,5 @@ class Sales::Director
     @builder.add_sales
     @builder.add_sale_concepts
     @builder.add_charts
-    @builder.decorate
   end
 end

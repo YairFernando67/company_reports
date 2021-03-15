@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Carrier < ApplicationRecord
   enum carrier_type: %i[national international]
   belongs_to :company

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateShipmentCarriers < ActiveRecord::Migration[6.0]
   def change
     create_table :shipment_carriers do |t|

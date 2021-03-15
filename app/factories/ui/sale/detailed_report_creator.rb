@@ -1,5 +1,6 @@
-class Ui::Sale::DetailedReportCreator < Ui::Sale::Report
+# frozen_string_literal: true
 
+class Ui::Sale::DetailedReportCreator < Ui::Sale::Report
   def initialize(data)
     @data = data
     @ui = ui

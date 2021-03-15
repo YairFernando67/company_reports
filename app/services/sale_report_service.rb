@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SaleReportService
   def initialize(params, reporter)
     @params = params
@@ -7,6 +9,7 @@ class SaleReportService
 
   def call
     send("get_#{params[:type]}_report")
+    report
   end
 
   private
@@ -31,4 +34,10 @@ class SaleReportService
 
   attr_reader :params, :user, :director
   attr_accessor :reporter
+
+  protected
+
+  def report
+    reporter.report
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateSaleConcepts < ActiveRecord::Migration[6.0]
   def change
     create_table :sale_concepts do |t|

@@ -1,4 +1,6 @@
-class Ui::Sale::DetailedReport < Ui::Sale::UiElements 
+# frozen_string_literal: true
+
+class Ui::Sale::DetailedReport < Ui::Sale::UiElements
   attr_accessor :data
 
   def initialize(data)
@@ -66,7 +68,7 @@ class Ui::Sale::DetailedReport < Ui::Sale::UiElements
         </tr>
         <tr>
           <td><b>Contributing Since:</b> </td>
-          <td>#{company[:created_at].strftime('%B %Y %m')}</td>
+          <td>#{company[:created_at].strftime("%B %Y %m")}</td>
         </tr>
         <tr>
           <td><b>Company type:</b> </td>
@@ -85,8 +87,8 @@ class Ui::Sale::DetailedReport < Ui::Sale::UiElements
           <td></td>
         </tr>
         <tr>
-          #{company[:products].size == 0 ?
-            '<h4>THERE ARE NO PRODUCTS</h4>'
+          #{company[:products].empty? ?
+            "<h4>THERE ARE NO PRODUCTS</h4>"
           :
             "
               <table class='mt-1'>
@@ -100,7 +102,7 @@ class Ui::Sale::DetailedReport < Ui::Sale::UiElements
                 </thead>
                 <tbody>
                   #{company[:products].map do |product|
-                  "
+                    "
                     <tr>
                       <td class='p-1 bg-color-green'><b>#{product[:id]}</b></td>
                       <td class='p-1 bg-color-green'><b>#{product[:name]}</b></td>
@@ -117,8 +119,8 @@ class Ui::Sale::DetailedReport < Ui::Sale::UiElements
            <tr>
           <h4 class='m-1 p-0'>Sales</h4>
           <hr/>
-          #{company[:sales].size == 0 ?
-            '<h4>THERE ARE NO SALES</h4>'
+          #{company[:sales].empty? ?
+            "<h4>THERE ARE NO SALES</h4>"
           :
             "
               <table class='mt-1'>
@@ -139,7 +141,7 @@ class Ui::Sale::DetailedReport < Ui::Sale::UiElements
                 </thead>
                 <tbody>
                   #{company[:sales].map do |sale|
-                  "
+                    "
                     <tr>
                       <td class='bg-color-green p-1'><b>#{sale[:id]}</b></td>
                       <td class='bg-color-green p-1'><b>#{sale[:status]}</b></td>
@@ -205,14 +207,14 @@ class Ui::Sale::DetailedReport < Ui::Sale::UiElements
                 <tbody>
                   #{company[:sales].map do |sale|
                     employee = sale[:employee_info]
-                      "
+                    "
                         <tr>
                           <td class='bg-color-green p-1'><b>#{employee[:id]}</b></td>
                           <td class='bg-color-green p-1 bl-white'><b>#{employee[:sale_id]}</b></td>
                           <td class='bg-color-green p-1'><b>#{employee[:name]}</b></td>
                           <td class='bg-color-green p-1' width='20%'><b>#{employee[:email]}</b></td>
                           <td class='bg-color-green p-1' width='20%'><b>#{employee[:sales]}</b></td>
-                          <td class='bg-color-green p-1' width='20%'><b>#{employee[:street] + ' ' + employee[:external_number] + ' ' + employee[:city] + ' ' + employee[:state] + ' ' + employee[:country]}</b></td>
+                          <td class='bg-color-green p-1' width='20%'><b>#{employee[:street] + " " + employee[:external_number] + " " + employee[:city] + " " + employee[:state] + " " + employee[:country]}</b></td>
                           <td class='bg-color-green p-1' width='20%'><b>$#{employee[:total_amount_sold_before_taxes]}</b></td>
                           <td class='bg-color-red p-1' width='20%'><b>$#{employee[:total_amount_sold]}</b></td>
                         </tr>
@@ -237,14 +239,14 @@ class Ui::Sale::DetailedReport < Ui::Sale::UiElements
                 <tbody>
                   #{company[:sales].map do |sale|
                     client = sale[:client_info]
-                      "
+                    "
                         <tr>
                           <td class='bg-color-green p-1'><b>#{client[:id]}</b></td>
                           <td class='bg-color-green p-1 bl-white'><b>#{client[:sale_id]}</b></td>
                           <td class='bg-color-green p-1'><b>#{client[:name]}</b></td>
                           <td class='bg-color-green p-1' width='20%'><b>#{client[:email]}</b></td>
                           <td class='bg-color-green p-1' width='10%'><b>#{client[:purchases]}</b></td>
-                          <td class='bg-color-green p-1' width='20%'><b>#{client[:street] + ' ' + client[:external_number] + ' ' + client[:city] + ' ' + client[:state] + ' ' + client[:country]}</b></td>
+                          <td class='bg-color-green p-1' width='20%'><b>#{client[:street] + " " + client[:external_number] + " " + client[:city] + " " + client[:state] + " " + client[:country]}</b></td>
                           <td class='bg-color-green p-1' width='20%'><b>$#{client[:total_amount_purchased_before_taxes]}</b></td>
                           <td class='bg-color-red p-1' width='20%'><b>$#{client[:total_amount_purchased]}</b></td>
                         </tr>
@@ -252,7 +254,7 @@ class Ui::Sale::DetailedReport < Ui::Sale::UiElements
                   end.join}
                 </tbody>
               </table>
-  
+
             "
           }
         </tr>

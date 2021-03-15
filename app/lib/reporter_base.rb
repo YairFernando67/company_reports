@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReporterBase
   @@config = {}
 
@@ -12,7 +14,7 @@ class ReporterBase
     @@config[object_id][:client_fields] = client_fields.map(&:to_sym)
   end
 
-  def initialize(user, active_companies, report= {})
+  def initialize(user, active_companies, report={})
     @user = user
     @report = report
     @active_companies = active_companies

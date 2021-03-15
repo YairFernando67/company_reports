@@ -1,9 +1,10 @@
-class CompanyService 
+# frozen_string_literal: true
 
+class CompanyService
   COMPANY_DECORATORS = {
     "Web Design Solutions": Companies::WebDesignCompanyDecorator,
     "IT Companies": Companies::ItCompanyDecorator
-  }
+  }.freeze
 
   class << self
     def get_company(company_id)

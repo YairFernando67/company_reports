@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Shipment < ApplicationRecord
   enum status: %i[completed cancelled pending blocked accepted progress]
   # belongs_to :company

@@ -1,5 +1,6 @@
-class BaseDecorator
+# frozen_string_literal: true
 
+class BaseDecorator
   class << self
     @@columns = {}
 
@@ -11,7 +12,7 @@ class BaseDecorator
       @@columns[object_id] = attrs.map(&:to_sym)
 
       attrs.each do |column|
-        define_method("#{column}") do
+        define_method(column.to_s) do
           instance_variable_get("@#{column}")
         end
         define_method("#{column}=") do |value|
@@ -20,7 +21,6 @@ class BaseDecorator
       end
     end
   end
-
 
   def initialize(hash, resource)
     @hash = hash
