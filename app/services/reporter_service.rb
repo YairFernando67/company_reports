@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
-class Reporter < ReporterBase
+class ReporterService < Report::Base
   def add_user_info
-    report[:user] = user.slice(:email, :name).merge(address_fields).symbolize_keys
+    report[:user] = user.slice(:email, :name)
+                        .merge(address_fields)
+                        .transform_keys! {|k| k.titleize }
+                        .symbolize_keys
   end
 
   def add_company_info

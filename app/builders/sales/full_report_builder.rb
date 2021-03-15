@@ -28,12 +28,12 @@ class Sales::FullReportBuilder < Sales::Builder
   end
 
   def add_charts
-    report[:charts] = Charts.build(active_companies)
+    report[:charts] = ChartsService.build(active_companies)
   end
 
-  def decorate
-    Sales::FullReportDecorator.decorate(report)
-  end
+  # def decorate
+  #   Sales::FullReportDecorator.decorate(report)
+  # end
 
   attr_accessor :reporter, :user
 

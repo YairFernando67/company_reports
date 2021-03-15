@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Charts
+class ChartsService
   def initialize(companies)
     @companies = companies
   end

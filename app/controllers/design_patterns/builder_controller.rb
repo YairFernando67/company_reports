@@ -5,7 +5,7 @@ module DesignPatterns
     before_action :authenticate_user!
 
     def index
-      reporter = Reporter.new(current_user, active_companies)
+      reporter = ReporterService.new(current_user, active_companies)
       @report = SaleReportService.new(params, reporter).call if params[:type].present?
       # binding.pry
       # @company_earnings = @report.ui.data[:charts][:company_earnings]

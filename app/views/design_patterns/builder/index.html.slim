@@ -40,9 +40,16 @@
 
 
 .mt-5.mb-5
-  = render "design_patterns/builder/simple_report" if params[:type] == "simple"
-  = render "design_patterns/builder/detailed_report" if params[:type] == "detailed"
-  = render "design_patterns/builder/full_report" if params[:type] == "full"
+  - if params[:type].present?
+    .wrapper-report
+      .background
+      .content
+        = image_tag("dots_y", class: "corner_img_one")
+        = image_tag("dots_y", class: "corner_img_two")
+        = image_tag("figure", class: "figure")
+        = render "simple_report" if params[:type] == "simple"
+        = render "detailed_report" if params[:type] == "detailed"
+        = render "full_report" if params[:type] == "full"
 
 
 script
