@@ -86,6 +86,144 @@ section.sales.mt-3
             icon_name: :attach_money, \
             header_title: "Sales"
 
+  .row
+    - @report[:sales].each do |c|
+      .col.s12
+        .sale-list
+          h5 = c[:company_name]
+          .row
+            .col.s6
+              span
+                | # &nbsp;
+                span = c[:id]
+              span
+                | Status: &nbsp;
+                span = c[:status]
+              span
+                | Total Before Taxes: &nbsp;
+                span
+                  | $
+                  = c[:total_before_taxes]
+              span
+                | IVA: &nbsp;
+                span
+                  | $
+                  = c[:iva]
+              span
+                | Discount: &nbsp;
+                span
+                  | $
+                  = c[:discount]
+              span
+                | Extra Fees: &nbsp;
+                span
+                  | $
+                  = c[:extra_fees]
+              span
+                | Sale Type: &nbsp;
+                span
+                  = c[:sale_type]
+              span
+                | Total: &nbsp;
+                span
+                  | $
+                  = c[:total]
+              span
+                | Date: &nbsp;
+                span = c[:date]
+          .divider
+          .row
+            .col.s6
+              h6 Employee Information
+              .company-fiscal-info
+                span
+                  | # &nbsp;
+                  span = c[:employee_info][:id]
+                span
+                  | Name: &nbsp;
+                  span = c[:employee_info][:name]
+                span
+                  | Email: &nbsp;
+                  span = c[:employee_info][:email]
+                span
+                  | Number of Sales: &nbsp;
+                  span = c[:employee_info][:sales]
+                span
+                  | Total amount sold before taxes: &nbsp;
+                  span
+                    | $
+                    = c[:employee_info][:total_amount_sold_before_taxes]
+                span
+                  | Total amount sold: &nbsp;
+                  span
+                    | $
+                    = c[:employee_info][:total_amount_sold]
+                span
+                  | Street: &nbsp;
+                  span = c[:employee_info][:street]
+                span
+                  | City: &nbsp;
+                  span = c[:employee_info][:city]
+                span
+                  | State: &nbsp;
+                  span = c[:employee_info][:state]
+                span
+                  | Country: &nbsp;
+                  span = c[:employee_info][:country]
+                span
+                  | External Number: &nbsp;
+                  span = c[:employee_info][:external_number]
+                span
+                  | Zip Code: &nbsp;
+                  span = c[:employee_info][:zip_code]
+
+            .col.s6
+              h6 Client Information
+              .company-fiscal-info
+                span
+                  | # &nbsp;
+                  span = c[:client_info][:id]
+                span
+                  | Name: &nbsp;
+                  span = c[:client_info][:name]
+                span
+                  | Email: &nbsp;
+                  span = c[:client_info][:email]
+                span
+                  | Phone: &nbsp;
+                  span = c[:client_info][:phone]
+                span
+                  | Number of Purchases: &nbsp;
+                  span = c[:client_info][:purchases]
+                span
+                  | Total amount purchased before taxes: &nbsp;
+                  span
+                    | $
+                    = c[:client_info][:total_amount_purchased_before_taxes]
+                span
+                  | Total amount purchased: &nbsp;
+                  span
+                    | $
+                    = c[:client_info][:total_amount_purchased]
+                span
+                  | Street: &nbsp;
+                  span = c[:client_info][:street]
+                span
+                  | City: &nbsp;
+                  span = c[:client_info][:city]
+                span
+                  | State: &nbsp;
+                  span = c[:client_info][:state]
+                span
+                  | Country: &nbsp;
+                  span = c[:client_info][:country]
+                span
+                  | External Number: &nbsp;
+                  span = c[:client_info][:external_number]
+                span
+                  | Zip Code: &nbsp;
+                  span = c[:client_info][:zip_code]
+
 section.sale-concepts.mt-3
   = render "design_patterns/shared/section_header", \
             icon_name: :add_shopping_cart, \

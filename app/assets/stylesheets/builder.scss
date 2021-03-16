@@ -147,10 +147,12 @@
       }
     }
 
-    section.companies {
+    section.companies,
+    section.sales {
       .row {
 
-        .company-list {
+        .company-list,
+        .sale-list {
           padding: 2rem;
 
           .row {
