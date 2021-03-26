@@ -1,7 +1,10 @@
 AllCops:
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 2.7.2
   Exclude:
     - "Rakefile"
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - "db/**/*"
 
 Style/MultilineBlockChain:
   Enabled: false

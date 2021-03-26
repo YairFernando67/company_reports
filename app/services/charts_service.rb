@@ -16,6 +16,7 @@ class ChartsService
     @sales_by_month = {}
     build_sales_base_hash
     get_sales_filtered
+    # binding.pry
     {
       company_sales: companies.map { |company| [company[:business_name], company.sales.size] },
       daily_sales: daily_sales,
@@ -58,7 +59,7 @@ class ChartsService
       company.sales.group_by(&:seller_name).map do |key, val|
         [key, val.size]
       end
-    end.flatten!]
+    end].flatten(2)
   end
 
   def client_sales
@@ -66,7 +67,7 @@ class ChartsService
       company.sales.group_by(&:buyer_name).map do |key, val|
         [key, val.size]
       end
-    end.flatten!]
+    end].flatten(2)
   end
 
   def get_start_date

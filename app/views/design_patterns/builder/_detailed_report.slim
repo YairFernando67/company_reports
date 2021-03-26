@@ -1,6 +1,6 @@
 h4.title
   | Detailed Report
-  .figure_year
+  .figure-year
     span = 2021
     = image_tag("figure3", class: "img")
 = render "design_patterns/shared/manager_info", user: @report[:user]
@@ -86,7 +86,7 @@ section.sales.mt-3
             icon_name: :attach_money, \
             header_title: "Sales"
 
-  .row
+  .row.sale-container
     - @report[:sales].each do |c|
       .col.s12
         .sale-list
@@ -229,7 +229,39 @@ section.sale-concepts.mt-3
             icon_name: :add_shopping_cart, \
             header_title: "Sale Concepts"
 
-section.charts.mt-3
-  = render "design_patterns/shared/section_header", \
-            icon_name: :bubble_chart, \
-            header_title: "Charts"
+  .row
+    .col.s12.sale_concepts
+      h6 Sale Concepts
+      table.responsive.striped.highlight.centered
+        thead
+          tr
+            th
+              | ID
+            th
+              | Sale ID
+            th
+              | Amount
+            th
+              | Unit Price
+            th
+              | IVA
+            th
+              | Total Before Taxes
+            th
+              | Total
+        tbody
+          - @report[:sale_concepts].each do |sc|
+            tr
+              td = sc[:id]
+              td = sc[:sale_id]
+              td = sc[:amount]
+              td
+                | $
+                = sc[:iva]
+              td
+                | $
+                = sc[:total_before_taxes]
+              td
+                | $
+                = sc[:total]
+

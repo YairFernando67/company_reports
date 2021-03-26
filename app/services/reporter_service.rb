@@ -3,9 +3,9 @@
 class ReporterService < Report::Base
   def add_user_info
     report[:user] = user.slice(:email, :name)
-                        .merge(address_fields)
-                        .transform_keys! {|k| k.titleize }
-                        .symbolize_keys
+      .merge(address_fields)
+      .transform_keys!(&:titleize)
+      .symbolize_keys
   end
 
   def add_company_info
@@ -52,7 +52,7 @@ class ReporterService < Report::Base
             .merge(
               total_before_taxes: concept.total.to_f,
               total: (concept.total.to_f + concept.total.to_f * 0.16),
-              iva: concept.total.to_f
+              iva: (concept.total.to_f * 0.16)
             ).deep_symbolize_keys
         end
       end

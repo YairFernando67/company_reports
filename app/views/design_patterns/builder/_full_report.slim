@@ -1,6 +1,6 @@
 h4.title
   | Full Report
-  .figure_year
+  .figure-year
     span = 2021
     = image_tag("figure3", class: "img")
 = render "design_patterns/shared/manager_info", user: @report[:user]
@@ -118,7 +118,7 @@ section.sales.mt-3
             icon_name: :attach_money, \
             header_title: "Sales"
 
-  .row
+  .row.sale-container
     - @report[:sales].each do |c|
       .col.s12
         .sale-list
@@ -242,8 +242,159 @@ section.sale-concepts.mt-3
             icon_name: :add_shopping_cart, \
             header_title: "Sale Concepts"
 
-section.charts.mt-3
+  .row
+    .concepts-list
+      .col.s12
+        .concepts
+          table.responsive.striped.highlight.centered
+            thead
+              tr
+                th
+                  | ID
+                th
+                  | Sale ID
+                th
+                  | Amount
+                th
+                  | Unit Price
+                th
+                  | IVA
+                th
+                  | Total Before Taxes
+                th
+                  | Total
+            tbody
+              - @report[:sale_concepts].each do |sc|
+                tr
+                  td = sc[:id]
+                  td = sc[:sale_id]
+                  td = sc[:amount]
+                  td
+                    | $
+                    = sc[:unit_price]
+                  td
+                    | $
+                    = sc[:iva]
+                  td
+                    | $
+                    = sc[:total_before_taxes]
+                  td
+                    | $
+                    = sc[:total]
+
+section.charts.mt-3 data-controller="builder"
   = render "design_patterns/shared/section_header", \
             icon_name: :bubble_chart, \
             header_title: "Charts"
 
+  .charts-container.mt-3.mb-3
+    .row
+      .col.s6
+        .card
+          #company-sales-chart
+      .col.s6
+        .card
+          #employee-sales-chart
+      .col.s6
+        .card
+          #client-sales-chart
+      .col.s6
+        .card
+          #company-earnings-chart
+
+
+javascript:
+  google.charts.load('current', {packages: ['corechart']});
+   google.charts.setOnLoadCallback(drawCharts);
+
+   function drawTotalCompanySalesChart() {
+     var data = google.visualization.arrayToDataTable([
+       ['Company', 'Sales'],
+     ].concat(#{raw @report[:charts][:company_sales]}));
+
+     var options = {
+       title: 'Total company sales',
+       haxis: {
+         title: 'Company Name'
+       },
+       vaxis: {
+         title: 'Number of Sales'
+       }
+     };
+
+     var chart = new google.visualization.AreaChart(
+       document.getElementById('company-sales-chart')
+     );
+     chart.draw(data, options);
+   }
+
+   function drawTotalEmployeeSalesChart() {
+     var data = google.visualization.arrayToDataTable([
+       ['Employee', 'Sales'],
+     ].concat(#{raw @report[:charts][:employee_sales]}));
+
+     var options = {
+       title: 'Total employee sales',
+       haxis: {
+         title: 'Employee Name'
+       },
+       vaxis: {
+         title: 'Number of Sales'
+       }
+     };
+
+     var chart = new google.visualization.PieChart(
+       document.getElementById('employee-sales-chart')
+     );
+     chart.draw(data, options);
+   }
+
+   function drawTotalClientSalesChart() {
+     var data = google.visualization.arrayToDataTable([
+       ['Client', 'Sales'],
+     ].concat(#{raw @report[:charts][:client_sales]}));
+
+     var options = {
+       title: 'Total client sales',
+       haxis: {
+         title: 'Client Name'
+       },
+       vaxis: {
+         title: 'Number of Sales'
+       }
+     };
+
+     var chart = new google.visualization.PieChart(
+       document.getElementById('client-sales-chart')
+     );
+     chart.draw(data, options);
+   }
+
+   function drawTotalCompanyEarningsChart() {
+     var data = google.visualization.arrayToDataTable([
+       ['Company', 'Earnings'],
+     ].concat(#{raw @report[:charts][:company_earnings]}));
+
+     var options = {
+       title: 'Total Company Earnings',
+       haxis: {
+         title: 'Company Name'
+       },
+       vaxis: {
+         title: 'Earnings($)'
+       }
+     };
+
+     var chart = new google.visualization.PieChart(
+       document.getElementById('company-earnings-chart')
+     );
+     chart.draw(data, options);
+   }
+
+
+   function drawCharts() {
+     drawTotalCompanySalesChart();
+     drawTotalEmployeeSalesChart();
+     drawTotalClientSalesChart();
+     drawTotalCompanyEarningsChart();
+   }
