@@ -5,6 +5,8 @@ AllCops:
     - 'node_modules/**/*'
     - 'vendor/**/*'
     - "db/**/*"
+    - "config/**/*"
+    - "bin/**/*"
 
 Style/MultilineBlockChain:
   Enabled: false

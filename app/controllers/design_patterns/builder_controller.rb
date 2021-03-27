@@ -2,8 +2,6 @@
 
 module DesignPatterns
   class BuilderController < ApplicationController
-    before_action :authenticate_user!
-
     def index
       reporter = ReporterService.new(current_user, active_companies)
       @report = SaleReportService.new(params, reporter).call if params[:type].present?

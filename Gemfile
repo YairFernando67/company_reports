@@ -16,13 +16,14 @@ gem "slim-rails", "~> 3.2"
 gem "turbolinks", "~> 5"
 gem "webpacker", "~> 4.0"
 gem "wicked_pdf"
-# gem 'wkhtmltopdf-binary'
 gem "wkhtmltopdf-binary"
-# gem 'wkhtmltopdf-binary-edge', '~> 0.12.6.0'
 gem "bootsnap", ">= 1.4.2", require: false
-# gem 'material_design_lite-sass'
 gem "material_icons"
 gem "materialize-sass"
+gem 'google-api-client', require: 'google/apis/calendar_v3'
+# get "google-apis-drive_v3"
+gem "omniauth", "~> 1.9"
+gem "omniauth-google-oauth2"
 
 group :development, :test do
   gem "awesome_print"
@@ -49,3 +50,7 @@ group :test do
 end
 
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
+
+# gem 'wkhtmltopdf-binary'
+# gem 'wkhtmltopdf-binary-edge', '~> 0.12.6.0'
+# gem 'material_design_lite-sass'
