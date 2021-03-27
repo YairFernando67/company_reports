@@ -1,0 +1,35 @@
+// Place all the styles related to the DesignPatterns/Facade controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.calendar-img {
+  opacity: 0.5;
+}
+
+.calendars {
+  &__title {
+    font-weight: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 0.1rem;
+
+    i {
+      font-size: 3rem;
+      margin-left: 1rem;
+      color: #1A9BE4;
+    }
+  }
+
+  &__list {
+    .row {
+      .card {
+        .card-content {
+          .card-title {
+            font-weight: 200;
+          }
+        }
+      }
+    }
+  }
+}
