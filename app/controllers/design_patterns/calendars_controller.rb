@@ -1,15 +1,16 @@
 
 module DesignPatterns
   class CalendarsController < ApplicationController
-    before_action :get_instance, only: %i[create_calendar]
+    before_action :get_instance, only: %i[create_calendar delete_calendar]
     def create_calendar
-      binding.pry
+      # binding.pry
       client.create_calendar(calendar_params)
 
       redirect_to calendars_url
     end
 
     def delete_calendar
+      # binding.pry
       client.delete_calendar(params[:calendar_id])
 
       redirect_to calendars_url

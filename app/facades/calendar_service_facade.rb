@@ -17,12 +17,16 @@ class CalendarServiceFacade
   end
 
   def create_calendar(calendar)
-    binding.pry
+    # binding.pry
     @calendar_service.insert_calendar(calendar)
   end
 
   def delete_calendar(id)
-    @calendar_service.delete_calendar(id)
+    # binding.pry
+    @calendar_service.delete_calendar(id + "@group.calendar.google.com")
+
+  rescue Google::Apis::ClientError => e
+    binding.pry
   end
 
   def set_authorization(client)

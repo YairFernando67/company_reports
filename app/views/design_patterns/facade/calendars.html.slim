@@ -15,7 +15,6 @@
               | format_quote
 
   .row.center-align
-    / h4 New Calendar
     = form_with url: create_calendar_path, method: :post, html: { class: "col s12 calendar-form hidden", data: { facade_target: "form" } } do |form|
       .row
         .input-field.col.s6.offset-s3
@@ -31,11 +30,6 @@
           label[for="textarea"]
             | Description
       = form.submit "Create Calendar", class: "btn waves-effect waves-light red lighten-2 white-text"
-
-      / = form_with url: "/search", method: :get do |form|
-      /   = form.label :query, "Search for:"
-      /   = form.text_field :query
-      /   = form.submit "Search"
   .calendars__list
     .row
       - @calendar_list.items.each do |calendar|
@@ -44,40 +38,16 @@
             .card-content
               - if calendar.primary
                 span.primary-calendar Primary Calendar
-              a.dropdown-trigger.btn[href="#" data-target="dropdown1"]
-                i.material-icons
-                  | menu
-              ul#dropdown1.dropdown-content
-                li
-                  = link_to builder_path(type: "simple", format: :html) do
-                    i.material-icons
-                      | delete_forever
-                li.divider[tabindex="-1"]
-                li
-                  = link_to builder_path(type: "detailed", format: :html) do
-                    i.material-icons
-                      | mode_edit
-                li.divider[tabindex="-1"]
+              .buttons-container
+                = link_to delete_calendar_path(calendar.id.split("@")[0]), class: "#{calendar.primary ? 'disabled': ''}", method: :delete, data: { confirm: "Are you sure you want to delete this calendar?", title: "Delete" } do
+                  i.material-icons
+                    | delete_forever
               span.card-title
                 = calendar.summary
               p
                 = calendar.description
             .card-action
               = link_to "See Events", list_events_path(calendar.id)
-
-
-  / a.waves-effect.waves-light.btn.modal-trigger[href="#modal1"]
-  /   | Modal
-  / #modal1.modal
-  /   .modal-content
-  /     h4
-  /       | Modal Header
-  /     p
-  /       | A bunch of text
-  /   .modal-footer
-  /     a.modal-close.waves-effect.waves-green.btn-flat[href="#!"]
-  /       | Agree
-
 
 
 

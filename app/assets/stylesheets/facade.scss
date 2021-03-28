@@ -48,14 +48,31 @@ $color-blue: #1A9BE4;
             color: black;
           }
 
-          ul.dropdown-content {
-            width: 52px !important;
-            min-width: 52px !important;
+          // ul.dropdown-content {
+          //   width: 52px !important;
+          //   min-width: 52px !important;
 
-            li {
-              a {
-                padding: 14px 14px;
-              }
+          //   li {
+          //     a {
+          //       padding: 14px 14px;
+          //     }
+          //   }
+
+          .buttons-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0.5rem;
+
+            a {
+              color: #26a69a;
+            }
+
+            a.disabled {
+              pointer-events: none;
+              box-shadow: none;
+              color: #9F9F9F !important;
+              cursor: default;
             }
           }
 

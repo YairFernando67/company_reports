@@ -29,8 +29,8 @@ module DesignPatterns
       s = c.get_calendar_service
       s.set_authorization(c.client)
 
-      # binding.pry
       @calendar_list = s.get_calendar_list
+      # binding.pry
     rescue Google::Apis::AuthorizationError
       # binding.pry
       response = c.refresh
