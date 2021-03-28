@@ -15,7 +15,7 @@ class GoogleCalendarFacade
     def instance(callback="")
       # binding.pry
       return @client_instance if @client_instance
-      binding.pry
+      # binding.pry
       @instance_mutex.synchronize do
         @client_instance ||= new(callback)
       end
@@ -47,11 +47,23 @@ class GoogleCalendarFacade
   end
 
   def get_calendar_service
-    Google::Apis::CalendarV3::CalendarService.new
+    CalendarServiceFacade.instance
   end
 
   def add_calendar_scope
     @client.scope << Google::Apis::CalendarV3::AUTH_CALENDAR
+  end
+
+  def create_calendar(params)
+    calendar = Google::Apis::CalendarV3::Calendar.new(
+      summary: params[:summary],
+      description: params[:description]
+    )
+    get_calendar_service.create_calendar(calendar)
+  end
+
+  def delete_calendar(id)
+    get_calendar_service.delete_calendar(id)
   end
 
   def refresh

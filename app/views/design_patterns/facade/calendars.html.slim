@@ -44,6 +44,20 @@
             .card-content
               - if calendar.primary
                 span.primary-calendar Primary Calendar
+              a.dropdown-trigger.btn[href="#" data-target="dropdown1"]
+                i.material-icons
+                  | menu
+              ul#dropdown1.dropdown-content
+                li
+                  = link_to builder_path(type: "simple", format: :html) do
+                    i.material-icons
+                      | delete_forever
+                li.divider[tabindex="-1"]
+                li
+                  = link_to builder_path(type: "detailed", format: :html) do
+                    i.material-icons
+                      | mode_edit
+                li.divider[tabindex="-1"]
               span.card-title
                 = calendar.summary
               p
@@ -71,3 +85,5 @@ javascript:
   $(document).ready(function(){
     $('.fixed-action-btn').floatingActionButton();
   });
+  $('.dropdown-trigger').dropdown();
+

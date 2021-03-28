@@ -26,11 +26,11 @@ module DesignPatterns
       c = GoogleCalendarFacade.instance(callback_url)
       c.update(session[:authorization])
 
-      service = c.get_calendar_service
-      service.authorization = c.client
+      s = c.get_calendar_service
+      s.set_authorization(c.client)
 
-      binding.pry
-      @calendar_list = service.list_calendar_lists
+      # binding.pry
+      @calendar_list = s.get_calendar_list
     rescue Google::Apis::AuthorizationError
       # binding.pry
       response = c.refresh
