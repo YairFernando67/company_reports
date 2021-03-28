@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get "/google_calendar_redirect", action: :google_calendar_redirect, controller: :facade
       get "/callback", action: :callback, controller: :facade
       get "/calendars", action: :calendars, controller: :facade
+      post "/calendars", action: :create_calendar, controller: :calendars, as: :create_calendar
       get "/list_events/:calendar_id", action: :events, controller: :facade, as: :list_events
       post "/create_event/:calendar_id", action: :new_event, controller: :facade, as: :create_event
     end

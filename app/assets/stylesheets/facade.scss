@@ -1,6 +1,7 @@
-// Place all the styles related to the DesignPatterns/Facade controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+// // Place all the styles related to the DesignPatterns/Facade controller here.
+// // They will automatically be included in application.css.
+// // You can use Sass (SCSS) here: https://sass-lang.com/
+$color-blue: #1A9BE4;
 
 .calendar-img {
   opacity: 0.5;
@@ -14,17 +15,29 @@
     align-items: center;
     letter-spacing: 0.1rem;
 
-    i {
+    .calendar-icon {
       font-size: 3rem;
       margin-left: 1rem;
-      color: #1A9BE4;
+      color: $color-blue;
     }
   }
+
 
   &__list {
     .row {
       .card {
         .card-content {
+          .primary-calendar {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 3px;
+            text-transform: uppercase;
+            color: #fff;
+            font-size: 0.8rem;
+            background: #4db6ac;
+          }
+
           .card-title {
             font-weight: 200;
           }
@@ -32,4 +45,9 @@
       }
     }
   }
+}
+
+.calendar-form.hidden {
+  visibility: hidden;
+  display: none;
 }

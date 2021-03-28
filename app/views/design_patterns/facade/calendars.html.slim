@@ -1,18 +1,73 @@
-.container.calendars
+.container.calendars data-controller="facade"
   h2.calendars__title
     | My Calendars
-    i.material-icons
+    i.material-icons.calendar-icon
       | event
 
+    .fixed-action-btn
+      a.btn-floating.btn-large.red
+        i.large.material-icons
+          | mode_edit
+      ul
+        li
+          a.btn-floating.yellow.darken-1 data-action="click->facade#showCalendarFrom"
+            i.material-icons
+              | format_quote
+
+  .row.center-align
+    / h4 New Calendar
+    = form_with url: create_calendar_path, method: :post, html: { class: "col s12 calendar-form hidden", data: { facade_target: "form" } } do |form|
+      .row
+        .input-field.col.s6.offset-s3
+          i.material-icons.prefix
+            | short_text
+          = form.text_field :summary, id: "icon_prefix", class: "validate"
+          label[for="icon_prefix"]
+            | Summary
+        .input-field.col.s6.offset-s3
+          i.material-icons.prefix
+            | description
+          = form.text_area :description, id: "textarea", class: "materialize-textarea"
+          label[for="textarea"]
+            | Description
+      = form.submit "Create Calendar", class: "btn waves-effect waves-light red lighten-2 white-text"
+
+      / = form_with url: "/search", method: :get do |form|
+      /   = form.label :query, "Search for:"
+      /   = form.text_field :query
+      /   = form.submit "Search"
   .calendars__list
     .row
       - @calendar_list.items.each do |calendar|
         .col.s12.m6
           .card
             .card-content
+              - if calendar.primary
+                span.primary-calendar Primary Calendar
               span.card-title
                 = calendar.summary
               p
                 = calendar.description
             .card-action
               = link_to "See Events", list_events_path(calendar.id)
+
+
+  / a.waves-effect.waves-light.btn.modal-trigger[href="#modal1"]
+  /   | Modal
+  / #modal1.modal
+  /   .modal-content
+  /     h4
+  /       | Modal Header
+  /     p
+  /       | A bunch of text
+  /   .modal-footer
+  /     a.modal-close.waves-effect.waves-green.btn-flat[href="#!"]
+  /       | Agree
+
+
+
+
+javascript:
+  $(document).ready(function(){
+    $('.fixed-action-btn').floatingActionButton();
+  });
