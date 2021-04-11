@@ -7,29 +7,40 @@
     .fixed-action-btn
       a.btn-floating.btn-large.red
         i.large.material-icons
-          | mode_edit
+          | settings_applications
       ul
         li
           a.btn-floating.yellow.darken-1 data-action="click->facade#showCalendarFrom"
             i.material-icons
-              | format_quote
-
+              | event
+  .logout-btn
+    = link_to gmail_logout_path, class: "waves-effect waves-light btn" do
+      | Calendar LogOut
+      i.material-icons.right
+        | keyboard_return
   .row.center-align
-    = form_with url: create_calendar_path, method: :post, html: { class: "col s12 calendar-form hidden", data: { facade_target: "form" } } do |form|
+    / = form_with url: create_calendar_path, method: :post, html: { class: "col s12 calendar-form hidden", data: { facade_target: "form" } } do |form|
+    / = form_with method: :post, class: "col s12 calendar-form hidden", data: { facade_target: "form", action: "submit->facade#createCalendar" }, remote: true do |form|
+    = form_tag(create_calendar_path,
+        method: :post,
+        class: "col s12 calendar-form hidden",
+        data: { facade_target: "form", action: "submit->facade#createCalendar" }) do
       .row
         .input-field.col.s6.offset-s3
           i.material-icons.prefix
             | short_text
-          = form.text_field :summary, id: "icon_prefix", class: "validate"
+          = text_field_tag(:summary, "", id: "icon_prefix", class: "validate", data: { facade_target: "summary" })
           label[for="icon_prefix"]
             | Summary
         .input-field.col.s6.offset-s3
           i.material-icons.prefix
             | description
-          = form.text_area :description, id: "textarea", class: "materialize-textarea"
+          = text_area_tag(:description,"", id: "textarea", class: "materialize-textarea", data: { facade_target: "description" })
           label[for="textarea"]
             | Description
-      = form.submit "Create Calendar", class: "btn waves-effect waves-light red lighten-2 white-text"
+      / = form.submit "Create Calendar", class: "btn waves-effect waves-light red lighten-2 white-text", data: { action: "click->facade#createCalendar"}
+      btn.btn.waves-effect.waves-light.red.lighten-2.white-text type="submit" data-action="click->facade#createCalendar"
+        | Create Calendar
   .calendars__list
     .row
       - @calendar_list.items.each do |calendar|
@@ -47,7 +58,7 @@
               p
                 = calendar.description
             .card-action
-              = link_to "See Events", list_events_path(calendar.id)
+              = link_to "See Events", list_events_url(calendar.id.split("@")[0])
 
 
 
