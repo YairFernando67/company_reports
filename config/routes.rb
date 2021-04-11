@@ -14,13 +14,15 @@ Rails.application.routes.draw do
     scope :facade do
       # root to: "facade#index"
       # get "/", action: :index, controller: :facade, as: :facade_main_page
-      get "/google_calendar_redirect", action: :google_calendar_redirect, controller: :facade
-      get "/callback", action: :callback, controller: :facade
-      get "/calendars", action: :calendars, controller: :facade
-      post "/calendars", action: :create_calendar, controller: :calendars, as: :create_calendar
-      delete "/calendars/:calendar_id", action: :delete_calendar, controller: :calendars, as: :delete_calendar
-      get "/list_events/:calendar_id", action: :events, controller: :facade, as: :list_events
-      post "/create_event/:calendar_id", action: :new_event, controller: :facade, as: :create_event
+      get "/gmail_login", action: :gmail_login, controller: :facade
+      get "/gmail_calendar_authorized", action: :gmail_calendar_authorized, controller: :facade
+      get "/gmail_logout", action: :gmail_logout, controller: :facade
+
+      post "/gmail_calendars", action: :create_calendar, controller: :gmail_calendars, as: :create_calendar
+      delete "/calendars/:calendar_id", action: :delete_calendar, controller: :gmail_calendars, as: :delete_calendar
+      get "/gmail_calendars", action: :gmail_calendars, controller: :gmail_calendars
+      get "/list_events/:calendar_id", action: :events, controller: :gmail_calendars, as: :list_events
+      post "/create_event/:calendar_id", action: :new_event, controller: :gmail_calendars, as: :create_event
     end
   end
 
