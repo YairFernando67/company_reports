@@ -1,8 +1,8 @@
 
 module DesignPatterns
   class GmailCalendarsController < ApplicationController
-    before_action :get_instance, only: %i[create_calendar delete_calendar]
-    before_action :validate_token, only: %i[create_calendar delete_calendar]
+    before_action :get_instance, only: %i[create_calendar delete_calendar gmail_calendars]
+    before_action :valid_token, only: %i[create_calendar delete_calendar gmail_calendars]
     CALLBACK_URL = "http://localhost:3000/design_patterns/facade/calendar_authorized".freeze
     def create_calendar
       # binding.pry
@@ -19,34 +19,34 @@ module DesignPatterns
     #   binding.pry
     #   response = client.refresh
 
-    #   session[:authorization] = session[:authorization].merge(response)
+    #   session[:auth_token] = session[:auth_token].merge(response)
 
     #   retry
     end
 
     def gmail_calendars
-      c = GoogleCalendarFacade.instance
-      c.update(session[:authorization])
+      # c = GoogleCalendarFacade.instance
+      # c.update(current_user.refresh_t)
 
-      s = c.get_calendar_service
-      s.set_authorization(c.client)
+      s = client.get_calendar_service
+      s.set_authorization(client.client)
 
       @calendar_list = s.get_calendar_list
       # binding.pry
-    rescue Google::Apis::AuthorizationError
-      # binding.pry
-      response = c.refresh
+    # rescue Google::Apis::AuthorizationError
+    #   # binding.pry
+    #   response = c.refresh
 
-      session[:authorization] = session[:authorization].merge(response)
+    #   session[:auth_token] = session[:auth_token].merge(response)
 
-      retry
+    #   retry
     end
 
     def events
       client = Signet::OAuth2::Client.new(client_options)
       # binding.pry
-      # client.update!(session[:authorization], :additional_parameters => {"access_type" => "offline"})
-      client.update!(session[:authorization])
+      # client.update!(session[:auth_token], :additional_parameters => {"access_type" => "offline"})
+      client.update!(session[:auth_token])
       # binding.pry
       service = Google::Apis::CalendarV3::CalendarService.new
       service.authorization = client
@@ -56,7 +56,7 @@ module DesignPatterns
 
     def new_event
       client = Signet::OAuth2::Client.new(client_options)
-      client.update!(session[:authorization])
+      client.update!(session[:auth_token])
 
       service = Google::Apis::CalendarV3::CalendarService.new
       service.authorization = client
@@ -80,9 +80,9 @@ module DesignPatterns
       @client = GoogleCalendarFacade.instance
     end
 
-    def validate_token
+    def valid_token
       # binding.pry
-      if !client.validate_token!
+      if !client.valid_token!(current_user.refresh_token)
         redirect_to client.authorization_uri
       end
     end

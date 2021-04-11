@@ -4,52 +4,44 @@ module DesignPatterns
   class FacadeController < ApplicationController
     CALLBACK_URL = "http://localhost:3000/design_patterns/facade/gmail_calendar_authorized".freeze
     def index
+      redirect_to gmail_calendars_path if user_gmail_oauth_active?
     end
 
     def gmail_login
-      token = session[:authorization]
-      if token
-        # binding.pry
-        if Time.now >= token["expires_at"]
-          client = GoogleCalendarFacade.instance
-          redirect_to client.authorization_uri
+      c = GoogleCalendarFacade.instance
+      if user_gmail_oauth_active?
+        if c.valid_token!(current_user.refresh_token)
+          return redirect_to gmail_calendars_path
         else
-          redirect_to gmail_calendars_path
+          return redirect_to c.authorization_uri
         end
       else
-        client = GoogleCalendarFacade.instance
-        redirect_to client.authorization_uri
+        redirect_to c.authorization_uri
       end
-
-      # client = GoogleCalendarFacade.instance
-      # if client.validate_token!
-      #   redirect_to gmail_calendars_path
-      # else
-      #   redirect_to client.authorization_uri
-      # end
-      # client = GoogleCalendarFacade.instance
-      # redirect_to client.authorization_uri
     end
 
     def gmail_calendar_authorized
       client = GoogleCalendarFacade.instance
       client.set_client_code(params[:code])
-      # binding.pry
       token = client.fetch_token
-      token[:expires_at] = client.expires_at
-      session[:authorization] = token
-      # binding.pry
+      session[:gmail_oauth] = token
+      current_user.update(gmail_oauth: true, refresh_token: token["refresh_token"])
 
-      # client.set_client_expiry(2, Time.now + 3.minutes)
-
-      # binding.pry
       redirect_to gmail_calendars_url
     end
 
     def gmail_logout
-      session[:authorization] = nil
+      session[:gmail_oauth] = nil
+      current_user.update(gmail_oauth: false, refresh_token: "")
       GoogleCalendarFacade.instance.logout
+
       redirect_to facade_path
+    end
+
+    private
+
+    def user_gmail_oauth_active?
+      current_user.gmail_oauth && current_user.refresh_token
     end
   end
 end
