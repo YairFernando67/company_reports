@@ -5,21 +5,20 @@ class GoogleCalendarFacade
   private_class_method :new
   @instance_mutex = Mutex.new
 
-  def initialize(callback)
-    @callback = callback
+  def initialize
     oauth_client
     # add_calendar_scope
   end
 
   class << self
-    def instance(callback="")
+    def instance
       # binding.pry
       return @client_instance if @client_instance
-      # binding.pry
       @instance_mutex.synchronize do
-        @client_instance ||= new(callback)
+        @client_instance ||= new
       end
 
+      # binding.pry
       @client_instance
     end
   end
@@ -40,6 +39,10 @@ class GoogleCalendarFacade
 
   def fetch_token
     @client.fetch_access_token!
+  end
+
+  def expires_at
+    @client.expires_at
   end
 
   def update(authorization)
@@ -66,7 +69,24 @@ class GoogleCalendarFacade
     get_calendar_service.delete_calendar(id)
   end
 
+  def validate_token!
+    if client.expires_within? 20
+      token = client.refresh!
+      if token
+        client.update(token)
+        return true
+      end
+      return false
+    end
+    return true
+  end
+
+  def logout
+    client.clear_credentials!
+  end
+
   def refresh
+    binding.pry
     @client.refresh!
   end
 
@@ -83,8 +103,13 @@ class GoogleCalendarFacade
       # scope: 'email profile',
       scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
       expiry: 3,
-      expires_at: Time.now + 3.minutes,
-      redirect_uri: callback
+      # expires_at: Time.now + 3.minutes,
+      # additional_parameters: {
+      #   response_type: 'code',
+      #   include_granted_scopes: true,
+      # },
+      redirect_uri: "http://localhost:3000/design_patterns/facade/gmail_calendar_authorized",
+      access_type: 'offline'
     }
   end
 
