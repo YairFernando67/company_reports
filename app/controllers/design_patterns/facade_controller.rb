@@ -24,14 +24,14 @@ module DesignPatterns
       client = GoogleCalendarFacade.instance
       client.set_client_code(params[:code])
       token = client.fetch_token
-      session[:gmail_oauth] = token
+      client.update(token)
       current_user.update(gmail_oauth: true, refresh_token: token["refresh_token"])
 
       redirect_to gmail_calendars_url
     end
 
     def gmail_logout
-      session[:gmail_oauth] = nil
+      gmail_oauth = nil
       current_user.update(gmail_oauth: false, refresh_token: "")
       GoogleCalendarFacade.instance.logout
 
@@ -41,7 +41,12 @@ module DesignPatterns
     private
 
     def user_gmail_oauth_active?
+      # binding.pry
       current_user.gmail_oauth && current_user.refresh_token
+    end
+
+    def gmail_oauth
+      session[:gmail_oauth]
     end
   end
 end

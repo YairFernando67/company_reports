@@ -5,7 +5,6 @@ module DesignPatterns
     before_action :valid_token, only: %i[create_calendar delete_calendar gmail_calendars]
     CALLBACK_URL = "http://localhost:3000/design_patterns/facade/calendar_authorized".freeze
     def create_calendar
-      # binding.pry
       client.create_calendar(calendar_params)
 
       redirect_to gmail_calendars_url
@@ -16,7 +15,7 @@ module DesignPatterns
 
       redirect_to gmail_calendars_url
     # rescue Google::Apis::AuthorizationError
-    #   binding.pry
+    # #   binding.pry
     #   response = client.refresh
 
     #   session[:auth_token] = session[:auth_token].merge(response)
@@ -27,27 +26,17 @@ module DesignPatterns
     def gmail_calendars
       # c = GoogleCalendarFacade.instance
       # c.update(current_user.refresh_t)
-
+      # binding.pry
       s = client.get_calendar_service
       s.set_authorization(client.client)
 
       @calendar_list = s.get_calendar_list
-      # binding.pry
-    # rescue Google::Apis::AuthorizationError
-    #   # binding.pry
-    #   response = c.refresh
-
-    #   session[:auth_token] = session[:auth_token].merge(response)
-
-    #   retry
     end
 
     def events
       client = Signet::OAuth2::Client.new(client_options)
-      # binding.pry
       # client.update!(session[:auth_token], :additional_parameters => {"access_type" => "offline"})
       client.update!(session[:auth_token])
-      # binding.pry
       service = Google::Apis::CalendarV3::CalendarService.new
       service.authorization = client
 
@@ -81,7 +70,6 @@ module DesignPatterns
     end
 
     def valid_token
-      # binding.pry
       if !client.valid_token!(current_user.refresh_token)
         redirect_to client.authorization_uri
       end
@@ -100,6 +88,11 @@ module DesignPatterns
         scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
         redirect_uri: CALLBACK_URL
       }
+    end
+
+    def gmail_oauth
+      # binding.pry
+      session[:gmail_oauth]
     end
 
     attr_accessor :client
