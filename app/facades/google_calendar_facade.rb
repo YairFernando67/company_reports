@@ -12,29 +12,27 @@ class GoogleCalendarFacade
 
   class << self
     def instance
-      # binding.pry
+      # # binding.pry
       return @client_instance if @client_instance
       @instance_mutex.synchronize do
         @client_instance ||= new
       end
 
-      # binding.pry
+      # # binding.pry
       @client_instance
     end
   end
 
   def oauth_client
     @client = Signet::OAuth2::Client.new(client_options)
+    # binding.pry
+    @client.expires_at = Time.now + 10.seconds
     @authorization_uri = client.authorization_uri.to_s
   end
 
   def set_client_code(code)
+    # binding.pry
     @client.code = code
-  end
-
-  def set_client_expiry(expiry, time)
-    @client.expiry = expiry
-    @client.expires_at = time
   end
 
   def fetch_token
@@ -69,25 +67,35 @@ class GoogleCalendarFacade
     get_calendar_service.delete_calendar(id)
   end
 
-  def validate_token!
-    if client.expires_within? 20
-      token = client.refresh!
-      if token
-        client.update(token)
-        return true
-      end
-      return false
+  def valid_token!(auth_token)
+    # binding.pry
+    return false unless client
+    if token_expired?
+      # binding.pry
+      token = refresh_token(auth_token)
+      client.update!(token)
     end
-    return true
+    true
+  rescue Signet::AuthorizationError
+    return false
+  end
+
+  def refresh_token(token)
+    # binding.pry
+    client.grant_type = "refresh_token"
+    client.refresh_token = token
+    # binding.pry
+    client.refresh!
+  end
+
+  def token_expired?
+    return true if client.expires_at.nil?
+
+    Time.now >= client.expires_at
   end
 
   def logout
-    client.clear_credentials!
-  end
-
-  def refresh
-    binding.pry
-    @client.refresh!
+    @client_instance = nil
   end
 
   attr_accessor :callback, :client, :authorization_uri, :client_instance
@@ -103,11 +111,11 @@ class GoogleCalendarFacade
       # scope: 'email profile',
       scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
       expiry: 3,
-      # expires_at: Time.now + 3.minutes,
-      # additional_parameters: {
-      #   response_type: 'code',
-      #   include_granted_scopes: true,
-      # },
+      expires_at: Time.now + 3.minutes,
+      additional_parameters: {
+        response_type: 'code',
+        include_granted_scopes: true,
+      },
       redirect_uri: "http://localhost:3000/design_patterns/facade/gmail_calendar_authorized",
       access_type: 'offline'
     }
