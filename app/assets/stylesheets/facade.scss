@@ -36,7 +36,10 @@ $color-blue: #1A9BE4;
   &__list {
     .row {
       .card {
+        min-height: 12rem;
         .card-content {
+          height: 10rem;
+
           .primary-calendar {
             position: absolute;
             top: 0;
@@ -57,16 +60,6 @@ $color-blue: #1A9BE4;
             box-shadow: none;
             color: black;
           }
-
-          // ul.dropdown-content {
-          //   width: 52px !important;
-          //   min-width: 52px !important;
-
-          //   li {
-          //     a {
-          //       padding: 14px 14px;
-          //     }
-          //   }
 
           .buttons-container {
             position: absolute;
@@ -98,4 +91,11 @@ $color-blue: #1A9BE4;
 .calendar-form.hidden {
   visibility: hidden;
   display: none;
+}
+
+.calendar-form {
+
+    .btn-cancel {
+      margin-left: 1rem;
+    }
 }
