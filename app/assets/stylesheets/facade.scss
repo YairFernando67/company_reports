@@ -22,6 +22,16 @@ $color-blue: #1A9BE4;
     }
   }
 
+  .logout-btn {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 0.75rem;
+
+    a {
+      font-size: 13px;
+    }
+  }
+
 
   &__list {
     .row {
