@@ -1,0 +1,47 @@
+.container.events data-controller="facade"
+  h2.events__title
+    | Events
+    i.material-icons.calendar-icon
+      | check_circle
+
+  .calendar-list-btn
+    = link_to gmail_calendars_path, class: "waves-effect waves-light btn" do
+      | Go to Calendars
+      i.material-icons.right
+        | keyboard_return
+
+
+  #calendar
+/ link[href="fullcalendar/main.css" rel="stylesheet"]
+/ script[src="fullcalendar/main.js"]
+
+= javascript_pack_tag 'js/full_calendar.js', 'data-turbolinks-track': 'reload'
+javascript:
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      headerToolbar: {
+        left: 'title,prev,next',
+        right: 'today,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      },
+      views: {
+        listWeek: {
+          eventTimeFormat: { // like '14:30:00'
+            hour: '2-digit'
+          }
+        }
+      },
+      googleCalendarApiKey: 'AIzaSyDDeFkbj0RUSP7_v4JfGc_gtAC-tJWeWGM',
+      events: {
+        googleCalendarId: '70knbvand2fmsj8tir8s40tvgo@group.calendar.google.com'
+      },
+       displayEventTime: false,
+    });
+    calendar.render();
+  });
+
+/ = javascript_pack_tag 'js/libs/fullcalendar.js', 'data-turbolinks-track': 'reload'
+/ = javascript_pack_tag 'js/apps/example.js', 'data-turbolinks-track': 'reload'
+/ = javascript_pack_tag 'js/calendar/GoogleCalendar.js', 'data-turbolinks-track': 'reload'
+/ = javascript_pack_tag 'js/apps/calendar.js', 'data-turbolinks-track': 'reload'

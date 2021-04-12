@@ -8,9 +8,9 @@ module DesignPatterns
     end
 
     def gmail_login
-      c = GoogleCalendarFacade.instance
+      client = GoogleCalendarFacade.instance
       if user_gmail_oauth_active?
-        if c.valid_token!(current_user.refresh_token)
+        if client.valid_token?(current_user.refresh_token)
           return redirect_to gmail_calendars_path
         else
           return redirect_to c.authorization_uri
@@ -31,7 +31,6 @@ module DesignPatterns
     end
 
     def gmail_logout
-      gmail_oauth = nil
       current_user.update(gmail_oauth: false, refresh_token: "")
       GoogleCalendarFacade.instance.logout
 
@@ -41,12 +40,7 @@ module DesignPatterns
     private
 
     def user_gmail_oauth_active?
-      # binding.pry
       current_user.gmail_oauth && current_user.refresh_token
-    end
-
-    def gmail_oauth
-      session[:gmail_oauth]
     end
   end
 end

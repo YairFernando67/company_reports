@@ -11,13 +11,11 @@ class GoogleCalendarFacade
 
   class << self
     def instance()
-      # # # binding.pry
       return @client_instance if @client_instance
       @instance_mutex.synchronize do
         @client_instance ||= new
       end
 
-      # # # binding.pry
       @client_instance
     end
   end
@@ -29,7 +27,6 @@ class GoogleCalendarFacade
   end
 
   def set_client_code(code)
-    # # binding.pry
     @client.code = code
   end
 
@@ -46,7 +43,7 @@ class GoogleCalendarFacade
   end
 
   def get_calendar_service
-    CalendarServiceFacade.instance
+    @get_calendar_service ||= Google::Apis::CalendarV3::CalendarService.new
   end
 
   def add_calendar_scope
@@ -58,18 +55,28 @@ class GoogleCalendarFacade
       summary: params[:summary],
       description: params[:description]
     )
-    get_calendar_service.create_calendar(calendar)
+    get_calendar_service.insert_calendar(calendar)
   end
 
   def delete_calendar(id)
-    get_calendar_service.delete_calendar(id)
+    get_calendar_service.delete_calendar(id + "@group.calendar.google.com")
   end
 
-  def valid_token!(auth_token)
+  def gmail_calendars
+    service = get_calendar_service
+    service.authorization = client
+    service.list_calendar_lists
+  end
+
+  def get_events(id)
+    service = get_calendar_service
+    service.authorization = client
+    service.list_events(id + "@group.calendar.google.com")
+  end
+
+  def valid_token?(auth_token)
     return false unless client
-    # binding.pry
     if token_expired? || client.access_token.nil?
-      # # binding.pry
       token = refresh_token(auth_token)
       client.update!(token)
     end

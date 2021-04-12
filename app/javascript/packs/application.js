@@ -13,6 +13,7 @@ import $ from 'jquery';
 global.$ = jQuery;
 import '../stylesheets/application'
 import 'materialize-css/dist/js/materialize'
+import 'fullcalendar/main'
 
 
 // $(document).on('turbolinks:click', function() {

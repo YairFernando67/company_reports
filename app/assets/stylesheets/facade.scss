@@ -22,17 +22,6 @@ $color-blue: #1A9BE4;
     }
   }
 
-  .logout-btn {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0 0.75rem;
-
-    a {
-      font-size: 13px;
-    }
-  }
-
-
   &__list {
     .row {
       .card {
@@ -94,8 +83,35 @@ $color-blue: #1A9BE4;
 }
 
 .calendar-form {
+  .btn-cancel {
+    margin-left: 1rem;
+  }
+}
 
-    .btn-cancel {
+.logout-btn,
+.calendar-list-btn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 0.75rem;
+
+  a {
+    font-size: 13px;
+  }
+}
+
+
+.events {
+  &__title {
+    font-weight: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 0.1rem;
+
+    .calendar-icon {
+      font-size: 3rem;
       margin-left: 1rem;
+      color: $color-blue;
     }
+  }
 }

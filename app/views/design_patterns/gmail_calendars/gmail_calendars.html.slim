@@ -59,9 +59,7 @@
               p
                 = calendar.description
             .card-action
-              = link_to "See Events", list_events_url(calendar.id)
-
-
+              = link_to "See Events", list_events_url(calendar.id.split("@")[0])
 
 javascript:
   $(document).ready(function(){
