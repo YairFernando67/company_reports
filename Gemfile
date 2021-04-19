@@ -24,6 +24,10 @@ gem 'google-api-client', require: 'google/apis/calendar_v3'
 # get "google-apis-drive_v3"
 gem "omniauth", "~> 1.9"
 gem "omniauth-google-oauth2"
+gem 'simple_form'
+gem 'redis', '~> 4.0'
+gem 'sidekiq'
+
 
 group :development, :test do
   gem "awesome_print"
