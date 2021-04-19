@@ -27,10 +27,13 @@ class GoogleCalendarFacade
   end
 
   def set_client_code(code)
+    # binding.pry
     @client.code = code
   end
 
   def fetch_token
+    # binding.pry
+    client.grant_type = nil
     client.fetch_access_token!
   end
 
@@ -65,13 +68,28 @@ class GoogleCalendarFacade
   def gmail_calendars
     service = get_calendar_service
     service.authorization = client
-    service.list_calendar_lists
+    # binding.pry
+    calendar_list = service.list_calendar_lists
+    calendar_list.items.each do |calendar|
+      uid = SecureRandom.uuid
+      id = calendar.id
+      # Redis.current.set(uid, id)
+      calendar.id = uid
+    end
+    calendar_list.items
   end
 
   def get_events(id)
     service = get_calendar_service
     service.authorization = client
-    service.list_events(id + "@group.calendar.google.com")
+    # binding.pry
+    events = service.list_events("primary",
+      always_include_email: true,
+      max_results: 2500,
+      order_by: 'startTime',
+      single_events: true
+    )
+    events.items
   end
 
   def valid_token?(auth_token)
@@ -86,6 +104,7 @@ class GoogleCalendarFacade
   end
 
   def refresh_token(token)
+    # binding.pry
     client.grant_type = "refresh_token"
     client.refresh_token = token
     client.refresh!
@@ -119,5 +138,18 @@ class GoogleCalendarFacade
       redirect_uri: "http://localhost:3000/design_patterns/facade/gmail_calendar_authorized",
       access_type: 'offline'
     }
+  end
+
+  def process_events(items)
+    # binding.pry
+    items.map do |e|
+      {
+        id: e.id,
+        title: e.summary,
+        description: e.description,
+        start: e&.start&.date_time,
+        end: e&.end&.date_time
+      }
+    end
   end
 end
