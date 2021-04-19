@@ -9,14 +9,15 @@ module DesignPatterns
 
     def gmail_login
       client = GoogleCalendarFacade.instance
+      # binding.pry
       if user_gmail_oauth_active?
         if client.valid_token?(current_user.refresh_token)
           return redirect_to gmail_calendars_path
         else
-          return redirect_to c.authorization_uri
+          return redirect_to client.authorization_uri
         end
       else
-        redirect_to c.authorization_uri
+        redirect_to client.authorization_uri
       end
     end
 
@@ -25,7 +26,8 @@ module DesignPatterns
       client.set_client_code(params[:code])
       token = client.fetch_token
       client.update(token)
-      current_user.update(gmail_oauth: true, refresh_token: token["refresh_token"])
+      # binding.pry
+      current_user.update(gmail_oauth: true, refresh_token: token["access_token"])
 
       redirect_to gmail_calendars_url
     end
