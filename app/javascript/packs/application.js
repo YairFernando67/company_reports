@@ -9,22 +9,12 @@ require("@rails/activestorage").start()
 require("channels")
 require('jquery')
 
-import $ from 'jquery';
+// import $ from 'jquery';
 global.$ = jQuery;
 import '../stylesheets/application'
 import 'materialize-css/dist/js/materialize'
 import 'fullcalendar/main'
-
-
-// $(document).on('turbolinks:click', function() {
-//   console.log("on click")
-//   $('.preloader-wrapper').removeClass("d-none")
-// });
-
-// $(document).on('turbolinks:load', function() {
-//   console.log("on hide loader")
-//   $('.preloader-wrapper').addClass("d-none")
-// });
+import 'moment/moment'
 
 import "controllers"
 import "animate.css"

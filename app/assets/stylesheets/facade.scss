@@ -7,6 +7,12 @@ $color-blue: #1A9BE4;
   opacity: 0.5;
 }
 
+.container.events,
+.container.calendars {
+  max-width: none !important;
+  width: 90% !important;
+}
+
 .calendars {
   &__title {
     font-weight: 200;
@@ -19,6 +25,24 @@ $color-blue: #1A9BE4;
       font-size: 3rem;
       margin-left: 1rem;
       color: $color-blue;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dbdfea;
+
+    h3 {
+      font-size: 2rem;
+      font-weight: 200;
+
+      // .calendar-icon {
+      //   font-size: 2rem;
+      //   margin-left: 1rem;
+      //   color: $color-blue;
+      // }
     }
   }
 
@@ -99,7 +123,6 @@ $color-blue: #1A9BE4;
   }
 }
 
-
 .events {
   &__title {
     font-weight: 200;
@@ -114,4 +137,37 @@ $color-blue: #1A9BE4;
       color: $color-blue;
     }
   }
+
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dbdfea;
+
+    h3 {
+      font-size: 2rem;
+      font-weight: 200;
+    }
+
+    .btn-actions {
+      .btn {
+        margin-left: 10px;
+
+        i {
+          font-size: 1.5rem;
+        }
+      }
+
+      ul {
+        width: 198.375px;
+        left: 0;
+        top: -38px;
+      }
+    }
+  }
+}
+
+div#calendar {
+  margin-bottom: 5rem !important;
 }

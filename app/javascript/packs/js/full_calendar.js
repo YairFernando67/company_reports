@@ -6575,6 +6575,7 @@ var FullCalendar = (function (exports) {
     function requestJson(method, url, params, successCallback, failureCallback) {
         method = method.toUpperCase();
         var body = null;
+        console.log("URL: ", url)
         if (method === 'GET') {
             url = injectQueryStringParams(url, params);
         }
@@ -6605,6 +6606,7 @@ var FullCalendar = (function (exports) {
                 }
             }
             else {
+                console.log("Failure 2")
                 failureCallback('Request failed', xhr);
             }
         };

@@ -1,0 +1,80 @@
+.fc-header-toolbar {
+  margin-top: 30px !important;
+}
+
+.fc .fc-button-primary:not(:disabled):active, .fc .fc-button-primary:not(:disabled).fc-button-active {
+  border: 1px solid #dbdfea !important;
+  background-color: rgba(32,33,36,0.039) !important;
+  color: #000 !important;
+  outline: none !important;
+}
+
+.fc .fc-button-primary:hover {
+  border: 1px solid #dbdfea !important;
+  background-color: #f5f6fa !important;
+  color: #526484 !important;
+  outline: none !important;
+}
+
+
+.fc .fc-button-primary {
+  padding: 8px 15px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  background: transparent !important;
+  color: #8094ae !important;
+  border: 1px solid #dbdfea !important;
+  text-transform: capitalize !important;
+}
+
+.fc .fc-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+ .fc-toolbar-chunk {
+  div {
+    display: flex !important;
+    flex-direction: row !important;
+
+    h2 {
+      font-size: 20px !important;
+      padding: 8px 15px !important;
+    }
+
+    .fc-next-button,
+    .fc-prev-button {
+      border: none !important;
+
+      &:hover {
+        background-color: transparent !important;
+        border: none !important;
+      }
+
+      &:active,
+      &:visited,
+      &:focus {
+        outline: none !important;
+        background-color: transparent !important;
+        border: none !important;
+      }
+    }
+  }
+}
+
+.fc .fc-next-button.fc-button-primary:not(:disabled):active, .fc .fc-next-button.fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-prev-button.fc-button-primary:not(:disabled):active, .fc .fc-prev-button.fc-button-primary:not(:disabled).fc-button-active {
+  outline: none !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.fc-col-header-cell-cushion { color: rgb(82, 100, 132) !important; }
+
+.fc-daygrid-day-number { color: rgb(54, 74, 99) !important; }
+
+td.fc-daygrid-day.fc-day { padding: 0 10px; }
+// .fc-scrollgrid-section.fc-scrollgrid-section-body.fc-scrollgrid-section-liquid td { padding: 0 10px !important; }
+// .fc-scrollgrid-section.fc-scrollgrid-section-header td { padding: 0 10px !important; box-sizing: border-box !important; }
+.fc-scrollgrid-sync-table tbody tr td.fc-daygrid-day.fc-day-today { background-color: #D2E3FC !important; }
+.fc-view-harness.fc-view-harness-active { height: 775px !important; }
