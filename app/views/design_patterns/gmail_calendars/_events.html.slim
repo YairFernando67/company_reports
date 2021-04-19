@@ -1,0 +1,105 @@
+.container.events.mt-1.pb-5 data-controller="facade"
+  .events__header
+    h3
+      | Events
+    .btn-actions
+      = link_to gmail_logout_path, class: "waves-effect waves-light btn" do
+        | Calendar LogOut
+        i.material-icons.right
+          | event
+      = link_to gmail_calendars_path, class: "waves-effect waves-light btn" do
+        | Create Event
+        i.material-icons.right
+          | event_available
+      = link_to gmail_calendars_path, class: "waves-effect waves-light btn" do
+        | My Calendars
+        i.material-icons.right
+          | keyboard_return
+      a.dropdown-trigger.btn[href="#" data-target="dropdown1"]
+        i.material-icons
+          | menu
+      ul#dropdown1.dropdown-content
+        li
+          = link_to builder_path(type: "simple", format: :html) do
+            i.material-icons
+              | dashboard
+            | Simple Report
+        li.divider[tabindex="-1"]
+        li
+          = link_to builder_path(type: "detailed", format: :html) do
+            i.material-icons
+              | assessment
+            | Detailed Report
+        li.divider[tabindex="-1"]
+        li
+          = link_to builder_path(type: "full", format: :html) do
+            i.material-icons
+              | assignment_turned_in
+            | Full Report
+
+  #calendar
+
+= javascript_pack_tag 'js/full_calendar.js', 'data-turbolinks-track': 'reload'
+javascript:
+  $('.dropdown-trigger').dropdown();
+  console.log("EVEBTS")
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+  var tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+  var t_dd = String(tomorrow.getDate()).padStart(2, '0');
+  var t_mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+  var t_yyyy = tomorrow.getFullYear();
+  var yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
+  var y_dd = String(yesterday.getDate()).padStart(2, '0');
+  var y_mm = String(yesterday.getMonth() + 1).padStart(2, '0');
+  var y_yyyy = yesterday.getFullYear();
+  var YM = yyyy + '-' + mm;
+  var YESTERDAY = y_yyyy + '-' + y_mm + '-' + y_dd;
+  var TODAY = yyyy + '-' + mm + '-' + dd;
+  var calendarEl = document.getElementById('calendar');
+  var calendarEvents = fetchEvents()
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    // timeZone: 'UTC',
+    // themeSystem: 'bootstrap',
+    headerToolbar: {
+      left: 'title,prev,next',
+      center: null,
+      right: 'today,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    },
+    height: 800,
+    contentHeight: 780,
+    aspectRatio: 3,
+    editable: true,
+    droppable: true,
+    direction: "ltr",
+    nowIndicator: true,
+    now: TODAY + 'T09:25:00',
+    views: {
+      listWeek: {
+        eventTimeFormat: {
+          hour: '2-digit'
+        }
+      },
+      dayGridMonth: {
+        titleFormat: {
+          month: 'long',
+          year: 'numeric'
+        },
+        dayMaxEventRows: 2
+      }
+    },
+    //displayEventTime: false,
+    //googleCalendarApiKey: 'AIzaSyDDeFkbj0RUSP7_v4JfGc_gtAC-tJWeWGM',
+    //events: {
+      //googleCalendarId: '70knbvand2fmsj8tir8s40tvgo@group.calendar.google.com'
+      // googleCalendarId: 'yair.facio@apptegy.com'
+    //},
+    events: calendarEvents
+  });
+  calendar.render();
+

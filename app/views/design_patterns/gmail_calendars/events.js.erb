@@ -1,0 +1,18 @@
+console.log("Events js erb")
+
+function fetchEvents() {
+  var events = '<%= @event_list %>'
+  let res = []
+  '<%= @event_list.each do |e| %>'
+    res.push({
+      id: '<%= e.id %>',
+      title: '<%= e.summary %>',
+      start: '<%= e.start.date_time %>',
+      end: '<%= e.end.date_time %>'
+    })
+  '<% end %>'
+
+  return res
+}
+
+$(".container.calendars").html("<%= j render partial: 'events' %>")

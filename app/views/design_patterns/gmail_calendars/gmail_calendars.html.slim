@@ -1,23 +1,23 @@
-.container.calendars data-controller="facade"
-  h2.calendars__title
-    | My Calendars
-    i.material-icons.calendar-icon
-      | event
+.container.calendars.mt-5 data-controller="facade"
+  .fixed-action-btn
+    a.btn-floating.btn-large.red
+      i.large.material-icons
+        | settings_applications
+    ul
+      li
+        a.btn-floating.yellow.darken-1 data-action="click->facade#toggleCalendarFrom"
+          i.material-icons
+            | event
 
-    .fixed-action-btn
-      a.btn-floating.btn-large.red
-        i.large.material-icons
-          | settings_applications
-      ul
-        li
-          a.btn-floating.yellow.darken-1 data-action="click->facade#toggleCalendarFrom"
-            i.material-icons
-              | event
-  .logout-btn
-    = link_to gmail_logout_path, class: "waves-effect waves-light btn" do
-      | Calendar LogOut
-      i.material-icons.right
-        | keyboard_return
+  .calendars__header
+    h3
+      | Calendar List
+    .logout-btn
+      = link_to gmail_logout_path, class: "waves-effect waves-light btn" do
+        | Calendar LogOut
+        i.material-icons.right
+          | event
+
   .row.center-align
     / = form_with url: create_calendar_path, method: :post, html: { class: "col s12 calendar-form hidden", data: { facade_target: "form" } } do |form|
     / = form_with method: :post, class: "col s12 calendar-form hidden", data: { facade_target: "form", action: "submit->facade#createCalendar" }, remote: true do |form|
@@ -44,7 +44,7 @@
         | Cancelar
   .calendars__list
     .row
-      - @calendar_list.items.each do |calendar|
+      - @calendar_list.each do |calendar|
         .col.s12.m6
           .card
             .card-content
@@ -59,7 +59,7 @@
               p
                 = calendar.description
             .card-action
-              = link_to "See Events", list_events_url(calendar.id.split("@")[0])
+              = link_to "See Events", list_events_url(calendar.id.split("@")[0]), remote: true
 
 javascript:
   $(document).ready(function(){
