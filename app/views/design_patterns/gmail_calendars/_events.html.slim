@@ -18,31 +18,12 @@
       / a.dropdown-trigger.btn[href="#" data-target="dropdown1"]
       /   i.material-icons
       /     | menu
-      / ul#dropdown1.dropdown-content
-      /   li
-      /     = link_to builder_path(type: "simple", format: :html) do
-      /       i.material-icons
-      /         | dashboard
-      /       | Simple Report
-      /   li.divider[tabindex="-1"]
-      /   li
-      /     = link_to builder_path(type: "detailed", format: :html) do
-      /       i.material-icons
-      /         | assessment
-      /       | Detailed Report
-      /   li.divider[tabindex="-1"]
-      /   li
-      /     = link_to builder_path(type: "full", format: :html) do
-      /       i.material-icons
-      /         | assignment_turned_in
-      /       | Full Report
 
   #calendar
 
 = javascript_pack_tag 'js/full_calendar.js', 'data-turbolinks-track': 'reload'
 javascript:
   $('.dropdown-trigger').dropdown();
-  console.log("EVEBTS")
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -93,12 +74,6 @@ javascript:
         dayMaxEventRows: 2
       }
     },
-    //displayEventTime: false,
-    //googleCalendarApiKey: 'AIzaSyDDeFkbj0RUSP7_v4JfGc_gtAC-tJWeWGM',
-    //events: {
-      //googleCalendarId: '70knbvand2fmsj8tir8s40tvgo@group.calendar.google.com'
-      // googleCalendarId: 'yair.facio@apptegy.com'
-    //},
     events: calendarEvents
   });
   calendar.render();

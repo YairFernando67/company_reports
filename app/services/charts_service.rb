@@ -16,7 +16,6 @@ class ChartsService
     @sales_by_month = {}
     build_sales_base_hash
     get_sales_filtered
-    # binding.pry
     {
       company_sales: companies.map { |company| [company[:business_name], company.sales.size] },
       daily_sales: daily_sales,
