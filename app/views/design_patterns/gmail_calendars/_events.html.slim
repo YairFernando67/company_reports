@@ -3,39 +3,39 @@
     h3
       | Events
     .btn-actions
-      = link_to gmail_logout_path, class: "waves-effect waves-light btn" do
-        | Calendar LogOut
-        i.material-icons.right
-          | event
-      = link_to gmail_calendars_path, class: "waves-effect waves-light btn" do
-        | Create Event
-        i.material-icons.right
-          | event_available
       = link_to gmail_calendars_path, class: "waves-effect waves-light btn" do
         | My Calendars
         i.material-icons.right
           | keyboard_return
-      a.dropdown-trigger.btn[href="#" data-target="dropdown1"]
-        i.material-icons
-          | menu
-      ul#dropdown1.dropdown-content
-        li
-          = link_to builder_path(type: "simple", format: :html) do
-            i.material-icons
-              | dashboard
-            | Simple Report
-        li.divider[tabindex="-1"]
-        li
-          = link_to builder_path(type: "detailed", format: :html) do
-            i.material-icons
-              | assessment
-            | Detailed Report
-        li.divider[tabindex="-1"]
-        li
-          = link_to builder_path(type: "full", format: :html) do
-            i.material-icons
-              | assignment_turned_in
-            | Full Report
+      = link_to gmail_logout_path, class: "waves-effect waves-light btn" do
+        | Calendar LogOut
+        i.material-icons.right
+          | event
+      / = link_to gmail_calendars_path, class: "waves-effect waves-light btn" do
+      /   | Create Event
+      /   i.material-icons.right
+      /     | event_available
+      / a.dropdown-trigger.btn[href="#" data-target="dropdown1"]
+      /   i.material-icons
+      /     | menu
+      / ul#dropdown1.dropdown-content
+      /   li
+      /     = link_to builder_path(type: "simple", format: :html) do
+      /       i.material-icons
+      /         | dashboard
+      /       | Simple Report
+      /   li.divider[tabindex="-1"]
+      /   li
+      /     = link_to builder_path(type: "detailed", format: :html) do
+      /       i.material-icons
+      /         | assessment
+      /       | Detailed Report
+      /   li.divider[tabindex="-1"]
+      /   li
+      /     = link_to builder_path(type: "full", format: :html) do
+      /       i.material-icons
+      /         | assignment_turned_in
+      /       | Full Report
 
   #calendar
 

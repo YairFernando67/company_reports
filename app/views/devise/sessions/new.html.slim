@@ -20,10 +20,14 @@
               = f.password_field :password, autocomplete: "password", id: "password", class: "validate"
               label[for="password"]
                 | Password
+
+          .center-align
+            span email: carl@gmail.com
+            br
+            span password: carl1234
           .actions
             button.btn-large.waves-effect.waves-light.light-blue[type="submit" name="action"]
-              | Submit 
+              | Submit
               i.material-icons.right
                 | send
-  
-    = render "devise/shared/links"
+    / = render "devise/shared/links"
