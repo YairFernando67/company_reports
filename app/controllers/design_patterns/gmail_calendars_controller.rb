@@ -4,7 +4,7 @@ module DesignPatterns
   class GmailCalendarsController < ApplicationController
     before_action :get_instance, only: %i[create_calendar delete_calendar gmail_calendars events]
     before_action :valid_token, only: %i[create_calendar delete_calendar gmail_calendars events]
-    CALLBACK_URL = "#{Rails.application.credentials[Rails.env.to_sym].dig(:callback_url)}/design_patterns/facade/gmail_calendar_authorized"
+    CALLBACK_URL = "#{ENV.fetch("CALLBACK_URL")}/design_patterns/facade/gmail_calendar_authorized"
 
 
     def create_calendar

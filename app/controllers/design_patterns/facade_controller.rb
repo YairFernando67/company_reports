@@ -2,7 +2,7 @@
 
 module DesignPatterns
   class FacadeController < ApplicationController
-    CALLBACK_URL = "#{Rails.application.credentials[Rails.env.to_sym].dig(:callback_url)}/design_patterns/facade/gmail_calendar_authorized"
+    CALLBACK_URL = "#{ENV.fetch("CALLBACK_URL")}/design_patterns/facade/gmail_calendar_authorized"
 
     def index
       redirect_to gmail_calendars_path if user_gmail_oauth_active?
