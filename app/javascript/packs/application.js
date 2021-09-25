@@ -13,6 +13,7 @@ require('jquery')
 global.$ = jQuery;
 import '../stylesheets/application'
 import 'materialize-css/dist/js/materialize'
+import "materialize-css/dist/css/materialize";
 import 'fullcalendar/main'
 import 'moment/moment'
 
