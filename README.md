@@ -6,6 +6,7 @@
 [![Hireable][hireable]][hireable-url]
 
 <!-- PROJECT LOGO -->
+
 <br />
 <p align="center">
   <h2 align="center"> Design Patterns</h2>
@@ -150,8 +151,3 @@ Give a ⭐️ if you like this project!
 [linkedin-url2]: https://www.linkedin.com/in/softwaredeveloperyairfacio/
 [hireable]: https://cdn.rawgit.com/hiendv/hireable/master/styles/flat/yes.svg
 [hireable-url]: https://www.linkedin.com/in/softwaredeveloperyairfacio/
-
-
-
-
-

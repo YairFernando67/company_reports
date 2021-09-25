@@ -3,7 +3,6 @@ FullCalendar v5.6.0
 Docs & License: https://fullcalendar.io/
 (c) 2020 Adam Shaw
 */
-console.log("FULL CALENDAR")
 var FullCalendar = (function (exports) {
     'use strict';
 
