@@ -62,28 +62,27 @@ class GoogleCalendarFacade
   end
 
   def delete_calendar(id)
-    get_calendar_service.delete_calendar(id + "@group.calendar.google.com")
+    get_calendar_service.delete_calendar(Redis.current.get(id))
   end
 
   def gmail_calendars
     service = get_calendar_service
     service.authorization = client
-    # binding.pry
     calendar_list = service.list_calendar_lists
     calendar_list.items.each do |calendar|
       uid = SecureRandom.uuid
       id = calendar.id
-      # Redis.current.set(uid, id)
+      Redis.current.set(uid, id)
       calendar.id = uid
     end
     calendar_list.items
   end
 
-  def get_events(id)
+  def get_events(id, current_user)
     service = get_calendar_service
     service.authorization = client
-    # binding.pry
-    events = service.list_events("primary",
+    calendar_id = Redis.current.get(id)
+    events = service.list_events(calendar_id,
       always_include_email: true,
       max_results: 2500,
       order_by: 'startTime',
@@ -141,7 +140,6 @@ class GoogleCalendarFacade
   end
 
   def process_events(items)
-    # binding.pry
     items.map do |e|
       {
         id: e.id,
