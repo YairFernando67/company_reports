@@ -136,7 +136,7 @@ class GoogleCalendarFacade
         response_type: "code",
         include_granted_scopes: true
       },
-      redirect_uri: "http://localhost:3000/design_patterns/facade/gmail_calendar_authorized",
+      redirect_uri: "#{ENV.fetch("CALLBACK_URL")}/design_patterns/facade/gmail_calendar_authorized",
       access_type: "offline"
     }
   end
