@@ -2,9 +2,15 @@ import { Controller } from 'stimulus';
 
 export default class extends Controller {
 
-  static targets = ["form", "summary", "description"]
+  static targets = ["form", "summary", "description", "btnCreateCalendar"]
 
-  initialize() {
+  summaryChange(e) {
+    let summary = e.target.value
+    if (summary.length > 0) {
+      $(this.btnCreateCalendarTarget).removeClass("disabled")
+    } else {
+      $(this.btnCreateCalendarTarget).addClass("disabled")
+    }
   }
 
   createCalendar() {
