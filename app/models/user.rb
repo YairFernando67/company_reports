@@ -12,7 +12,6 @@ class User < ApplicationRecord
   has_one :address, as: :addressable, dependent: :destroy
   has_many :sales, foreign_key: :seller_id, class_name: "Sale"
 
-  # New association
   has_many :shipments, inverse_of: :user
 
   def active_companies

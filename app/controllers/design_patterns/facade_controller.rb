@@ -3,6 +3,7 @@
 module DesignPatterns
   class FacadeController < ApplicationController
     CALLBACK_URL = "http://localhost:3000/design_patterns/facade/gmail_calendar_authorized"
+
     def index
       redirect_to gmail_calendars_path if user_gmail_oauth_active?
     end

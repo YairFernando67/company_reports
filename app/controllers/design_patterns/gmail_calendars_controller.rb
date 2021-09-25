@@ -4,6 +4,7 @@ module DesignPatterns
     before_action :get_instance, only: %i[create_calendar delete_calendar gmail_calendars events]
     before_action :valid_token, only: %i[create_calendar delete_calendar gmail_calendars events]
     CALLBACK_URL = "http://localhost:3000/design_patterns/facade/calendar_authorized".freeze
+
     def create_calendar
       client.create_calendar(calendar_params)
       redirect_to gmail_calendars_url

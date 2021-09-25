@@ -21,10 +21,6 @@ class Sales::SimpleReportBuilder < Sales::Builder
     report[:charts] = {}
   end
 
-  # def decorate
-  #   Sales::SimpleReportDecorator.decorate(report)
-  # end
-
   attr_accessor :reporter, :user
 
   private

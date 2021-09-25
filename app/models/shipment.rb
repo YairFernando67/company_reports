@@ -2,7 +2,6 @@
 
 class Shipment < ApplicationRecord
   enum status: %i[completed cancelled pending blocked accepted progress]
-  # belongs_to :company
   belongs_to :sale
   belongs_to :user
   belongs_to :client
@@ -11,5 +10,4 @@ class Shipment < ApplicationRecord
   has_one :address, as: :addressable
 
   delegate :name, :email, :phone, to: :client, prefix: "client", allow_nil: true
-  # delegate :name, :code, :affiliation, to: :company_type, prefix: "company_type", allow_nil: true
 end
