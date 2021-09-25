@@ -10,8 +10,19 @@
     .card {
       height: 500px;
       width: 500px;
+      box-shadow: 0 0 6px 2px #fff;
+
+      .card-content {
+        padding: 25px 35px;
+
+        .card-title {
+          margin-bottom: 2rem;
+        }
+      }
 
       .actions{
+        margin-top: 3rem;
+
         .btn-large {
           width: 100%;
           display: flex;

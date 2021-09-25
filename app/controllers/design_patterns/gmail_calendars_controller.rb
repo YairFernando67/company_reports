@@ -19,24 +19,12 @@ module DesignPatterns
     end
 
     def events
-      @event_list = client.get_events(params[:calendar_id])
-
+      @event_list = client.get_events(params[:calendar_id], current_user)
       respond_to do |f|
         f.html
         f.js
         f.json
       end
-
-      # respond_to do |format|
-      #   format.json do
-      #     if request.xhr?
-      #       render :json => {success: true, events: @event_list }
-      #     end
-      #   end
-      #   format.js
-
-      #   format.html {   }
-      # end
     end
 
     def new_event
