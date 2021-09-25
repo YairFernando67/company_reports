@@ -5,8 +5,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.7.2"
 
+gem "bootsnap", ">= 1.4.2", require: false
 gem "devise"
+gem "google-api-client", require: "google/apis/calendar_v3"
 gem "jbuilder", "~> 2.7"
+gem "material_icons"
+gem "materialize-sass"
 gem "pg", ">= 0.18", "< 2.0"
 gem "pry-rails"
 gem "puma", "~> 4.1"
@@ -17,17 +21,12 @@ gem "turbolinks", "~> 5"
 gem "webpacker", "~> 4.0"
 gem "wicked_pdf"
 gem "wkhtmltopdf-binary"
-gem "bootsnap", ">= 1.4.2", require: false
-gem "material_icons"
-gem "materialize-sass"
-gem 'google-api-client', require: 'google/apis/calendar_v3'
 # get "google-apis-drive_v3"
 gem "omniauth", "~> 1.9"
 gem "omniauth-google-oauth2"
-gem 'simple_form'
-gem 'redis', '~> 4.0'
-gem 'sidekiq'
-
+gem "redis", "~> 4.0"
+gem "sidekiq"
+gem "simple_form"
 
 group :development, :test do
   gem "awesome_print"

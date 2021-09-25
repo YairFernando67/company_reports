@@ -1,9 +1,10 @@
+# frozen_string_literal: true
 
 module DesignPatterns
   class GmailCalendarsController < ApplicationController
     before_action :get_instance, only: %i[create_calendar delete_calendar gmail_calendars events]
     before_action :valid_token, only: %i[create_calendar delete_calendar gmail_calendars events]
-    CALLBACK_URL = "http://localhost:3000/design_patterns/facade/calendar_authorized".freeze
+    CALLBACK_URL = "http://localhost:3000/design_patterns/facade/calendar_authorized"
 
     def create_calendar
       client.create_calendar(calendar_params)
@@ -37,11 +38,11 @@ module DesignPatterns
 
       today = Date.today
 
-      event = Google::Apis::CalendarV3::Event.new({
+      event = Google::Apis::CalendarV3::Event.new(
         start: Google::Apis::CalendarV3::EventDateTime.new(date: today),
         end: Google::Apis::CalendarV3::EventDateTime.new(date: today + 1),
-        summary: 'New event!'
-      })
+        summary: "New event!"
+      )
 
       service.insert_event(params[:calendar_id], event)
 
@@ -55,9 +56,7 @@ module DesignPatterns
     end
 
     def valid_token
-      if !client.valid_token?(current_user.refresh_token)
-        redirect_to client.authorization_uri
-      end
+      redirect_to client.authorization_uri unless client.valid_token?(current_user.refresh_token)
     end
 
     def calendar_params
@@ -68,8 +67,8 @@ module DesignPatterns
       {
         client_id: Rails.application.credentials[Rails.env.to_sym].dig(:google_calendar, :google_client_id),
         client_secret: Rails.application.credentials[Rails.env.to_sym].dig(:google_calendar, :google_client_secret),
-        authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
-        token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
+        authorization_uri: "https://accounts.google.com/o/oauth2/auth",
+        token_credential_uri: "https://accounts.google.com/o/oauth2/token",
         scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
         redirect_uri: CALLBACK_URL
       }

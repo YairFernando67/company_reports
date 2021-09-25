@@ -5,7 +5,6 @@ module DesignPatterns
     def index
       reporter = ReporterService.new(current_user, active_companies)
       @report = SaleReportService.new(params, reporter).call if params[:type].present?
-
     end
 
     private

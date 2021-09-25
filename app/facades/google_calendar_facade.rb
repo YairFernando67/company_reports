@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require "google/apis/calendar_v3"
 
 class GoogleCalendarFacade
-
   private_class_method :new
   @instance_mutex = Mutex.new
 
@@ -10,8 +11,9 @@ class GoogleCalendarFacade
   end
 
   class << self
-    def instance()
+    def instance
       return @client_instance if @client_instance
+
       @instance_mutex.synchronize do
         @client_instance ||= new
       end
@@ -78,28 +80,28 @@ class GoogleCalendarFacade
     calendar_list.items
   end
 
-  def get_events(id, current_user)
+  def get_events(id, _current_user)
     service = get_calendar_service
     service.authorization = client
     calendar_id = Redis.current.get(id)
     events = service.list_events(calendar_id,
-      always_include_email: true,
-      max_results: 2500,
-      order_by: 'startTime',
-      single_events: true
-    )
+                                 always_include_email: true,
+                                 max_results: 2500,
+                                 order_by: "startTime",
+                                 single_events: true)
     events.items
   end
 
   def valid_token?(auth_token)
     return false unless client
+
     if token_expired? || client.access_token.nil?
       token = refresh_token(auth_token)
       client.update!(token)
     end
     true
   rescue Signet::AuthorizationError
-    return false
+    false
   end
 
   def refresh_token(token)
@@ -127,15 +129,15 @@ class GoogleCalendarFacade
     {
       client_id: Rails.application.credentials[Rails.env.to_sym].dig(:google_calendar, :google_client_id),
       client_secret: Rails.application.credentials[Rails.env.to_sym].dig(:google_calendar, :google_client_secret),
-      authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
-      token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
+      authorization_uri: "https://accounts.google.com/o/oauth2/auth",
+      token_credential_uri: "https://accounts.google.com/o/oauth2/token",
       scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
       additional_parameters: {
-        response_type: 'code',
-        include_granted_scopes: true,
+        response_type: "code",
+        include_granted_scopes: true
       },
       redirect_uri: "http://localhost:3000/design_patterns/facade/gmail_calendar_authorized",
-      access_type: 'offline'
+      access_type: "offline"
     }
   end
 

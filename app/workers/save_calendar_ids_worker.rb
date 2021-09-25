@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SaveCalendarIdsWorker
   include Sidekiq::Worker
   sidekiq_options retry: 2
