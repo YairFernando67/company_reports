@@ -37,6 +37,7 @@ group :development, :test do
   gem "rubocop-md"
   gem "rubocop-performance", require: false
   gem "rubocop-rspec"
+  gem "dotenv-rails"
 end
 
 group :development do
