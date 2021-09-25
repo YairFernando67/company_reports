@@ -14,8 +14,8 @@ global.$ = jQuery;
 import '../stylesheets/application'
 import 'materialize-css/dist/js/materialize'
 import "materialize-css/dist/css/materialize";
-import 'fullcalendar/main'
-import "fullcalendar/main.css";
+// import 'fullcalendar/main'
+// import "fullcalendar/main.css";
 import 'moment/moment'
 import "./js/full_calendar.js"
 
